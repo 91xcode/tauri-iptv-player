@@ -252,14 +252,20 @@ async fn fetch_url_content(url: String) -> Result<String, String> {
 async fn fetch_and_proxy_m3u8(url: String) -> Result<String, String> {
     println!("🌐 获取并处理 m3u8: {}", url);
 
-    // 获取原始内容
+    // ⭐ 获取原始内容 - 添加完整请求头
     let client = reqwest::Client::builder()
         .redirect(reqwest::redirect::Policy::limited(10))
+        .timeout(std::time::Duration::from_secs(30))
         .build()
         .map_err(|e| format!("创建客户端失败: {}", e))?;
 
     let response = client
         .get(&url)
+        .header("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+        .header("Accept", "*/*")
+        .header("Accept-Language", "zh-CN,zh;q=0.9")
+        .header("Cache-Control", "no-cache")
+        .header("Pragma", "no-cache")
         .send()
         .await
         .map_err(|e| format!("请求失败: {}", e))?;
@@ -487,6 +493,7 @@ struct ProxyParams {
 async fn proxy_handler(Query(params): Query<ProxyParams>) -> Result<Response, StatusCode> {
     println!("🌐 代理请求: {}", params.url);
 
+    // ⭐ 完全复制 x-iptv-player 的请求头策略
     let client = reqwest::Client::builder()
         .redirect(reqwest::redirect::Policy::limited(10))
         .timeout(std::time::Duration::from_secs(30))
@@ -496,8 +503,18 @@ async fn proxy_handler(Query(params): Query<ProxyParams>) -> Result<Response, St
             StatusCode::INTERNAL_SERVER_ERROR
         })?;
 
+    // ⭐ 添加完整的浏览器请求头（模拟 x-iptv-player）
     let response = client
         .get(&params.url)
+        .header("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+        .header("Accept", "*/*")
+        .header("Accept-Language", "zh-CN,zh;q=0.9,en;q=0.8")
+        .header("Accept-Encoding", "gzip, deflate")
+        .header("Origin", "https://www.example.com")
+        .header("Referer", "https://www.example.com/")
+        .header("Connection", "keep-alive")
+        .header("Cache-Control", "no-cache")
+        .header("Pragma", "no-cache")
         .send()
         .await
         .map_err(|e| {
@@ -505,12 +522,21 @@ async fn proxy_handler(Query(params): Query<ProxyParams>) -> Result<Response, St
             StatusCode::BAD_GATEWAY
         })?;
 
-    let content_type = response
-        .headers()
-        .get(header::CONTENT_TYPE)
-        .and_then(|v| v.to_str().ok())
-        .unwrap_or("application/octet-stream")
-        .to_string();
+    // ⭐ 智能 Content-Type 检测（完全复制 x-iptv-player）
+    let content_type = if let Some(ct) = response.headers().get(header::CONTENT_TYPE) {
+        ct.to_str().unwrap_or("application/octet-stream").to_string()
+    } else {
+        // 根据 URL 推断 Content-Type
+        if params.url.ends_with(".m3u8") {
+            "application/vnd.apple.mpegurl".to_string()
+        } else if params.url.ends_with(".ts") {
+            "video/mp2t".to_string()
+        } else if params.url.ends_with(".mp4") {
+            "video/mp4".to_string()
+        } else {
+            "application/octet-stream".to_string()
+        }
+    };
 
     let bytes = response
         .bytes()
@@ -520,12 +546,75 @@ async fn proxy_handler(Query(params): Query<ProxyParams>) -> Result<Response, St
             StatusCode::INTERNAL_SERVER_ERROR
         })?;
 
-    println!("✅ 代理成功: {} 字节, 类型: {}", bytes.len(), content_type);
+    // ⭐ 关键修复：如果是 m3u8 文件，重写内容中的 URL
+    let final_bytes = if params.url.contains(".m3u8") {
+        match String::from_utf8(bytes.to_vec()) {
+            Ok(content) => {
+                println!("📄 处理 m3u8 内容，原始大小: {} 字节", content.len());
 
+                // 解析原始 URL 的 base
+                let base_url = if let Some(pos) = params.url.rfind('/') {
+                    &params.url[..pos + 1]
+                } else {
+                    &params.url
+                };
+                println!("🔗 Base URL: {}", base_url);
+
+                // 重写每一行
+                let processed_lines: Vec<String> = content.lines().map(|line| {
+                    let trimmed = line.trim();
+
+                    // 如果是注释或空行，保持不变
+                    if trimmed.starts_with('#') || trimmed.is_empty() {
+                        return line.to_string();
+                    }
+
+                    // 处理 URL 行
+                    let absolute_url = if trimmed.starts_with("http://") || trimmed.starts_with("https://") {
+                        // 已经是绝对 URL
+                        trimmed.to_string()
+                    } else {
+                        // 相对 URL，转换为绝对 URL
+                        format!("{}{}", base_url, trimmed)
+                    };
+
+                    // ⭐ 关键：如果是 IPv6 URL，通过代理
+                    if absolute_url.contains('[') && absolute_url.contains(']') {
+                        let encoded = urlencoding::encode(&absolute_url);
+                        let proxied = format!("http://127.0.0.1:18080/proxy?url={}", encoded);
+                        println!("🔄 重写 URL: {} -> 代理", absolute_url.chars().take(60).collect::<String>());
+                        proxied
+                    } else {
+                        absolute_url
+                    }
+                }).collect();
+
+                let processed_content = processed_lines.join("\n");
+                println!("✅ m3u8 处理完成，新大小: {} 字节", processed_content.len());
+                processed_content.into_bytes()
+            }
+            Err(_) => {
+                println!("⚠️ m3u8 内容不是有效的 UTF-8，返回原始字节");
+                bytes.to_vec()
+            }
+        }
+    } else {
+        bytes.to_vec()
+    };
+
+    println!("✅ 代理成功: {} 字节, 类型: {}", final_bytes.len(), content_type);
+
+    // ⭐ 添加 CORS 头（完全复制 x-iptv-player）
     Ok((
         StatusCode::OK,
-        [(header::CONTENT_TYPE, content_type.as_str())],
-        bytes.to_vec(),
+        [
+            (header::CONTENT_TYPE, content_type.as_str()),
+            (header::ACCESS_CONTROL_ALLOW_ORIGIN, "*"),
+            (header::ACCESS_CONTROL_ALLOW_METHODS, "GET, HEAD, OPTIONS"),
+            (header::ACCESS_CONTROL_ALLOW_HEADERS, "*"),
+            (header::CACHE_CONTROL, "no-cache"),
+        ],
+        final_bytes,
     )
         .into_response())
 }
