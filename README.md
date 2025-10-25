@@ -818,28 +818,45 @@ xattr -cr /Applications/IPTV\ Player.app
 
 **macOS:**
 ```bash
-~/Library/Logs/com.sai.iptv-player/iptv-player.log
+~/Library/Logs/com.sai.iptv-player/iptv-player.log.YYYY-MM-DD
 ```
+
+**注意：** 日志文件名会自动添加日期后缀（如 `iptv-player.log.2025-10-25`），这是 `tracing-appender` 的日期滚动策略，**这是正常行为**。每天午夜会自动创建新的日志文件。
 
 **Windows:**
 ```bash
-%APPDATA%\com.sai.iptv-player\logs\iptv-player.log
+%APPDATA%\com.sai.iptv-player\logs\iptv-player.log.YYYY-MM-DD
 ```
 
 **Linux:**
 ```bash
-~/.local/share/com.sai.iptv-player/logs/iptv-player.log
+~/.local/share/com.sai.iptv-player/logs/iptv-player.log.YYYY-MM-DD
 ```
 
 ### 快速使用
 
-**1. 实时查看日志：**
+**1. 实时查看日志（推荐）：**
 ```bash
-# macOS/Linux
-tail -f ~/Library/Logs/com.sai.iptv-player/iptv-player.log
+# macOS/Linux - 使用通配符自动匹配最新日志
+tail -f ~/Library/Logs/com.sai.iptv-player/iptv-player.log.*
+
+# 查看所有日志
+cat ~/Library/Logs/com.sai.iptv-player/*.log.*
 
 # 搜索错误
-grep -E "ERROR|WARN" ~/Library/Logs/com.sai.iptv-player/iptv-player.log
+grep -E "ERROR|WARN" ~/Library/Logs/com.sai.iptv-player/*.log.*
+```
+
+**快捷别名（推荐）：**
+```bash
+# 添加到 ~/.zshrc 或 ~/.bashrc
+echo 'alias iptv-log="tail -f ~/Library/Logs/com.sai.iptv-player/iptv-player.log.*"' >> ~/.zshrc
+echo 'alias iptv-errors="grep -E \"ERROR|WARN\" ~/Library/Logs/com.sai.iptv-player/*.log.*"' >> ~/.zshrc
+source ~/.zshrc
+
+# 使用
+iptv-log        # 实时查看日志
+iptv-errors     # 查看错误日志
 ```
 
 **2. 设置日志级别：**
@@ -868,25 +885,31 @@ export RUST_LOG=debug
 
 ### 日志示例
 
-**应用启动：**
+**应用启动（实际日志）：**
 ```
-2025-10-26T10:30:45Z  INFO IPTV Player 启动
-2025-10-26T10:30:45Z  INFO 版本: 0.1.0
-2025-10-26T10:30:45Z  INFO 启动 HTTP 代理服务器: http://127.0.0.1:18080
-2025-10-26T10:30:45Z  INFO 从文件加载了 3 个订阅源
+2025-10-25T19:59:07Z  INFO 日志系统初始化完成
+2025-10-25T19:59:07Z  INFO 日志文件位置: "/Users/sai/Library/Logs/com.sai.iptv-player/iptv-player.log"
+2025-10-25T19:59:07Z  INFO ========================================
+2025-10-25T19:59:07Z  INFO IPTV Player 启动
+2025-10-25T19:59:07Z  INFO 版本: 0.1.0
+2025-10-25T19:59:07Z  INFO ========================================
+2025-10-25T19:59:07Z  INFO 启动 HTTP 代理服务器: http://127.0.0.1:18080
+2025-10-25T19:59:08Z  INFO 数据目录: "/Users/sai/Library/Application Support/com.sai.iptv-player"
+2025-10-25T19:59:08Z  INFO 从文件加载了 3 个订阅源
+2025-10-25T19:59:08Z  INFO 应用初始化完成
 ```
 
 **添加订阅源：**
 ```
-2025-10-26T10:31:00Z  INFO 添加订阅源: 名称='CCTV', URL类型='网络地址'
-2025-10-26T10:31:01Z  INFO M3U 内容下载成功，大小: 12345 字节
-2025-10-26T10:31:01Z  INFO 成功解析 123 个频道
+INFO 添加订阅源: 名称='CCTV', URL类型='网络地址'
+INFO M3U 内容下载成功，大小: 12345 字节
+INFO 成功解析 123 个频道
 ```
 
 **HTTP 代理：**
 ```
-2025-10-26T10:32:00Z DEBUG HTTP 代理请求
-2025-10-26T10:32:00Z  INFO HTTP 代理成功: 6789 字节
+DEBUG HTTP 代理请求
+INFO HTTP 代理成功: 6789 字节
 ```
 
 ### 日志级别说明
@@ -904,17 +927,17 @@ export RUST_LOG=debug
 **调试订阅源添加失败：**
 ```bash
 export RUST_LOG=debug
-tail -f ~/Library/Logs/com.sai.iptv-player/iptv-player.log | grep "订阅源\|M3U\|解析"
+tail -f ~/Library/Logs/com.sai.iptv-player/iptv-player.log.* | grep "订阅源\|M3U\|解析"
 ```
 
 **调试播放失败：**
 ```bash
-tail -f ~/Library/Logs/com.sai.iptv-player/iptv-player.log | grep "代理\|proxy"
+tail -f ~/Library/Logs/com.sai.iptv-player/iptv-player.log.* | grep "代理\|proxy"
 ```
 
 **调试 IPv6 问题：**
 ```bash
-tail -f ~/Library/Logs/com.sai.iptv-player/iptv-player.log | grep "IPv6\|ipv6"
+tail -f ~/Library/Logs/com.sai.iptv-player/iptv-player.log.* | grep "IPv6\|ipv6"
 ```
 
 ### 清理日志

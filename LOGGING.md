@@ -15,38 +15,49 @@ IPTV Player 使用 Rust 的 `tracing` 框架实现了完善的日志系统，支
 
 ### macOS
 ```bash
-~/Library/Logs/com.sai.iptv-player/iptv-player.log
+~/Library/Logs/com.sai.iptv-player/iptv-player.log.YYYY-MM-DD
 ```
+
+**重要说明：** 日志文件名会自动添加日期后缀（例如 `iptv-player.log.2025-10-25`），这是 `tracing-appender` 的日期滚动策略，**这是正常行为**。每天午夜会自动创建新的日志文件。
 
 ### Windows
 ```bash
-%APPDATA%\com.sai.iptv-player\logs\iptv-player.log
+%APPDATA%\com.sai.iptv-player\logs\iptv-player.log.YYYY-MM-DD
 ```
 
 ### Linux
 ```bash
-~/.local/share/com.sai.iptv-player/logs/iptv-player.log
+~/.local/share/com.sai.iptv-player/logs/iptv-player.log.YYYY-MM-DD
 ```
 
 ---
 
 ## 🔍 查看日志
 
-### 方法 1: 直接查看文件
+### 方法 1: 直接查看文件（推荐使用通配符）
 
 **macOS/Linux:**
 ```bash
-# 实时查看日志
-tail -f ~/Library/Logs/com.sai.iptv-player/iptv-player.log
+# 实时查看最新日志（推荐）
+tail -f ~/Library/Logs/com.sai.iptv-player/iptv-player.log.*
+
+# 查看所有日志
+cat ~/Library/Logs/com.sai.iptv-player/*.log.*
 
 # 查看最近 100 行
-tail -n 100 ~/Library/Logs/com.sai.iptv-player/iptv-player.log
+tail -n 100 ~/Library/Logs/com.sai.iptv-player/iptv-player.log.*
 
 # 搜索特定内容
-grep "错误\|失败\|ERROR" ~/Library/Logs/com.sai.iptv-player/iptv-player.log
+grep -E "错误|失败|ERROR|WARN" ~/Library/Logs/com.sai.iptv-player/*.log.*
 
-# 查看今天的日志
-grep "$(date +%Y-%m-%d)" ~/Library/Logs/com.sai.iptv-player/iptv-player.log
+# 快捷别名（推荐添加到 ~/.zshrc）
+echo 'alias iptv-log="tail -f ~/Library/Logs/com.sai.iptv-player/iptv-player.log.*"' >> ~/.zshrc
+echo 'alias iptv-errors="grep -E \"ERROR|WARN\" ~/Library/Logs/com.sai.iptv-player/*.log.*"' >> ~/.zshrc
+source ~/.zshrc
+
+# 使用别名
+iptv-log        # 实时查看
+iptv-errors     # 查看错误
 ```
 
 **Windows (PowerShell):**

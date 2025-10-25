@@ -17,6 +17,15 @@ dist-ssr
 src-tauri/target
 src-tauri/gen
 
+# Release builds (binary files)
+releases/
+*.dmg
+*.exe
+*.msi
+*.deb
+*.rpm
+*.AppImage
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
