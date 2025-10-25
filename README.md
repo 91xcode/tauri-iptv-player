@@ -38,18 +38,281 @@ npm run tauri dev
 
 ### 生产打包
 
-#### 打包 macOS DMG
+#### 📦 打包前准备
 
+1. **清理旧的构建产物**
+   ```bash
+   cd /Users/sai/good_tool/palyer/iptv-player
+   rm -rf src-tauri/target/release/bundle
+   ```
+
+2. **确认依赖已安装**
+   ```bash
+   npm install
+   ```
+
+3. **修复 TypeScript 错误（如需要）**
+   ```bash
+   npm run build  # 测试前端构建
+   ```
+
+#### 🔨 开始打包
+
+**方法 1：直接打包（推荐）**
 ```bash
 npm run tauri build
 ```
 
-打包完成后，DMG 文件在: `src-tauri/target/release/bundle/dmg/`
+**方法 2：后台打包（长时间任务）**
+```bash
+npm run tauri build > /tmp/tauri-build.log 2>&1 &
 
-#### 打包其他平台
+# 查看构建进度
+tail -f /tmp/tauri-build.log
 
-- **Windows**: 自动生成 `.msi` 和 `.exe`
-- **Linux**: 自动生成 `.deb` 和 `.AppImage`
+# 或使用提供的监控脚本
+./check-build.sh
+```
+
+#### 📍 打包产物位置
+
+打包成功后，文件位于：
+
+**macOS**
+```
+src-tauri/target/release/bundle/macos/
+├── IPTV Player.app                    # 应用程序包
+└── IPTV Player_0.1.0_aarch64.dmg     # DMG 安装包（推荐分发）
+```
+
+**Windows** (在 Windows 系统上构建)
+```
+src-tauri/target/release/bundle/msi/
+└── IPTV Player_0.1.0_x64_en-US.msi   # MSI 安装包
+
+src-tauri/target/release/bundle/nsis/
+└── IPTV Player_0.1.0_x64-setup.exe   # NSIS 安装包
+```
+
+**Linux** (在 Linux 系统上构建)
+```
+src-tauri/target/release/bundle/deb/
+└── iptv-player_0.1.0_amd64.deb       # Debian 包
+
+src-tauri/target/release/bundle/appimage/
+└── iptv-player_0.1.0_amd64.AppImage  # AppImage 包
+```
+
+#### 📦 整理发布包
+
+项目提供了自动整理脚本，会将安装包复制到 `releases/` 目录：
+
+```bash
+# 脚本会自动创建 releases 目录并重命名文件
+mkdir -p releases
+cp "src-tauri/target/release/bundle/macos/IPTV Player_0.1.0_aarch64.dmg" \
+   "releases/IPTV-Player-v0.1.0-macOS-Apple-Silicon.dmg"
+```
+
+重命名后的文件：
+- macOS (Apple Silicon): `IPTV-Player-v0.1.0-macOS-Apple-Silicon.dmg`
+- macOS (Intel): `IPTV-Player-v0.1.0-macOS-Intel.dmg`
+- Windows: `IPTV-Player-v0.1.0-Windows-x64.msi`
+- Linux: `IPTV-Player-v0.1.0-Linux-x64.deb`
+
+#### 🚀 分发安装包
+
+**分享给其他用户：**
+1. 上传到云盘（百度网盘、阿里云盘等）
+2. 发布到 GitHub Releases
+3. 托管到自己的服务器
+
+**用户安装步骤（macOS）：**
+1. 下载 `.dmg` 文件
+2. 双击打开 DMG
+3. 拖拽 "IPTV Player.app" 到 "Applications" 文件夹
+4. 首次运行：右键点击 → "打开" → 在弹窗中再次点击 "打开"
+
+#### ⚙️ 构建脚本说明
+
+项目包含以下构建相关脚本：
+
+**1. `check-build.sh` - 构建监控脚本**
+```bash
+#!/bin/bash
+# 自动监控构建进度，显示实时日志
+# 构建完成后自动查找生成的安装包
+
+chmod +x check-build.sh
+./check-build.sh
+```
+
+**功能：**
+- ⏳ 实时显示编译进度
+- 📦 自动检测打包状态
+- 📁 构建完成后列出所有生成的安装包
+- 📄 显示最后 20 行构建日志
+
+**2. 构建时间参考**
+
+| 平台 | 首次构建 | 增量构建 | 说明 |
+|------|---------|---------|------|
+| macOS (M1/M2/M3) | 5-10 分钟 | 2-5 分钟 | Rust 依赖编译较慢 |
+| Windows | 8-15 分钟 | 3-6 分钟 | 需要额外编译 WebView2 |
+| Linux | 6-12 分钟 | 2-5 分钟 | 取决于系统配置 |
+
+**3. 构建优化建议**
+
+**加速首次构建：**
+```bash
+# 使用国内 Rust 镜像
+export RUSTUP_DIST_SERVER="https://rsproxy.cn"
+export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
+
+# 或编辑 ~/.cargo/config.toml
+[source.crates-io]
+replace-with = 'tuna'
+
+[source.tuna]
+registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
+```
+
+**增量构建（跳过依赖重新编译）：**
+```bash
+# 只有代码修改时使用
+npm run tauri build -- --no-bundle  # 仅编译，不打包
+```
+
+#### 🐛 打包常见问题
+
+**1. TypeScript 编译错误**
+```bash
+# 错误: error TS6133: 'xxx' is declared but its value is never read
+# 解决: 添加 @ts-ignore 注释或移除未使用的导入
+
+# 示例修复
+// @ts-ignore - 保留用于未来功能
+import { invoke } from "@tauri-apps/api/core";
+```
+
+**2. Rust 编译错误**
+```bash
+# 错误: missing field 'xxx' in initializer
+# 解决: 检查结构体定义，确保所有字段都已初始化
+
+# 清理并重新构建
+cargo clean
+npm run tauri build
+```
+
+**3. 打包体积过大**
+```bash
+# 优化构建（生产模式已默认启用）
+# Cargo.toml 中配置：
+[profile.release]
+opt-level = "z"     # 优化体积
+lto = true          # 链接时优化
+codegen-units = 1   # 单个编译单元
+strip = true        # 移除符号信息
+```
+
+**4. 端口冲突导致打包失败**
+```bash
+# 检查端口占用
+lsof -i:1420   # Vite 开发服务器
+lsof -i:18080  # 代理服务器
+
+# 杀死占用进程
+lsof -ti:1420 | xargs kill -9
+lsof -ti:18080 | xargs kill -9
+```
+
+**5. macOS 打包后无法打开**
+```bash
+# 移除隔离属性
+xattr -cr "/Applications/IPTV Player.app"
+
+# 或在系统设置中允许
+系统设置 → 隐私与安全性 → 仍要打开
+```
+
+#### 📊 版本号管理
+
+**修改版本号：**
+
+1. **修改 package.json**
+   ```json
+   {
+     "version": "0.2.0"
+   }
+   ```
+
+2. **修改 src-tauri/Cargo.toml**
+   ```toml
+   [package]
+   version = "0.2.0"
+   ```
+
+3. **修改 src-tauri/tauri.conf.json**
+   ```json
+   {
+     "version": "0.2.0"
+   }
+   ```
+
+**重新打包：**
+```bash
+npm run tauri build
+```
+
+生成的文件名会自动包含新版本号：
+- `IPTV Player_0.2.0_aarch64.dmg`
+
+#### 🎯 CI/CD 自动化打包
+
+如果使用 GitHub Actions，可以参考以下配置：
+
+```yaml
+name: Build Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        platform: [macos-latest, ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Setup Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Tauri app
+        run: npm run tauri build
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.platform }}-build
+          path: src-tauri/target/release/bundle/
+```
 
 ## 📖 使用说明
 
