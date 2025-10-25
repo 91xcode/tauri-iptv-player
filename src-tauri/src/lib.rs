@@ -14,6 +14,9 @@ use axum::{
     Router,
 };
 use tower_http::cors::CorsLayer;
+use tracing::{info, warn, error, debug, instrument};
+use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt, EnvFilter};
+use tracing_appender::rolling::{RollingFileAppender, Rotation};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 struct Channel {
@@ -41,58 +44,146 @@ struct AppState {
     data_dir: PathBuf,
 }
 
+/// 初始化日志系统
+fn init_logging() {
+    // 获取日志目录
+    let log_dir = if cfg!(target_os = "macos") {
+        // macOS: ~/Library/Logs/com.sai.iptv-player/
+        if let Some(home) = std::env::var_os("HOME") {
+            PathBuf::from(home).join("Library/Logs/com.sai.iptv-player")
+        } else {
+            PathBuf::from("/tmp/iptv-player-logs")
+        }
+    } else if cfg!(target_os = "windows") {
+        // Windows: %APPDATA%\com.sai.iptv-player\logs\
+        if let Some(appdata) = std::env::var_os("APPDATA") {
+            PathBuf::from(appdata).join("com.sai.iptv-player\\logs")
+        } else {
+            PathBuf::from("C:\\temp\\iptv-player-logs")
+        }
+    } else {
+        // Linux: ~/.local/share/com.sai.iptv-player/logs/
+        if let Some(home) = std::env::var_os("HOME") {
+            PathBuf::from(home).join(".local/share/com.sai.iptv-player/logs")
+        } else {
+            PathBuf::from("/tmp/iptv-player-logs")
+        }
+    };
+
+    // 确保日志目录存在
+    if let Err(e) = fs::create_dir_all(&log_dir) {
+        eprintln!("创建日志目录失败: {}", e);
+        return;
+    }
+
+    // 文件日志（每天滚动一次）
+    let file_appender = RollingFileAppender::new(
+        Rotation::DAILY,
+        &log_dir,
+        "iptv-player.log",
+    );
+
+    // 环境过滤器（支持 RUST_LOG 环境变量）
+    let env_filter = EnvFilter::try_from_default_env()
+        .unwrap_or_else(|_| {
+            // 默认配置：
+            // - 应用代码：INFO 级别
+            // - 依赖库：WARN 级别
+            EnvFilter::new("tauri_app_lib=info,warn")
+        });
+
+    // 构建订阅器
+    tracing_subscriber::registry()
+        .with(env_filter)
+        .with(
+            tracing_subscriber::fmt::layer()
+                .with_writer(file_appender)
+                .with_ansi(false)  // 文件日志不需要颜色
+                .with_target(true)
+                .with_thread_ids(true)
+                .with_line_number(true)
+        )
+        .with(
+            tracing_subscriber::fmt::layer()
+                .with_writer(std::io::stdout)
+                .with_ansi(true)  // 控制台支持颜色
+                .with_target(false)
+                .compact()
+        )
+        .init();
+
+    info!("日志系统初始化完成");
+    info!("日志文件位置: {:?}", log_dir.join("iptv-player.log"));
+}
+
 impl AppState {
+    #[instrument(skip(self), fields(data_dir = ?self.data_dir))]
     fn save_sources(&self) -> Result<(), String> {
         let sources = self.sources.lock().unwrap();
         let data_file = self.data_dir.join("sources.json");
 
         let json = serde_json::to_string_pretty(&*sources)
-            .map_err(|e| format!("序列化失败: {}", e))?;
+            .map_err(|e| {
+                error!("序列化失败: {}", e);
+                format!("序列化失败: {}", e)
+            })?;
 
         fs::write(&data_file, json)
-            .map_err(|e| format!("写入文件失败: {}", e))?;
+            .map_err(|e| {
+                error!("写入文件失败: {}", e);
+                format!("写入文件失败: {}", e)
+            })?;
 
-        println!("💾 数据已保存到: {:?}", data_file);
+        info!("数据已保存到: {:?}, 数量: {}", data_file, sources.len());
         Ok(())
     }
 
+    #[instrument(skip(self), fields(data_dir = ?self.data_dir))]
     fn load_sources(&self) -> Result<Vec<Source>, String> {
         let data_file = self.data_dir.join("sources.json");
 
         if !data_file.exists() {
-            println!("📂 数据文件不存在，返回空列表");
+            info!("数据文件不存在，返回空列表");
             return Ok(Vec::new());
         }
 
         let json = fs::read_to_string(&data_file)
-            .map_err(|e| format!("读取文件失败: {}", e))?;
+            .map_err(|e| {
+                error!("读取文件失败: {}", e);
+                format!("读取文件失败: {}", e)
+            })?;
 
         let sources: Vec<Source> = serde_json::from_str(&json)
-            .map_err(|e| format!("解析 JSON 失败: {}", e))?;
+            .map_err(|e| {
+                error!("解析 JSON 失败: {}", e);
+                format!("解析 JSON 失败: {}", e)
+            })?;
 
-        println!("📂 从文件加载了 {} 个订阅源", sources.len());
+        info!("从文件加载了 {} 个订阅源", sources.len());
         Ok(sources)
     }
 }
 
 #[tauri::command]
+#[instrument(skip(state))]
 fn get_sources(state: State<AppState>) -> Result<Vec<Source>, String> {
     let sources = state.sources.lock().unwrap();
-    println!("📋 get_sources 被调用，返回 {} 个订阅源", sources.len());
+    info!("获取订阅源列表，返回 {} 个订阅源", sources.len());
     Ok(sources.clone())
 }
 
 #[tauri::command]
+#[instrument(skip(state))]
 async fn add_source(name: String, url: String, state: State<'_, AppState>) -> Result<(), String> {
-    println!("========================================");
-    println!("🚀 add_source 被调用");
-    println!("名称: {}", name);
-    println!("URL: {}", url);
-    println!("========================================");
+    info!("添加订阅源: 名称='{}', URL类型='{}'", name,
+        if url == "TEST_DATA" { "测试数据" }
+        else if url.starts_with("FILE_CONTENT:") { "本地文件" }
+        else { "网络地址" }
+    );
 
     // 检查订阅源类型
     let channels = if url == "TEST_DATA" {
-        println!("📦 使用内置测试数据");
+        debug!("使用内置测试数据");
         // 返回内置的测试频道
         vec![
             Channel {
@@ -117,7 +208,7 @@ async fn add_source(name: String, url: String, state: State<'_, AppState>) -> Re
     } else if url.starts_with("FILE_CONTENT:") {
         // 从文件内容解析
         // 格式: FILE_CONTENT:<file_path>:<content>
-        println!("📄 从本地文件内容解析");
+        debug!("从本地文件内容解析");
         let without_prefix = url.strip_prefix("FILE_CONTENT:").unwrap();
 
         // 尝试分离文件路径和内容
@@ -130,27 +221,27 @@ async fn add_source(name: String, url: String, state: State<'_, AppState>) -> Re
         };
 
         if let Some(path) = &file_path {
-            println!("📁 文件路径: {}", path);
+            debug!("文件路径: {}", path);
         }
 
         let result = parse_m3u_content(content, &url);
         match &result {
-            Ok(chs) => println!("✅ 成功解析到 {} 个频道", chs.len()),
-            Err(e) => println!("❌ 解析失败: {}", e),
+            Ok(chs) => info!("成功解析本地文件，获得 {} 个频道", chs.len()),
+            Err(e) => error!("解析本地文件失败: {}", e),
         }
         result?
     } else {
         // 从网络 URL 下载并解析
-        println!("🌐 从 URL 下载并解析: {}", url);
+        debug!("从网络 URL 下载: {}", url);
         let result = fetch_and_parse_m3u(&url).await;
         match &result {
-            Ok(chs) => println!("✅ 成功解析到 {} 个频道", chs.len()),
-            Err(e) => println!("❌ 解析失败: {}", e),
+            Ok(chs) => info!("成功从网络解析，获得 {} 个频道", chs.len()),
+            Err(e) => error!("从网络解析失败: {}", e),
         }
         result?
     };
 
-    println!("📺 频道列表: {:?}", channels.iter().map(|c| &c.name).collect::<Vec<_>>());
+    debug!("频道列表: {:?}", channels.iter().map(|c| &c.name).collect::<Vec<_>>());
 
     // 从 URL 中提取文件路径（如果是本地文件）
     let file_path = if url.starts_with("FILE_CONTENT:") {
@@ -175,57 +266,51 @@ async fn add_source(name: String, url: String, state: State<'_, AppState>) -> Re
     {
         let mut sources = state.sources.lock().unwrap();
         sources.push(source);
-        println!("✅ 订阅源 '{}' 添加成功！当前总数: {}", name, sources.len());
+        info!("订阅源 '{}' 添加成功！当前总数: {}", name, sources.len());
     }
 
     // 保存到文件
     state.save_sources()?;
-    println!("========================================");
 
     Ok(())
 }
 
 #[tauri::command]
+#[instrument(skip(state))]
 fn delete_source(#[allow(non_snake_case)] sourceId: String, state: State<AppState>) -> Result<(), String> {
-    println!("========================================");
-    println!("🗑️ delete_source 被调用");
-    println!("要删除的 ID: {}", sourceId);
+    info!("删除订阅源: ID={}", sourceId);
 
-    let deleted = {
+    let (deleted, source_name) = {
         let mut sources = state.sources.lock().unwrap();
         let before_count = sources.len();
+        let source_name = sources.iter().find(|s| s.id == sourceId).map(|s| s.name.clone());
         sources.retain(|s| s.id != sourceId);
         let after_count = sources.len();
 
-        println!("删除前数量: {}", before_count);
-        println!("删除后数量: {}", after_count);
-        println!("是否删除成功: {}", before_count > after_count);
+        debug!("删除前数量: {}, 删除后数量: {}", before_count, after_count);
 
-        before_count > after_count
+        (before_count > after_count, source_name)
     };
 
     if !deleted {
-        println!("⚠️ 未找到要删除的订阅源！");
-        println!("========================================");
+        warn!("未找到要删除的订阅源: ID={}", sourceId);
         return Err(format!("未找到 ID 为 {} 的订阅源", sourceId));
     }
 
     // 保存到文件
-    println!("💾 开始保存到文件...");
     state.save_sources()?;
-    println!("✅ 删除操作完成");
-    println!("========================================");
+    info!("订阅源删除成功: 名称='{}'", source_name.unwrap_or_else(|| "未知".to_string()));
     Ok(())
 }
 
 #[tauri::command]
+#[instrument(skip(state))]
 async fn update_source(#[allow(non_snake_case)] sourceId: String, name: String, url: String, state: State<'_, AppState>) -> Result<(), String> {
-    println!("========================================");
-    println!("🔄 update_source 被调用");
-    println!("订阅源 ID: {}", sourceId);
-    println!("新名称: {}", name);
-    println!("新 URL: {}", url);
-    println!("========================================");
+    info!("更新订阅源: ID={}, 新名称='{}', URL类型='{}'", sourceId, name,
+        if url == "TEST_DATA" { "测试数据" }
+        else if url.starts_with("FILE_CONTENT:") { "本地文件" }
+        else { "网络地址" }
+    );
 
     // 重新解析频道
     let channels = if url == "TEST_DATA" {
@@ -266,26 +351,26 @@ async fn update_source(#[allow(non_snake_case)] sourceId: String, name: String, 
         };
 
         if let Some(path) = &file_path {
-            println!("📁 文件路径: {}", path);
+            debug!("文件路径: {}", path);
         }
 
         let result = parse_m3u_content(content, &url);
         match &result {
-            Ok(chs) => println!("✅ 成功解析到 {} 个频道", chs.len()),
-            Err(e) => println!("❌ 解析失败: {}", e),
+            Ok(chs) => info!("成功解析本地文件，获得 {} 个频道", chs.len()),
+            Err(e) => error!("解析本地文件失败: {}", e),
         }
         result?
     } else {
-        println!("🌐 从 URL 下载并解析: {}", url);
+        debug!("从网络 URL 下载: {}", url);
         let result = fetch_and_parse_m3u(&url).await;
         match &result {
-            Ok(chs) => println!("✅ 成功解析到 {} 个频道", chs.len()),
-            Err(e) => println!("❌ 解析失败: {}", e),
+            Ok(chs) => info!("成功从网络解析，获得 {} 个频道", chs.len()),
+            Err(e) => error!("从网络解析失败: {}", e),
         }
         result?
     };
 
-    println!("📺 频道列表: {:?}", channels.iter().map(|c| &c.name).collect::<Vec<_>>());
+    debug!("频道列表: {:?}", channels.iter().map(|c| &c.name).collect::<Vec<_>>());
 
     // 从 URL 中提取文件路径（如果是本地文件）
     let file_path = if url.starts_with("FILE_CONTENT:") {
@@ -307,21 +392,22 @@ async fn update_source(#[allow(non_snake_case)] sourceId: String, name: String, 
             source.url = url.clone();
             source.channels = channels;
             source.file_path = file_path;
-            println!("✅ 订阅源 '{}' 更新成功！", name);
+            info!("订阅源 '{}' 更新成功！", name);
         } else {
+            warn!("未找到要更新的订阅源: ID={}", sourceId);
             return Err(format!("未找到订阅源: {}", sourceId));
         }
     }
 
     // 保存到文件
     state.save_sources()?;
-    println!("========================================");
 
     Ok(())
 }
 
 /// 为 IPv6 URL 创建代理映射
 #[tauri::command]
+#[instrument(skip(state))]
 fn create_proxy_url(original_url: String, state: State<AppState>) -> Result<String, String> {
     // 检查是否是 IPv6 URL
     if !original_url.contains('[') || !original_url.contains(']') {
@@ -329,7 +415,7 @@ fn create_proxy_url(original_url: String, state: State<AppState>) -> Result<Stri
         return Ok(original_url);
     }
 
-    println!("🔄 为 IPv6 URL 创建代理: {}", original_url);
+    debug!("为 IPv6 URL 创建代理");
 
     // 生成代理 ID
     let proxy_id = Uuid::new_v4().to_string();
@@ -337,53 +423,67 @@ fn create_proxy_url(original_url: String, state: State<AppState>) -> Result<Stri
 
     // 存储映射
     let mut mappings = state.proxy_mappings.lock().unwrap();
-    mappings.insert(proxy_id, original_url.clone());
+    mappings.insert(proxy_id.clone(), original_url.clone());
 
-    println!("✅ 代理 URL: {}", proxy_url);
+    info!("IPv6 代理映射创建: proxy_id={}", proxy_id);
     Ok(proxy_url)
 }
 
 /// 通过代理获取流数据
 #[tauri::command]
+#[instrument(skip(state))]
 async fn proxy_stream(proxy_id: String, state: State<'_, AppState>) -> Result<Vec<u8>, String> {
     // 获取原始 URL
     let original_url = {
         let mappings = state.proxy_mappings.lock().unwrap();
         mappings.get(&proxy_id).cloned()
-            .ok_or_else(|| "代理 ID 不存在".to_string())?
+            .ok_or_else(|| {
+                warn!("代理 ID 不存在: {}", proxy_id);
+                "代理 ID 不存在".to_string()
+            })?
     };
 
-    println!("🌐 代理请求: {} -> {}", proxy_id, original_url);
+    debug!("代理请求: {} -> {}", proxy_id, original_url);
 
     // 通过 reqwest 获取数据（支持 IPv6）
     let response = reqwest::get(&original_url)
         .await
-        .map_err(|e| format!("代理请求失败: {}", e))?;
+        .map_err(|e| {
+            error!("代理请求失败: {}", e);
+            format!("代理请求失败: {}", e)
+        })?;
 
     let bytes = response
         .bytes()
         .await
-        .map_err(|e| format!("读取数据失败: {}", e))?;
+        .map_err(|e| {
+            error!("读取数据失败: {}", e);
+            format!("读取数据失败: {}", e)
+        })?;
 
     Ok(bytes.to_vec())
 }
 
 /// 简单获取 URL 内容（支持 IPv6）
 #[tauri::command]
+#[instrument]
 async fn fetch_url_content(url: String) -> Result<String, String> {
-    println!("🌐 获取 URL 内容: {}", url);
+    debug!("获取 URL 内容");
 
     let client = reqwest::Client::builder()
         .redirect(reqwest::redirect::Policy::limited(10))
         .build()
-        .map_err(|e| format!("创建客户端失败: {}", e))?;
+        .map_err(|e| {
+            error!("创建客户端失败: {}", e);
+            format!("创建客户端失败: {}", e)
+        })?;
 
     let response = client
         .get(&url)
         .send()
         .await
         .map_err(|e| {
-            println!("❌ 请求失败: {}", e);
+            error!("请求失败: {}", e);
             format!("请求失败: {}", e)
         })?;
 
@@ -391,25 +491,29 @@ async fn fetch_url_content(url: String) -> Result<String, String> {
         .text()
         .await
         .map_err(|e| {
-            println!("❌ 读取内容失败: {}", e);
+            error!("读取内容失败: {}", e);
             format!("读取内容失败: {}", e)
         })?;
 
-    println!("✅ 成功获取内容，大小: {} 字节", content.len());
+    info!("成功获取内容，大小: {} 字节", content.len());
     Ok(content)
 }
 
 /// 获取并处理 IPv6 m3u8 内容，将相对 URL 转换为绝对 URL
 #[tauri::command]
+#[instrument]
 async fn fetch_and_proxy_m3u8(url: String) -> Result<String, String> {
-    println!("🌐 获取并处理 m3u8: {}", url);
+    debug!("获取并处理 m3u8");
 
     // ⭐ 获取原始内容 - 添加完整请求头
     let client = reqwest::Client::builder()
         .redirect(reqwest::redirect::Policy::limited(10))
         .timeout(std::time::Duration::from_secs(30))
         .build()
-        .map_err(|e| format!("创建客户端失败: {}", e))?;
+        .map_err(|e| {
+            error!("创建客户端失败: {}", e);
+            format!("创建客户端失败: {}", e)
+        })?;
 
     let response = client
         .get(&url)
@@ -420,14 +524,20 @@ async fn fetch_and_proxy_m3u8(url: String) -> Result<String, String> {
         .header("Pragma", "no-cache")
         .send()
         .await
-        .map_err(|e| format!("请求失败: {}", e))?;
+        .map_err(|e| {
+            error!("请求失败: {}", e);
+            format!("请求失败: {}", e)
+        })?;
 
     let content = response
         .text()
         .await
-        .map_err(|e| format!("读取内容失败: {}", e))?;
+        .map_err(|e| {
+            error!("读取内容失败: {}", e);
+            format!("读取内容失败: {}", e)
+        })?;
 
-    println!("📄 原始 m3u8 大小: {} 字节", content.len());
+    debug!("原始 m3u8 大小: {} 字节", content.len());
 
     // 解析 base URL
     let base_url = if let Some(pos) = url.rfind('/') {
@@ -436,10 +546,11 @@ async fn fetch_and_proxy_m3u8(url: String) -> Result<String, String> {
         &url
     };
 
-    println!("🔗 Base URL: {}", base_url);
+    debug!("Base URL: {}", base_url);
 
     // 处理 m3u8 内容，将相对路径转换为绝对路径
     let mut processed_lines = Vec::new();
+    let mut url_count = 0;
     for line in content.lines() {
         let trimmed = line.trim();
 
@@ -453,29 +564,40 @@ async fn fetch_and_proxy_m3u8(url: String) -> Result<String, String> {
                 trimmed.to_string()
             } else {
                 // 相对 URL，转换为绝对 URL
+                url_count += 1;
                 format!("{}{}", base_url, trimmed)
             };
-            println!("🔄 转换 URL: {} -> {}", trimmed, absolute_url);
             processed_lines.push(absolute_url);
         }
     }
 
     let processed_content = processed_lines.join("\n");
-    println!("✅ 处理完成，新大小: {} 字节", processed_content.len());
+    info!("m3u8 处理完成，转换了 {} 个相对 URL，新大小: {} 字节", url_count, processed_content.len());
 
     Ok(processed_content)
 }
 
+#[instrument]
 async fn fetch_and_parse_m3u(url: &str) -> Result<Vec<Channel>, String> {
+    debug!("下载 M3U 播放列表");
+
     // 下载播放列表
     let response = reqwest::get(url)
         .await
-        .map_err(|e| format!("下载失败: {}", e))?;
+        .map_err(|e| {
+            error!("下载失败: {}", e);
+            format!("下载失败: {}", e)
+        })?;
 
     let content = response
         .text()
         .await
-        .map_err(|e| format!("读取内容失败: {}", e))?;
+        .map_err(|e| {
+            error!("读取内容失败: {}", e);
+            format!("读取内容失败: {}", e)
+        })?;
+
+    info!("M3U 内容下载成功，大小: {} 字节", content.len());
 
     // 解析 M3U 格式
     parse_m3u_content(&content, url)
@@ -542,7 +664,7 @@ fn parse_m3u_content(content: &str, url: &str) -> Result<Vec<Channel>, String> {
 
                     // 检测并记录 IPv6 URL
                     if channel_url.contains('[') && channel_url.contains(']') {
-                        println!("🌐 检测到 IPv6 URL: {}", channel_url);
+                        debug!("检测到 IPv6 频道: {}", name);
                     }
 
                     channels.push(Channel {
@@ -561,18 +683,28 @@ fn parse_m3u_content(content: &str, url: &str) -> Result<Vec<Channel>, String> {
     }
 
     if channels.is_empty() {
+        warn!("未找到有效的频道信息");
         Err("未找到有效的频道信息".to_string())
     } else {
+        info!("成功解析 {} 个频道", channels.len());
         Ok(channels)
     }
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
+    // 初始化日志系统
+    init_logging();
+
+    info!("========================================");
+    info!("IPTV Player 启动");
+    info!("版本: {}", env!("CARGO_PKG_VERSION"));
+    info!("========================================");
+
     // 在后台启动代理服务器
     tauri::async_runtime::spawn(async {
         if let Err(e) = start_proxy_server().await {
-            eprintln!("❌ 代理服务器启动失败: {}", e);
+            error!("代理服务器启动失败: {}", e);
         }
     });
 
@@ -585,7 +717,7 @@ pub fn run() {
                 match handle_stream_protocol(&request).await {
                     Ok(response) => responder.respond(response),
                     Err(e) => {
-                        eprintln!("Protocol error: {}", e);
+                        error!("Stream protocol 错误: {}", e);
                         let error_response = tauri::http::Response::builder()
                             .status(500)
                             .body(format!("Error: {}", e).into_bytes())
@@ -604,7 +736,7 @@ pub fn run() {
             fs::create_dir_all(&data_dir)
                 .expect("无法创建数据目录");
 
-            println!("📁 数据目录: {:?}", data_dir);
+            info!("数据目录: {:?}", data_dir);
 
             // 创建 AppState
             let app_state = AppState {
@@ -617,10 +749,10 @@ pub fn run() {
             if let Ok(sources) = app_state.load_sources() {
                 let mut state_sources = app_state.sources.lock().unwrap();
                 *state_sources = sources;
-                println!("✅ 已加载 {} 个订阅源", state_sources.len());
             }
 
             app.manage(app_state);
+            info!("应用初始化完成");
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
@@ -643,8 +775,9 @@ struct ProxyParams {
     url: String,
 }
 
+#[instrument(skip(params))]
 async fn proxy_handler(Query(params): Query<ProxyParams>) -> Result<Response, StatusCode> {
-    println!("🌐 代理请求: {}", params.url);
+    debug!("HTTP 代理请求: {}", params.url);
 
     // ⭐ 完全复制 x-iptv-player 的请求头策略
     let client = reqwest::Client::builder()
@@ -652,7 +785,7 @@ async fn proxy_handler(Query(params): Query<ProxyParams>) -> Result<Response, St
         .timeout(std::time::Duration::from_secs(30))
         .build()
         .map_err(|e| {
-            eprintln!("❌ 创建客户端失败: {}", e);
+            error!("创建客户端失败: {}", e);
             StatusCode::INTERNAL_SERVER_ERROR
         })?;
 
@@ -671,7 +804,7 @@ async fn proxy_handler(Query(params): Query<ProxyParams>) -> Result<Response, St
         .send()
         .await
         .map_err(|e| {
-            eprintln!("❌ 请求失败: {}", e);
+            error!("HTTP 代理请求失败: {}", e);
             StatusCode::BAD_GATEWAY
         })?;
 
@@ -695,7 +828,7 @@ async fn proxy_handler(Query(params): Query<ProxyParams>) -> Result<Response, St
         .bytes()
         .await
         .map_err(|e| {
-            eprintln!("❌ 读取数据失败: {}", e);
+            error!("读取数据失败: {}", e);
             StatusCode::INTERNAL_SERVER_ERROR
         })?;
 
@@ -703,7 +836,7 @@ async fn proxy_handler(Query(params): Query<ProxyParams>) -> Result<Response, St
     let final_bytes = if params.url.contains(".m3u8") {
         match String::from_utf8(bytes.to_vec()) {
             Ok(content) => {
-                println!("📄 处理 m3u8 内容，原始大小: {} 字节", content.len());
+                debug!("处理 m3u8 内容，原始大小: {} 字节", content.len());
 
                 // 解析原始 URL 的 base
                 let base_url = if let Some(pos) = params.url.rfind('/') {
@@ -711,9 +844,10 @@ async fn proxy_handler(Query(params): Query<ProxyParams>) -> Result<Response, St
                 } else {
                     &params.url
                 };
-                println!("🔗 Base URL: {}", base_url);
+                debug!("Base URL: {}", base_url);
 
                 // 重写每一行
+                let mut ipv6_count = 0;
                 let processed_lines: Vec<String> = content.lines().map(|line| {
                     let trimmed = line.trim();
 
@@ -733,9 +867,9 @@ async fn proxy_handler(Query(params): Query<ProxyParams>) -> Result<Response, St
 
                     // ⭐ 关键：如果是 IPv6 URL，通过代理
                     if absolute_url.contains('[') && absolute_url.contains(']') {
+                        ipv6_count += 1;
                         let encoded = urlencoding::encode(&absolute_url);
                         let proxied = format!("http://127.0.0.1:18080/proxy?url={}", encoded);
-                        println!("🔄 重写 URL: {} -> 代理", absolute_url.chars().take(60).collect::<String>());
                         proxied
                     } else {
                         absolute_url
@@ -743,11 +877,15 @@ async fn proxy_handler(Query(params): Query<ProxyParams>) -> Result<Response, St
                 }).collect();
 
                 let processed_content = processed_lines.join("\n");
-                println!("✅ m3u8 处理完成，新大小: {} 字节", processed_content.len());
+                if ipv6_count > 0 {
+                    debug!("m3u8 处理完成，重写了 {} 个 IPv6 URL，新大小: {} 字节", ipv6_count, processed_content.len());
+                } else {
+                    debug!("m3u8 处理完成，新大小: {} 字节", processed_content.len());
+                }
                 processed_content.into_bytes()
             }
             Err(_) => {
-                println!("⚠️ m3u8 内容不是有效的 UTF-8，返回原始字节");
+                warn!("m3u8 内容不是有效的 UTF-8，返回原始字节");
                 bytes.to_vec()
             }
         }
@@ -755,7 +893,7 @@ async fn proxy_handler(Query(params): Query<ProxyParams>) -> Result<Response, St
         bytes.to_vec()
     };
 
-    println!("✅ 代理成功: {} 字节, 类型: {}", final_bytes.len(), content_type);
+    info!("HTTP 代理成功: {} 字节, 类型: {}", final_bytes.len(), content_type);
 
     // ⭐ 添加 CORS 头（完全复制 x-iptv-player）
     Ok((
@@ -773,13 +911,14 @@ async fn proxy_handler(Query(params): Query<ProxyParams>) -> Result<Response, St
 }
 
 // 启动本地代理服务器
+#[instrument]
 async fn start_proxy_server() -> Result<(), Box<dyn std::error::Error>> {
     let app = Router::new()
         .route("/proxy", get(proxy_handler))
         .layer(CorsLayer::permissive());
 
     let addr = std::net::SocketAddr::from(([127, 0, 0, 1], 18080));
-    println!("🚀 启动代理服务器: http://{}", addr);
+    info!("启动 HTTP 代理服务器: http://{}", addr);
 
     let listener = tokio::net::TcpListener::bind(addr).await?;
     axum::serve(listener, app).await?;
@@ -787,9 +926,10 @@ async fn start_proxy_server() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
+#[instrument]
 async fn handle_stream_protocol(request: &tauri::http::Request<Vec<u8>>) -> Result<tauri::http::Response<Vec<u8>>, Box<dyn std::error::Error>> {
     let url_str = request.uri().to_string();
-    println!("🌐 Stream protocol request: {}", url_str);
+    debug!("Stream protocol 请求: {}", url_str);
 
     // 从 stream://xxx 中提取实际 URL
     // 格式: stream://encode(actual_url)
@@ -800,7 +940,7 @@ async fn handle_stream_protocol(request: &tauri::http::Request<Vec<u8>>) -> Resu
     // URL decode
     let decoded_url = urlencoding::decode(actual_url)?;
 
-    println!("📡 Fetching: {}", decoded_url);
+    debug!("获取流数据: {}", decoded_url);
 
     // 使用 reqwest 获取数据（支持 IPv6）
     let client = reqwest::Client::builder()
@@ -821,7 +961,7 @@ async fn handle_stream_protocol(request: &tauri::http::Request<Vec<u8>>) -> Resu
 
     let bytes = response.bytes().await?;
 
-    println!("✅ Fetched {} bytes, type: {}", bytes.len(), content_type);
+    info!("Stream protocol 成功: {} 字节, 类型: {}", bytes.len(), content_type);
 
     tauri::http::Response::builder()
         .status(200)

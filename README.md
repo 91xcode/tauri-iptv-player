@@ -803,6 +803,139 @@ xattr -cr /Applications/IPTV\ Player.app
 - ✅ 智能错误过滤和自动恢复
 - ✅ 数据持久化
 
+## 📊 日志系统
+
+### 概述
+
+项目集成了生产级日志系统，使用 Rust 的 `tracing` 框架实现：
+- ✅ 文件日志（每日滚动）
+- ✅ 控制台日志（带颜色）
+- ✅ 结构化日志记录
+- ✅ 函数调用自动追踪
+- ✅ 多级别日志（ERROR, WARN, INFO, DEBUG, TRACE）
+
+### 日志文件位置
+
+**macOS:**
+```bash
+~/Library/Logs/com.sai.iptv-player/iptv-player.log
+```
+
+**Windows:**
+```bash
+%APPDATA%\com.sai.iptv-player\logs\iptv-player.log
+```
+
+**Linux:**
+```bash
+~/.local/share/com.sai.iptv-player/logs/iptv-player.log
+```
+
+### 快速使用
+
+**1. 实时查看日志：**
+```bash
+# macOS/Linux
+tail -f ~/Library/Logs/com.sai.iptv-player/iptv-player.log
+
+# 搜索错误
+grep -E "ERROR|WARN" ~/Library/Logs/com.sai.iptv-player/iptv-player.log
+```
+
+**2. 设置日志级别：**
+```bash
+# 默认 INFO 级别
+npm run tauri dev
+
+# DEBUG 级别（查看详细信息）
+export RUST_LOG=debug
+npm run tauri dev
+
+# TRACE 级别（最详细）
+export RUST_LOG=trace
+npm run tauri dev
+```
+
+**3. 从终端启动已安装应用（查看日志）：**
+```bash
+# macOS
+/Applications/IPTV\ Player.app/Contents/MacOS/IPTV\ Player
+
+# 设置日志级别
+export RUST_LOG=debug
+/Applications/IPTV\ Player.app/Contents/MacOS/IPTV\ Player
+```
+
+### 日志示例
+
+**应用启动：**
+```
+2025-10-26T10:30:45Z  INFO IPTV Player 启动
+2025-10-26T10:30:45Z  INFO 版本: 0.1.0
+2025-10-26T10:30:45Z  INFO 启动 HTTP 代理服务器: http://127.0.0.1:18080
+2025-10-26T10:30:45Z  INFO 从文件加载了 3 个订阅源
+```
+
+**添加订阅源：**
+```
+2025-10-26T10:31:00Z  INFO 添加订阅源: 名称='CCTV', URL类型='网络地址'
+2025-10-26T10:31:01Z  INFO M3U 内容下载成功，大小: 12345 字节
+2025-10-26T10:31:01Z  INFO 成功解析 123 个频道
+```
+
+**HTTP 代理：**
+```
+2025-10-26T10:32:00Z DEBUG HTTP 代理请求
+2025-10-26T10:32:00Z  INFO HTTP 代理成功: 6789 字节
+```
+
+### 日志级别说明
+
+| 级别 | 环境变量 | 用途 | 适用场景 |
+|------|---------|------|---------|
+| ERROR | `RUST_LOG=error` | 仅错误 | 生产环境 |
+| WARN | `RUST_LOG=warn` | 警告+错误 | 生产环境 |
+| INFO | `RUST_LOG=info` | 关键操作 | 默认/生产 |
+| DEBUG | `RUST_LOG=debug` | 详细信息 | 开发/调试 |
+| TRACE | `RUST_LOG=trace` | 完整追踪 | 深度调试 |
+
+### 调试技巧
+
+**调试订阅源添加失败：**
+```bash
+export RUST_LOG=debug
+tail -f ~/Library/Logs/com.sai.iptv-player/iptv-player.log | grep "订阅源\|M3U\|解析"
+```
+
+**调试播放失败：**
+```bash
+tail -f ~/Library/Logs/com.sai.iptv-player/iptv-player.log | grep "代理\|proxy"
+```
+
+**调试 IPv6 问题：**
+```bash
+tail -f ~/Library/Logs/com.sai.iptv-player/iptv-player.log | grep "IPv6\|ipv6"
+```
+
+### 清理日志
+
+```bash
+# 删除 7 天前的日志
+find ~/Library/Logs/com.sai.iptv-player -name "iptv-player.log.*" -mtime +7 -delete
+
+# 删除所有历史日志（保留当前）
+rm ~/Library/Logs/com.sai.iptv-player/iptv-player.log.*
+```
+
+### 完整文档
+
+详细使用指南请查看 **[LOGGING.md](./LOGGING.md)**，包含：
+- 各平台日志位置详解
+- 高级过滤和搜索技巧
+- 环境变量配置方法
+- 问题报告指南
+- 常见问题解答
+
 ## 📝 License
 
 MIT License

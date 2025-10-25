@@ -31,4 +31,7 @@ urlencoding = "2.1"
 axum = "0.7"
 tower = "0.4"
 tower-http = { version = "0.5", features = ["cors"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json", "local-time"] }
+tracing-appender = "0.2"
 
