@@ -104,18 +104,68 @@ body {
   opacity: 0.7;
 }
 
-.delete-source-btn {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-  opacity: 0.6;
-  transition: opacity 0.2s;
-  padding: 4px 8px;
+/* 订阅源操作按钮容器 */
+.source-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
 
-.delete-source-btn:hover {
+.source-item:hover .source-actions {
   opacity: 1;
+}
+
+/* 通用操作按钮样式 */
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.action-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.action-btn:active {
+  transform: translateY(0);
+}
+
+/* 编辑按钮 */
+.edit-btn {
+  color: #4a9eff;
+}
+
+.edit-btn:hover {
+  background: rgba(74, 158, 255, 0.15);
+  color: #6bb3ff;
+}
+
+/* 删除按钮 */
+.delete-btn {
+  color: #ff5555;
+}
+
+.delete-btn:hover {
+  background: rgba(255, 85, 85, 0.15);
+  color: #ff7777;
+}
+
+/* SVG 图标 */
+.action-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
 }
 
 .empty-sources {

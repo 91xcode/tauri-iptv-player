@@ -31,6 +31,8 @@ struct Source {
     name: String,
     url: String,
     channels: Vec<Channel>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    file_path: Option<String>, // 本地文件的原始路径
 }
 
 struct AppState {
@@ -114,8 +116,23 @@ async fn add_source(name: String, url: String, state: State<'_, AppState>) -> Re
         ]
     } else if url.starts_with("FILE_CONTENT:") {
         // 从文件内容解析
+        // 格式: FILE_CONTENT:<file_path>:<content>
         println!("📄 从本地文件内容解析");
-        let content = url.strip_prefix("FILE_CONTENT:").unwrap();
+        let without_prefix = url.strip_prefix("FILE_CONTENT:").unwrap();
+
+        // 尝试分离文件路径和内容
+        let (file_path, content) = if let Some(second_colon_pos) = without_prefix.find(':') {
+            let path = &without_prefix[..second_colon_pos];
+            let content = &without_prefix[second_colon_pos + 1..];
+            (Some(path.to_string()), content)
+        } else {
+            (None, without_prefix)
+        };
+
+        if let Some(path) = &file_path {
+            println!("📁 文件路径: {}", path);
+        }
+
         let result = parse_m3u_content(content, &url);
         match &result {
             Ok(chs) => println!("✅ 成功解析到 {} 个频道", chs.len()),
@@ -135,11 +152,24 @@ async fn add_source(name: String, url: String, state: State<'_, AppState>) -> Re
 
     println!("📺 频道列表: {:?}", channels.iter().map(|c| &c.name).collect::<Vec<_>>());
 
+    // 从 URL 中提取文件路径（如果是本地文件）
+    let file_path = if url.starts_with("FILE_CONTENT:") {
+        let without_prefix = url.strip_prefix("FILE_CONTENT:").unwrap();
+        if let Some(second_colon_pos) = without_prefix.find(':') {
+            Some(without_prefix[..second_colon_pos].to_string())
+        } else {
+            None
+        }
+    } else {
+        None
+    };
+
     let source = Source {
         id: Uuid::new_v4().to_string(),
         name: name.clone(),
         url: url.clone(),
         channels,
+        file_path,
     };
 
     {
@@ -156,15 +186,137 @@ async fn add_source(name: String, url: String, state: State<'_, AppState>) -> Re
 }
 
 #[tauri::command]
-fn delete_source(source_id: String, state: State<AppState>) -> Result<(), String> {
+fn delete_source(#[allow(non_snake_case)] sourceId: String, state: State<AppState>) -> Result<(), String> {
+    println!("========================================");
+    println!("🗑️ delete_source 被调用");
+    println!("要删除的 ID: {}", sourceId);
+
+    let deleted = {
+        let mut sources = state.sources.lock().unwrap();
+        let before_count = sources.len();
+        sources.retain(|s| s.id != sourceId);
+        let after_count = sources.len();
+
+        println!("删除前数量: {}", before_count);
+        println!("删除后数量: {}", after_count);
+        println!("是否删除成功: {}", before_count > after_count);
+
+        before_count > after_count
+    };
+
+    if !deleted {
+        println!("⚠️ 未找到要删除的订阅源！");
+        println!("========================================");
+        return Err(format!("未找到 ID 为 {} 的订阅源", sourceId));
+    }
+
+    // 保存到文件
+    println!("💾 开始保存到文件...");
+    state.save_sources()?;
+    println!("✅ 删除操作完成");
+    println!("========================================");
+    Ok(())
+}
+
+#[tauri::command]
+async fn update_source(#[allow(non_snake_case)] sourceId: String, name: String, url: String, state: State<'_, AppState>) -> Result<(), String> {
+    println!("========================================");
+    println!("🔄 update_source 被调用");
+    println!("订阅源 ID: {}", sourceId);
+    println!("新名称: {}", name);
+    println!("新 URL: {}", url);
+    println!("========================================");
+
+    // 重新解析频道
+    let channels = if url == "TEST_DATA" {
+        println!("📦 使用内置测试数据");
+        vec![
+            Channel {
+                name: "测试视频 1 - Demo".to_string(),
+                url: "https://upyun.luckly-mjw.cn/Assets/media-source/example/media/index.m3u8".to_string(),
+                logo: Some("https://picsum.photos/100/100?1".to_string()),
+                group: Some("测试频道".to_string()),
+            },
+            Channel {
+                name: "测试视频 2 - Big Buck Bunny".to_string(),
+                url: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8".to_string(),
+                logo: Some("https://picsum.photos/100/100?2".to_string()),
+                group: Some("测试频道".to_string()),
+            },
+            Channel {
+                name: "测试视频 3 - Tears of Steel".to_string(),
+                url: "https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8".to_string(),
+                logo: Some("https://picsum.photos/100/100?3".to_string()),
+                group: Some("测试频道".to_string()),
+            },
+        ]
+    } else if url.starts_with("FILE_CONTENT:") {
+        // 从文件内容解析
+        // 格式: FILE_CONTENT:<file_path>:<content>
+        println!("📄 从本地文件内容解析");
+        let without_prefix = url.strip_prefix("FILE_CONTENT:").unwrap();
+
+        // 尝试分离文件路径和内容
+        let (file_path, content) = if let Some(second_colon_pos) = without_prefix.find(':') {
+            let path = &without_prefix[..second_colon_pos];
+            let content = &without_prefix[second_colon_pos + 1..];
+            (Some(path.to_string()), content)
+        } else {
+            (None, without_prefix)
+        };
+
+        if let Some(path) = &file_path {
+            println!("📁 文件路径: {}", path);
+        }
+
+        let result = parse_m3u_content(content, &url);
+        match &result {
+            Ok(chs) => println!("✅ 成功解析到 {} 个频道", chs.len()),
+            Err(e) => println!("❌ 解析失败: {}", e),
+        }
+        result?
+    } else {
+        println!("🌐 从 URL 下载并解析: {}", url);
+        let result = fetch_and_parse_m3u(&url).await;
+        match &result {
+            Ok(chs) => println!("✅ 成功解析到 {} 个频道", chs.len()),
+            Err(e) => println!("❌ 解析失败: {}", e),
+        }
+        result?
+    };
+
+    println!("📺 频道列表: {:?}", channels.iter().map(|c| &c.name).collect::<Vec<_>>());
+
+    // 从 URL 中提取文件路径（如果是本地文件）
+    let file_path = if url.starts_with("FILE_CONTENT:") {
+        let without_prefix = url.strip_prefix("FILE_CONTENT:").unwrap();
+        if let Some(second_colon_pos) = without_prefix.find(':') {
+            Some(without_prefix[..second_colon_pos].to_string())
+        } else {
+            None
+        }
+    } else {
+        None
+    };
+
+    // 更新订阅源
     {
         let mut sources = state.sources.lock().unwrap();
-        sources.retain(|s| s.id != source_id);
-        println!("🗑️ 删除订阅源: {}", source_id);
+        if let Some(source) = sources.iter_mut().find(|s| s.id == sourceId) {
+            source.name = name.clone();
+            source.url = url.clone();
+            source.channels = channels;
+            source.file_path = file_path;
+            println!("✅ 订阅源 '{}' 更新成功！", name);
+        } else {
+            return Err(format!("未找到订阅源: {}", sourceId));
+        }
     }
 
     // 保存到文件
     state.save_sources()?;
+    println!("========================================");
+
     Ok(())
 }
 
@@ -474,6 +626,7 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             get_sources,
             add_source,
+            update_source,
             delete_source,
             create_proxy_url,
             proxy_stream,

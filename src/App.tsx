@@ -19,6 +19,7 @@ export interface Source {
   name: string;
   url: string;
   channels: Channel[];
+  filePath?: string; // 本地文件的原始路径
 }
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
   const [selectedSource, setSelectedSource] = useState<Source | null>(null);
   const [selectedChannel, setSelectedChannel] = useState<Channel | null>(null);
   const [showAddSource, setShowAddSource] = useState(false);
+  const [editingSource, setEditingSource] = useState<Source | null>(null);
   const [sourceListCollapsed, setSourceListCollapsed] = useState(false);
   const [channelListCollapsed, setChannelListCollapsed] = useState(false);
 
@@ -74,14 +76,76 @@ function App() {
 
   const handleDeleteSource = async (sourceId: string) => {
     try {
-      await invoke("delete_source", { sourceId });
-      await loadSources();
+      console.log("========================================");
+      console.log("🗑️ handleDeleteSource 被调用");
+      console.log("当前订阅源数量:", sources.length);
+      console.log("要删除的订阅源 ID:", sourceId);
+      console.log("========================================");
+
+      await invoke("delete_source", { sourceId: sourceId });
+      console.log("✅ Tauri 命令执行完成");
+
+      // 如果删除的是当前选中的订阅源，先清除选中状态
       if (selectedSource?.id === sourceId) {
+        console.log("🔄 删除的是当前选中的订阅源，清除选中状态");
         setSelectedSource(null);
         setSelectedChannel(null);
       }
+
+      // 重新加载订阅源列表
+      console.log("🔄 开始重新加载订阅源列表...");
+      const loadedSources = await invoke<Source[]>("get_sources");
+      console.log("✅ 重新加载完成，新数量:", loadedSources.length);
+      console.log("📊 新的订阅源列表:", loadedSources.map(s => s.name));
+
+      // 强制更新状态
+      setSources([...loadedSources]);
+      console.log("✅ React 状态已更新");
+
+      console.log("✅ 删除操作全部完成");
+      console.log("========================================");
     } catch (error) {
-      console.error("Failed to delete source:", error);
+      console.error("========================================");
+      console.error("❌ 删除失败:", error);
+      console.error("========================================");
+      alert(`删除失败: ${error}`);
+    }
+  };
+
+  const handleEditSource = (source: Source) => {
+    setEditingSource(source);
+    setShowAddSource(true);
+  };
+
+  const handleUpdateSource = async (name: string, url: string) => {
+    if (!editingSource) return;
+
+    try {
+      console.log("========================================");
+      console.log("🔄 开始更新订阅源");
+      console.log("订阅源 ID:", editingSource.id);
+      console.log("新名称:", name);
+      console.log("新 URL:", url);
+      console.log("========================================");
+
+      await invoke("update_source", {
+        sourceId: editingSource.id,
+        name,
+        url
+      });
+
+      console.log("✅ Tauri 命令执行完成，刷新列表");
+      await loadSources();
+
+      setShowAddSource(false);
+      setEditingSource(null);
+      console.log("✅ 更新操作全部完成");
+      console.log("========================================");
+    } catch (error) {
+      console.error("========================================");
+      console.error("❌ 更新订阅源失败:", error);
+      console.error("========================================");
+      alert(`更新订阅源失败: ${error}`);
     }
   };
 
@@ -99,6 +163,7 @@ function App() {
             selectedSource={selectedSource}
             onSelectSource={setSelectedSource}
             onDeleteSource={handleDeleteSource}
+            onEditSource={handleEditSource}
             onAddSource={() => setShowAddSource(true)}
           />
         ) : null}
@@ -149,11 +214,15 @@ function App() {
         )}
       </div>
 
-      {/* 添加订阅源对话框 */}
+      {/* 添加/编辑订阅源对话框 */}
       {showAddSource && (
         <AddSource
-          onAdd={handleAddSource}
-          onClose={() => setShowAddSource(false)}
+          onAdd={editingSource ? handleUpdateSource : handleAddSource}
+          onClose={() => {
+            setShowAddSource(false);
+            setEditingSource(null);
+          }}
+          initialSource={editingSource}
         />
       )}
     </div>
