@@ -5,9 +5,9 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 16px;
+  width: 20px;
   height: 64px;
-  background: linear-gradient(to right, rgba(32, 32, 32, 0.6), rgba(42, 42, 42, 0.8));
+  background: linear-gradient(135deg, rgba(32, 32, 32, 0.7), rgba(42, 42, 42, 0.85));
   backdrop-filter: blur(10px);
   border: 1px solid rgba(58, 58, 58, 0.4);
   color: #888;
@@ -19,26 +19,29 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  opacity: 0.6;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+  opacity: 0.5;
 }
 
 .collapse-btn:hover {
-  background: linear-gradient(to right, rgba(42, 42, 42, 0.8), rgba(58, 58, 58, 0.9));
+  background: linear-gradient(135deg, rgba(42, 42, 42, 0.85), rgba(58, 58, 58, 0.95));
   color: #007aff;
   border-color: rgba(0, 122, 255, 0.4);
-  box-shadow: 0 4px 16px rgba(0, 122, 255, 0.15);
+  box-shadow: -2px 0 16px rgba(0, 122, 255, 0.2), 0 0 20px rgba(0, 122, 255, 0.1);
   opacity: 1;
-  width: 18px;
+  width: 24px;
 }
 
 .collapse-btn:active {
-  transform: translateY(-50%) scale(0.92);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transform: scale(0.94);
+  box-shadow: -1px 0 6px rgba(0, 0, 0, 0.3);
 }
 
 .collapse-btn-left {
   right: 0;
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%);
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
   border-right: none;
@@ -46,6 +49,9 @@
 
 .collapse-btn-right {
   right: 0;
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%);
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
   border-right: none;
@@ -59,17 +65,19 @@
 }
 
 .source-list-panel.collapsed {
-  width: 24px !important;
-  min-width: 24px !important;
-  max-width: 24px !important;
-  overflow: hidden;
+  width: 0 !important;
+  min-width: 0 !important;
+  max-width: 0 !important;
+  overflow: visible;
+  border-right: none;
 }
 
 .channel-list-panel.collapsed {
-  width: 24px !important;
-  min-width: 24px !important;
-  max-width: 24px !important;
-  overflow: hidden;
+  width: 0 !important;
+  min-width: 0 !important;
+  max-width: 0 !important;
+  overflow: visible;
+  border-right: none;
 }
 
 /* 折叠时隐藏内容 */
@@ -80,29 +88,66 @@
   display: none;
 }
 
-/* 折叠按钮在折叠状态下的样式 */
-.source-list-panel.collapsed .collapse-btn-left,
+/* 折叠按钮在折叠状态下的样式 - 悬浮标签 */
+.source-list-panel.collapsed .collapse-btn-left {
+  right: auto;
+  left: 12px;
+  top: auto;
+  bottom: 90px;
+  transform: none;
+  border-radius: 8px;
+  border: 1px solid rgba(58, 58, 58, 0.5);
+  background: linear-gradient(135deg, rgba(32, 32, 32, 0.9), rgba(42, 42, 42, 0.95));
+  backdrop-filter: blur(20px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .channel-list-panel.collapsed .collapse-btn-right {
   right: auto;
-  left: 0;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
-  border-left: none;
-  border-right: 1px solid rgba(58, 58, 58, 0.4);
-  background: linear-gradient(to left, rgba(32, 32, 32, 0.6), rgba(42, 42, 42, 0.8));
+  left: 12px;
+  top: auto;
+  bottom: 40px;
+  transform: none;
+  border-radius: 8px;
+  border: 1px solid rgba(58, 58, 58, 0.5);
+  background: linear-gradient(135deg, rgba(32, 32, 32, 0.9), rgba(42, 42, 42, 0.95));
+  backdrop-filter: blur(20px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .source-list-panel.collapsed .collapse-btn-left:hover,
 .channel-list-panel.collapsed .collapse-btn-right:hover {
-  background: linear-gradient(to left, rgba(42, 42, 42, 0.8), rgba(58, 58, 58, 0.9));
+  background: linear-gradient(135deg, rgba(42, 42, 42, 0.95), rgba(58, 58, 58, 1));
+  border-color: rgba(0, 122, 255, 0.6);
+  box-shadow: 0 6px 20px rgba(0, 122, 255, 0.3), 0 0 30px rgba(0, 122, 255, 0.2);
+  opacity: 1 !important;
+  transform: scale(1.08);
+  pointer-events: auto !important;
 }
 
 /* 播放器面板自动扩展 */
 .player-panel {
   flex: 1;
   transition: all 0.3s ease;
+}
+
+/* app-container 悬停时显示所有折叠按钮 */
+.app-container:hover .source-list-panel.collapsed .collapse-btn-left,
+.app-container:hover .channel-list-panel.collapsed .collapse-btn-right {
+  opacity: 0.7;
+  pointer-events: auto;
 }
 
 /* 响应式调整 */
