@@ -1,9 +1,11 @@
 use serde::{Deserialize, Serialize};
 use std::sync::Mutex;
-use tauri::State;
+use tauri::{Manager, State};
 use uuid::Uuid;
 use std::collections::HashMap;
 use std::sync::Arc;
+use std::fs;
+use std::path::PathBuf;
 use axum::{
     extract::Query,
     http::{header, StatusCode},
@@ -34,6 +36,41 @@ struct Source {
 struct AppState {
     sources: Mutex<Vec<Source>>,
     proxy_mappings: Arc<Mutex<HashMap<String, String>>>,
+    data_dir: PathBuf,
+}
+
+impl AppState {
+    fn save_sources(&self) -> Result<(), String> {
+        let sources = self.sources.lock().unwrap();
+        let data_file = self.data_dir.join("sources.json");
+
+        let json = serde_json::to_string_pretty(&*sources)
+            .map_err(|e| format!("序列化失败: {}", e))?;
+
+        fs::write(&data_file, json)
+            .map_err(|e| format!("写入文件失败: {}", e))?;
+
+        println!("💾 数据已保存到: {:?}", data_file);
+        Ok(())
+    }
+
+    fn load_sources(&self) -> Result<Vec<Source>, String> {
+        let data_file = self.data_dir.join("sources.json");
+
+        if !data_file.exists() {
+            println!("📂 数据文件不存在，返回空列表");
+            return Ok(Vec::new());
+        }
+
+        let json = fs::read_to_string(&data_file)
+            .map_err(|e| format!("读取文件失败: {}", e))?;
+
+        let sources: Vec<Source> = serde_json::from_str(&json)
+            .map_err(|e| format!("解析 JSON 失败: {}", e))?;
+
+        println!("📂 从文件加载了 {} 个订阅源", sources.len());
+        Ok(sources)
+    }
 }
 
 #[tauri::command]
@@ -105,9 +142,14 @@ async fn add_source(name: String, url: String, state: State<'_, AppState>) -> Re
         channels,
     };
 
-    let mut sources = state.sources.lock().unwrap();
-    sources.push(source);
-    println!("✅ 订阅源 '{}' 添加成功！当前总数: {}", name, sources.len());
+    {
+        let mut sources = state.sources.lock().unwrap();
+        sources.push(source);
+        println!("✅ 订阅源 '{}' 添加成功！当前总数: {}", name, sources.len());
+    }
+
+    // 保存到文件
+    state.save_sources()?;
     println!("========================================");
 
     Ok(())
@@ -115,8 +157,14 @@ async fn add_source(name: String, url: String, state: State<'_, AppState>) -> Re
 
 #[tauri::command]
 fn delete_source(source_id: String, state: State<AppState>) -> Result<(), String> {
-    let mut sources = state.sources.lock().unwrap();
-    sources.retain(|s| s.id != source_id);
+    {
+        let mut sources = state.sources.lock().unwrap();
+        sources.retain(|s| s.id != source_id);
+        println!("🗑️ 删除订阅源: {}", source_id);
+    }
+
+    // 保存到文件
+    state.save_sources()?;
     Ok(())
 }
 
@@ -389,9 +437,33 @@ pub fn run() {
                 }
             });
         })
-        .manage(AppState {
-            sources: Mutex::new(Vec::new()),
-            proxy_mappings: Arc::new(Mutex::new(HashMap::new())),
+        .setup(|app| {
+            // 获取数据目录
+            let data_dir = app.path().app_data_dir()
+                .expect("无法获取数据目录");
+
+            // 确保数据目录存在
+            fs::create_dir_all(&data_dir)
+                .expect("无法创建数据目录");
+
+            println!("📁 数据目录: {:?}", data_dir);
+
+            // 创建 AppState
+            let app_state = AppState {
+                sources: Mutex::new(Vec::new()),
+                proxy_mappings: Arc::new(Mutex::new(HashMap::new())),
+                data_dir: data_dir.clone(),
+            };
+
+            // 加载保存的数据
+            if let Ok(sources) = app_state.load_sources() {
+                let mut state_sources = app_state.sources.lock().unwrap();
+                *state_sources = sources;
+                println!("✅ 已加载 {} 个订阅源", state_sources.len());
+            }
+
+            app.manage(app_state);
+            Ok(())
         })
         .invoke_handler(tauri::generate_handler![
             get_sources,
