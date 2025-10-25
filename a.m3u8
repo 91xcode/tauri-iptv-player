@@ -1,0 +1,607 @@
+#EXTM3U
+#EXTINF:-1 tvg-id="星空卫视" tvg-name="星空卫视" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/星空卫视.png" group-title="电影频道",星空卫视
+http://quan2018.mycloudnas.com:51888/play/a016/index.m3u8
+#EXTINF:-1 tvg-id="云和新闻" tvg-name="云和新闻" tvg-logo="https://live.zbds.top/logo/云和新闻.png" group-title="地方频道",云和新闻
+http://l.cztvcloud.com/channels/lantian/SXyunhe1/720p.m3u8?
+#EXTINF:-1 tvg-id="唐河一套" tvg-name="唐河一套" tvg-logo="https://ghproxy.kilvn.com/https://raw.githubusercontent.com/fanmingming/live/main/tv/唐河一套.png" group-title="地方频道",唐河一套
+http://live.dxhmt.cn:9081/tv/11328-1.m3u8
+#EXTINF:-1 tvg-id="兰考新闻" tvg-name="兰考新闻" tvg-logo="https://ghproxy.kilvn.com/https://raw.githubusercontent.com/fanmingming/live/main/tv/兰考新闻.png" group-title="地方频道",兰考新闻
+http://live.dxhmt.cn:9081/tv/10225-1.m3u8
+#EXTINF:-1 tvg-id="龙门飞甲" tvg-name="龙门飞甲" tvg-logo="https://gh-proxy.com/raw.githubusercontent.com/suxuang/myIPTV/main/img/电影.png" group-title="电影频道",龙门飞甲
+http://jsmov2.a.yximgs.com/bs3/video-hls/5203346449046555193_hlsb.m3u8
+#EXTINF:-1 tvg-id="余姚姚江文化" tvg-name="余姚姚江文化" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/余姚姚江文化.png" group-title="地方频道",余姚姚江文化
+http://l.cztvcloud.com/channels/lantian/SXyuyao3/720p.m3u8
+#EXTINF:-1 tvg-id="伊犁哈萨克" tvg-name="伊犁哈萨克" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/伊犁哈萨克.png" group-title="地方频道",伊犁哈萨克
+http://110.153.180.106:55555/out_3/index.m3u8?zxinjd
+#EXTINF:-1 tvg-id="CCTV世界地理" tvg-name="CCTV世界地理" tvg-logo="https://live.zbds.top/logo/CCTV世界地理.png" group-title="央视频道",CCTV世界地理
+http://111.61.236.247:9081/hls/62/index.m3u8
+#EXTINF:-1 tvg-id="云和新闻综合" tvg-name="云和新闻综合" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/云和新闻综合.png" group-title="地方频道",云和新闻综合
+http://l.cztvcloud.com/channels/lantian/SXyunhe1/720p.m3u8
+#EXTINF:-1 tvg-id="CCTV女性时尚" tvg-name="CCTV女性时尚" tvg-logo="https://live.zbds.top/logo/CCTV女性时尚.png" group-title="央视频道",CCTV女性时尚
+http://111.61.236.247:9081/hls/59/index.m3u8
+#EXTINF:-1 tvg-id="KCTV" tvg-name="KCTV" tvg-logo="https://live.zbds.top/logo/KCTV.png" group-title="其他频道",KCTV
+http://119.77.96.184:1935/chn05/chn05/chunklist.m3u8
+#EXTINF:-1 tvg-id="余姚综合" tvg-name="余姚综合" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/余姚综合.png" group-title="地方频道",余姚综合
+http://l.cztvcloud.com/channels/lantian/SXyuyao1/720p.m3u8
+#EXTINF:-1 tvg-id="人间卫视" tvg-name="人间卫视" tvg-logo="https://live.zbds.top/logo/人间卫视.png" group-title="卫视频道",人间卫视
+http://61.216.67.119:1935/bltvhd/bltv1/chunklist_w1266569526.m3u8
+#EXTINF:-1 tvg-id="余杭综合" tvg-name="余杭综合" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/余杭综合.png" group-title="地方频道",余杭综合
+http://l.cztvcloud.com/channels/lantian/SXyuhang1/720p.m3u8?zzhed
+#EXTINF:-1 tvg-id="内蒙古卫视" tvg-name="内蒙古卫视" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/内蒙古卫视.png" group-title="卫视频道",内蒙古卫视
+http://111.61.236.247:9081/hls/48/index.m3u8
+#EXTINF:-1 tvg-id="万州科教" tvg-name="万州科教" tvg-logo="https://live.zbds.top/logo/万州科教.png" group-title="其他频道",万州科教
+http://123.146.162.24:8013/tslslive/URetCnP/hls/live_sd.m3u8
+#EXTINF:-1 tvg-id="云浮综合" tvg-name="云浮综合" tvg-logo="https://live.zbds.top/logo/云浮综合.png" group-title="地方频道",云浮综合
+https://livestream.oeeee.com/slive/17806.m3u8
+#EXTINF:-1 tvg-id="内乡综合" tvg-name="内乡综合" tvg-logo="https://ghproxy.kilvn.com/https://raw.githubusercontent.com/fanmingming/live/main/tv/内乡综合.png" group-title="地方频道",内乡综合
+http://live.dxhmt.cn:9081/tv/11325-1.m3u8
+#EXTINF:-1 tvg-id="义马新闻综合" tvg-name="义马新闻综合" tvg-logo="https://ghproxy.kilvn.com/https://raw.githubusercontent.com/fanmingming/live/main/tv/义马新闻综合.png" group-title="地方频道",义马新闻综合
+http://live.dxhmt.cn:9081/tv/11281-1.m3u8
+#EXTINF:-1 tvg-id="旅游卫视" tvg-name="旅游卫视" tvg-logo="https://live.zbds.top/logo/旅游卫视.png" group-title="卫视频道",旅游卫视
+http://111.61.236.247:9081/hls/50/index.m3u8
+#EXTINF:-1 tvg-id="东阳影视生活" tvg-name="东阳影视生活" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/东阳影视生活.png" group-title="电影频道",东阳影视生活
+http://l.cztvcloud.com/channels/lantian/SXdongyang1/720p.m3u8
+#EXTINF:-1 tvg-id="宿州公共" tvg-name="宿州公共" tvg-logo="https://live.zbds.top/logo/宿州公共.png" group-title="地方频道",宿州公共
+http://live.ahsz.tv/video/s10001-ggpd/index.m3u8?zanhd
+#EXTINF:-1 tvg-id="余杭新闻" tvg-name="余杭新闻" tvg-logo="https://live.zbds.top/logo/余杭新闻.png" group-title="地方频道",余杭新闻
+http://l.cztvcloud.com/channels/lantian/SXyuhang1/720p.m3u8?zzhed?
+#EXTINF:-1 tvg-id="有线新" tvg-name="有线新" tvg-logo="https://live.zbds.top/logo/有线新.png" group-title="其他频道",有线新
+http://61.10.2.140/live_freedirect/freehd209_h.live/chunklist_w135209556.m3u8
+#EXTINF:-1 tvg-id="哈尔滨娱乐" tvg-name="哈尔滨娱乐" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/哈尔滨娱乐.png" group-title="地方频道",哈尔滨娱乐
+https://stream.hrbtv.net/ylpd/sd/live.m3u8
+#EXTINF:-1 tvg-id="万州科教频道" tvg-name="万州科教频道" tvg-logo="https://live.zbds.top/logo/万州科教频道.png" group-title="其他频道",万州科教频道
+http://123.146.162.24:8017/Cz7WPb8/800/live.m3u8
+#EXTINF:-1 tvg-id="余杭未来E" tvg-name="余杭未来E" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/余杭未来E.png" group-title="地方频道",余杭未来E
+http://l.cztvcloud.com/channels/lantian/SXyuhang3/720p.m3u8?zzhed
+#EXTINF:-1 tvg-id="西藏卫视" tvg-name="西藏卫视" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/西藏卫视.png" group-title="卫视频道",西藏卫视
+http://36.32.174.67:60080/newlive/live/hls/48/live.m3u8
+#EXTINF:-1 tvg-id="上虞新闻综合" tvg-name="上虞新闻综合" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/上虞新闻综合.png" group-title="地方频道",上虞新闻综合
+http://l.cztvcloud.com/channels/lantian/SXshangyu1/720p.m3u8
+#EXTINF:-1 tvg-id="哈尔滨都市资讯" tvg-name="哈尔滨都市资讯" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/哈尔滨都市资讯.png" group-title="地方频道",哈尔滨都市资讯
+https://stream.hrbtv.net/zxpd/sd/live.m3u8
+#EXTINF:-1 tvg-id="普陀山" tvg-name="普陀山" tvg-logo="https://live.zbds.top/logo/普陀山.png" group-title="直播中国",普陀山
+https://gcalic.v.myalicdn.com/gc/pts01_1/index.m3u8
+#EXTINF:-1 tvg-id="叶县" tvg-name="叶县" tvg-logo="https://ghproxy.kilvn.com/https://raw.githubusercontent.com/fanmingming/live/main/tv/叶县.png" group-title="地方频道",叶县
+http://live.dxhmt.cn:9081/tv/10422-1.m3u8
+#EXTINF:-1 tvg-id="重温经典" tvg-name="重温经典" tvg-logo="https://live.zbds.top/logo/重温经典.png" group-title="电影频道",重温经典
+http://cdn3.132.us.kg/live/cwjd/stream.m3u8
+#EXTINF:-1 tvg-id="CHC家庭影院" tvg-name="CHC家庭影院" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/CHC家庭影院.png" group-title="电影频道",CHC家庭影院
+http://110.53.52.63:8888/newlive/live/hls/51/live.m3u8
+#EXTINF:-1 tvg-id="安徽黟县西递牌坊" tvg-name="安徽黟县西递牌坊" tvg-logo="https://live.zbds.top/logo/安徽黟县西递牌坊.png" group-title="直播中国",安徽黟县西递牌坊
+https://gcalic.v.myalicdn.com/gc/yxxdpf_1/index.m3u8
+#EXTINF:-1 tvg-id="新视觉" tvg-name="新视觉" tvg-logo="https://gitee.com/suxuang/TVlogo/raw/main/img/xsj.png" group-title="数字频道",新视觉
+http://120.76.248.139/live/bfgd/4200000249.m3u8
+#EXTINF:-1 tvg-id="黄花城水长城02" tvg-name="黄花城水长城02" tvg-logo="https://live.zbds.top/logo/黄花城水长城02.png" group-title="直播中国",黄花城水长城02
+http://gctxyc.liveplay.myqcloud.com/gc/wgw02_1/index.m3u8
+#EXTINF:-1 tvg-id="新疆天山" tvg-name="新疆天山" tvg-logo="https://live.zbds.top/logo/新疆天山.png" group-title="直播中国",新疆天山
+http://gctxyc.liveplay.myqcloud.com/gc/xjtcdhsz_1/index.m3u8
+#EXTINF:-1 tvg-id="余姚新闻综合" tvg-name="余姚新闻综合" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/余姚新闻综合.png" group-title="地方频道",余姚新闻综合
+https://l.cztvcloud.com/channels/lantian/SXyuyao1/720p.m3u8
+#EXTINF:-1 tvg-id="张掖七彩丹霞" tvg-name="张掖七彩丹霞" tvg-logo="https://live.zbds.top/logo/张掖七彩丹霞.png" group-title="直播中国",张掖七彩丹霞
+https://gcalic.v.myalicdn.com/gc/zyqcdx01_1/index.m3u8
+#EXTINF:-1 tvg-id="黑龙江雪乡梦幻家园" tvg-name="黑龙江雪乡梦幻家园" tvg-logo="https://live.zbds.top/logo/黑龙江雪乡梦幻家园.png" group-title="其他频道",黑龙江雪乡梦幻家园
+https://gcalic.v.myalicdn.com/gc/mdjxxmhjyxj_1/index.m3u8?contentid=2820180516001
+#EXTINF:-1 tvg-id="月牙泉" tvg-name="月牙泉" tvg-logo="https://live.zbds.top/logo/月牙泉.png" group-title="直播中国",月牙泉
+https://gcalic.v.myalicdn.com/gc/dhyyqsm_1/index.m3u8
+#EXTINF:-1 tvg-id="江苏徐州云龙湖风景区云龙山观景台西" tvg-name="江苏徐州云龙湖风景区云龙山观景台西" tvg-logo="https://live.zbds.top/logo/江苏徐州云龙湖风景区云龙山观景台西.png" group-title="直播中国",江苏徐州云龙湖风景区云龙山观景台西
+https://gcalic.v.myalicdn.com/gc/ylh04_1/index.m3u8
+#EXTINF:-1 tvg-id="四川峨眉山远眺贡嘎雪山" tvg-name="四川峨眉山远眺贡嘎雪山" tvg-logo="https://live.zbds.top/logo/四川峨眉山远眺贡嘎雪山.png" group-title="直播中国",四川峨眉山远眺贡嘎雪山
+https://gcalic.v.myalicdn.com/gc/emsyh_1/index.m3u8
+#EXTINF:-1 tvg-id="黄山飞来石" tvg-name="黄山飞来石" tvg-logo="https://live.zbds.top/logo/黄山飞来石.png" group-title="直播中国",黄山飞来石
+https://gcalic.v.myalicdn.com/gc/hsptgy_1/index.m3u8
+#EXTINF:-1 tvg-id="安徽池州九华山风景区九华山" tvg-name="安徽池州九华山风景区九华山" tvg-logo="https://live.zbds.top/logo/安徽池州九华山风景区九华山.png" group-title="直播中国",安徽池州九华山风景区九华山
+https://gcalic.v.myalicdn.com/gc/jhs05_1/index.m3u8
+#EXTINF:-1 tvg-id="黄果树六角亭瀑布" tvg-name="黄果树六角亭瀑布" tvg-logo="https://live.zbds.top/logo/黄果树六角亭瀑布.png" group-title="直播中国",黄果树六角亭瀑布
+https://gcalic.v.myalicdn.com/gc/hgsspzxdpb_1/index.m3u8
+#EXTINF:-1 tvg-id="黄花城水长城01" tvg-name="黄花城水长城01" tvg-logo="https://live.zbds.top/logo/黄花城水长城01.png" group-title="直播中国",黄花城水长城01
+https://gcalic.v.myalicdn.com/gc/wgw01_1/index.m3u8
+#EXTINF:-1 tvg-id="厦门鼓浪屿" tvg-name="厦门鼓浪屿" tvg-logo="https://live.zbds.top/logo/厦门鼓浪屿.png" group-title="直播中国",厦门鼓浪屿
+https://gcalic.v.myalicdn.com/gc/gly01_1/index.m3u8
+#EXTINF:-1 tvg-id="南京玄武湖公园" tvg-name="南京玄武湖公园" tvg-logo="https://live.zbds.top/logo/南京玄武湖公园.png" group-title="直播中国",南京玄武湖公园
+https://gcalic.v.myalicdn.com/gc/xwh01_1/index.m3u8
+#EXTINF:-1 tvg-id="泰山大观峰" tvg-name="泰山大观峰" tvg-logo="https://live.zbds.top/logo/泰山大观峰.png" group-title="直播中国",泰山大观峰
+https://gcalic.v.myalicdn.com/gc/taishan03_1/index.m3u8
+#EXTINF:-1 tvg-id="黄龙" tvg-name="黄龙" tvg-logo="https://live.zbds.top/logo/黄龙.png" group-title="直播中国",黄龙
+https://gcalic.v.myalicdn.com/gc/hlzycc_1/index.m3u8
+#EXTINF:-1 tvg-id="安徽黟县芦村远眺" tvg-name="安徽黟县芦村远眺" tvg-logo="https://live.zbds.top/logo/安徽黟县芦村远眺.png" group-title="直播中国",安徽黟县芦村远眺
+https://gcalic.v.myalicdn.com/gc/yxlcyt_1/index.m3u8
+#EXTINF:-1 tvg-id="115新天地民俗台" tvg-name="115新天地民俗台" tvg-logo="https://live.zbds.top/logo/115新天地民俗台.png" group-title="其他频道",115新天地民俗台
+http://tvpull.dxhmt.cn:9081/tv/11329-1.m3u8?zhend
+#EXTINF:-1 tvg-id="都江堰鱼嘴" tvg-name="都江堰鱼嘴" tvg-logo="https://live.zbds.top/logo/都江堰鱼嘴.png" group-title="直播中国",都江堰鱼嘴
+https://gcalic.v.myalicdn.com/gc/djyqyl1_1/index.m3u8
+#EXTINF:-1 tvg-id="陕西洋县国宝朱鹮03" tvg-name="陕西洋县国宝朱鹮03" tvg-logo="https://live.zbds.top/logo/陕西洋县国宝朱鹮03.png" group-title="直播中国",陕西洋县国宝朱鹮03
+https://gcalic.v.myalicdn.com/gc/zh03_1/index.m3u8
+#EXTINF:-1 tvg-id="电影辣警狂花第3部" tvg-name="电影辣警狂花第3部" tvg-logo="https://live.zbds.top/logo/电影辣警狂花第3部.png" group-title="电影频道",电影辣警狂花第3部
+https://cdn15.yzzy-tv-cdn.com/20230329/4852_2724c586/index.m3u8
+#EXTINF:-1 tvg-id="泰山太平岭" tvg-name="泰山太平岭" tvg-logo="https://live.zbds.top/logo/泰山太平岭.png" group-title="直播中国",泰山太平岭
+https://gcalic.v.myalicdn.com/gc/hkts09_1/index.m3u8
+#EXTINF:-1 tvg-id="泰山主峰" tvg-name="泰山主峰" tvg-logo="https://live.zbds.top/logo/泰山主峰.png" group-title="直播中国",泰山主峰
+https://gcalic.v.myalicdn.com/gc/taishan01_1/index.m3u8
+#EXTINF:-1 tvg-id="凤凰古城南华山" tvg-name="凤凰古城南华山" tvg-logo="https://live.zbds.top/logo/凤凰古城南华山.png" group-title="直播中国",凤凰古城南华山
+https://gcalic.v.myalicdn.com/gc/fhgcdnhs_1/index.m3u8
+#EXTINF:-1 tvg-id="电影昆仑境" tvg-name="电影昆仑境" tvg-logo="https://live.zbds.top/logo/电影昆仑境.png" group-title="电影频道",电影昆仑境
+https://cdn15.yzzy-tv-cdn.com/20230610/15317_9ea0d662/index.m3u8
+#EXTINF:-1 tvg-id="雪乡大石碑" tvg-name="雪乡大石碑" tvg-logo="https://live.zbds.top/logo/雪乡大石碑.png" group-title="直播中国",雪乡大石碑
+https://gcalic.v.myalicdn.com/gc/mdjxxdsb_1/index.m3u8
+#EXTINF:-1 tvg-id="泰山十八盘" tvg-name="泰山十八盘" tvg-logo="https://live.zbds.top/logo/泰山十八盘.png" group-title="直播中国",泰山十八盘
+https://gcalic.v.myalicdn.com/gc/taishan05_1/index.m3u8
+#EXTINF:-1 tvg-id="哈利波特死神的圣物" tvg-name="哈利波特死神的圣物" tvg-logo="https://live.zbds.top/logo/哈利波特死神的圣物.png" group-title="电影频道",哈利波特死神的圣物
+https://ikcdn01.ikzybf.com/20221105/DABRajDL/index.m3u8
+#EXTINF:-1 tvg-id="泰山玉皇顶" tvg-name="泰山玉皇顶" tvg-logo="https://live.zbds.top/logo/泰山玉皇顶.png" group-title="直播中国",泰山玉皇顶
+https://gcalic.v.myalicdn.com/gc/taishan06_1/index.m3u8
+#EXTINF:-1 tvg-id="贵州省兴义市万峰林" tvg-name="贵州省兴义市万峰林" tvg-logo="https://live.zbds.top/logo/贵州省兴义市万峰林.png" group-title="直播中国",贵州省兴义市万峰林
+https://gcalic.v.myalicdn.com/gc/xywfl_1/index.m3u8
+#EXTINF:-1 tvg-id="泰山碧霞祠" tvg-name="泰山碧霞祠" tvg-logo="https://live.zbds.top/logo/泰山碧霞祠.png" group-title="直播中国",泰山碧霞祠
+https://gcalic.v.myalicdn.com/gc/hkts03_1/index.m3u8
+#EXTINF:-1 tvg-id="福建漳州醉美沙滩翡翠湾" tvg-name="福建漳州醉美沙滩翡翠湾" tvg-logo="https://live.zbds.top/logo/福建漳州醉美沙滩翡翠湾.png" group-title="直播中国",福建漳州醉美沙滩翡翠湾
+https://gcalic.v.myalicdn.com/gc/fcw03_1/index.m3u8
+#EXTINF:-1 tvg-id="泰山望人松" tvg-name="泰山望人松" tvg-logo="https://live.zbds.top/logo/泰山望人松.png" group-title="直播中国",泰山望人松
+https://gcalic.v.myalicdn.com/gc/taishan02_1/index.m3u8
+#EXTINF:-1 tvg-id="上虞新商都" tvg-name="上虞新商都" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/上虞新商都.png" group-title="地方频道",上虞新商都
+http://l.cztvcloud.com/channels/lantian/SXshangyu3/720p.m3u8
+#EXTINF:-1 tvg-id="陕西洋县国宝朱鹮02" tvg-name="陕西洋县国宝朱鹮02" tvg-logo="https://live.zbds.top/logo/陕西洋县国宝朱鹮02.png" group-title="直播中国",陕西洋县国宝朱鹮02
+https://gcalic.v.myalicdn.com/gc/zh02_1/index.m3u8
+#EXTINF:-1 tvg-id="黄凯芹相爱很难" tvg-name="黄凯芹相爱很难" tvg-logo="https://live.zbds.top/logo/黄凯芹相爱很难.png" group-title="其他频道",黄凯芹相爱很难
+http://vodcdn.video.taobao.com/oss/ali-video/11b6273898b6a1b1da34e646264cd036/video.m3u8
+#EXTINF:-1 tvg-id="青岛崂山双福" tvg-name="青岛崂山双福" tvg-logo="https://live.zbds.top/logo/青岛崂山双福.png" group-title="直播中国",青岛崂山双福
+https://gcalic.v.myalicdn.com/gc/qdls03_1/index.m3u8
+#EXTINF:-1 tvg-id="泰山白云亭悬崖" tvg-name="泰山白云亭悬崖" tvg-logo="https://live.zbds.top/logo/泰山白云亭悬崖.png" group-title="直播中国",泰山白云亭悬崖
+https://gcalic.v.myalicdn.com/gc/hkts02_1/index.m3u8
+#EXTINF:-1 tvg-id="凤凰古城东关门" tvg-name="凤凰古城东关门" tvg-logo="https://live.zbds.top/logo/凤凰古城东关门.png" group-title="直播中国",凤凰古城东关门
+https://gcalic.v.myalicdn.com/gc/fhgcdgm_1/index.m3u8
+#EXTINF:-1 tvg-id="好讯息" tvg-name="好讯息" tvg-logo="https://live.zbds.top/logo/好讯息.png" group-title="其他频道",好讯息
+https://dqhxk7sbp7xog.cloudfront.net/hls-live/goodtv/_definst_/liveevent/live-ch1-2.m3u8
+#EXTINF:-1 tvg-id="兰溪新闻" tvg-name="兰溪新闻" tvg-logo="https://live.zbds.top/logo/兰溪新闻.png" group-title="地方频道",兰溪新闻
+http://l.cztvcloud.com/channels/lantian/SXlanxi1/720p.m3u8?zzhed?
+#EXTINF:-1 tvg-id="湖南张家界御笔峰" tvg-name="湖南张家界御笔峰" tvg-logo="https://live.zbds.top/logo/湖南张家界御笔峰.png" group-title="直播中国",湖南张家界御笔峰
+https://gcalic.v.myalicdn.com/gc/zjjybf_1/index.m3u8
+#EXTINF:-1 tvg-id="电影辣警狂花第2部" tvg-name="电影辣警狂花第2部" tvg-logo="https://live.zbds.top/logo/电影:辣警狂花:第2部.png" group-title="电影频道",电影辣警狂花第2部
+https://cdn15.yzzy-tv-cdn.com/20230326/4049_1b286d2c/index.m3u8
+#EXTINF:-1 tvg-id="湖南张家界水绕四门" tvg-name="湖南张家界水绕四门" tvg-logo="https://live.zbds.top/logo/湖南张家界水绕四门.png" group-title="直播中国",湖南张家界水绕四门
+https://gcalic.v.myalicdn.com/gc/zjjsrsm_1/index.m3u8
+#EXTINF:-1 tvg-id="湖南张家界将军列队" tvg-name="湖南张家界将军列队" tvg-logo="https://live.zbds.top/logo/湖南张家界将军列队.png" group-title="直播中国",湖南张家界将军列队
+https://gcalic.v.myalicdn.com/gc/zjjjjdl_1/index.m3u8
+#EXTINF:-1 tvg-id="广西玉林大容山莲花山顶" tvg-name="广西玉林大容山莲花山顶" tvg-logo="https://live.zbds.top/logo/广西玉林大容山莲花山顶.png" group-title="直播中国",广西玉林大容山莲花山顶
+https://gcalic.v.myalicdn.com/gc/drs01_1/index.m3u8
+#EXTINF:-1 tvg-id="鸣沙山" tvg-name="鸣沙山" tvg-logo="https://live.zbds.top/logo/鸣沙山.png" group-title="直播中国",鸣沙山
+https://gcalic.v.myalicdn.com/gc/dhyyqst_1/index.m3u8
+#EXTINF:-1 tvg-id="黄花城水长城03" tvg-name="黄花城水长城03" tvg-logo="https://live.zbds.top/logo/黄花城水长城03.png" group-title="直播中国",黄花城水长城03
+https://gcalic.v.myalicdn.com/gc/wgw03_1/index.m3u8
+#EXTINF:-1 tvg-id="八里沟风景区桃花湾瀑布" tvg-name="八里沟风景区桃花湾瀑布" tvg-logo="https://live.zbds.top/logo/八里沟风景区桃花湾瀑布.png" group-title="直播中国",八里沟风景区桃花湾瀑布
+https://gcalic.v.myalicdn.com/gc/blg05_1/index.m3u8
+#EXTINF:-1 tvg-id="浙江舟山东极岛" tvg-name="浙江舟山东极岛" tvg-logo="https://live.zbds.top/logo/浙江舟山东极岛.png" group-title="直播中国",浙江舟山东极岛
+https://gcalic.v.myalicdn.com/gc/djd01_1/index.m3u8
+#EXTINF:-1 tvg-id="狮子山鸟瞰丽江古城" tvg-name="狮子山鸟瞰丽江古城" tvg-logo="https://live.zbds.top/logo/狮子山鸟瞰丽江古城.png" group-title="直播中国",狮子山鸟瞰丽江古城
+https://gcalic.v.myalicdn.com/gc/ljgcszsnkgc_1/index.m3u8
+#EXTINF:-1 tvg-id="八里沟风景区天界山玻璃栈道" tvg-name="八里沟风景区天界山玻璃栈道" tvg-logo="https://live.zbds.top/logo/八里沟风景区天界山玻璃栈道.png" group-title="直播中国",八里沟风景区天界山玻璃栈道
+https://gcalic.v.myalicdn.com/gc/blg03_1/index.m3u8
+#EXTINF:-1 tvg-id="六盘山红军长征景区" tvg-name="六盘山红军长征景区" tvg-logo="https://live.zbds.top/logo/六盘山红军长征景区.png" group-title="直播中国",六盘山红军长征景区
+https://gcalic.v.myalicdn.com/gc/lpsgmjng01_1/index.m3u8
+#EXTINF:-1 tvg-id="云南丽江蓝月谷" tvg-name="云南丽江蓝月谷" tvg-logo="https://live.zbds.top/logo/云南丽江蓝月谷.png" group-title="直播中国",云南丽江蓝月谷
+https://gcalic.v.myalicdn.com/gc/ylxs12_1/index.m3u8
+#EXTINF:-1 tvg-id="望乡台" tvg-name="望乡台" tvg-logo="https://live.zbds.top/logo/望乡台.png" group-title="直播中国",望乡台
+https://gcalic.v.myalicdn.com/gc/hlwxt_1/index.m3u8
+#EXTINF:-1 tvg-id="直播中国精编直播" tvg-name="直播中国精编直播" tvg-logo="https://live.zbds.top/logo/直播中国精编直播.png" group-title="直播中国",直播中国精编直播
+https://gcalic.v.myalicdn.com/gc/wgw05_1/index.m3u8
+#EXTINF:-1 tvg-id="云南白沙远眺玉龙雪山" tvg-name="云南白沙远眺玉龙雪山" tvg-logo="https://live.zbds.top/logo/云南白沙远眺玉龙雪山.png" group-title="直播中国",云南白沙远眺玉龙雪山
+https://gcalic.v.myalicdn.com/gc/hkylxs03_1/index.m3u8
+#EXTINF:-1 tvg-id="云南丽江玉龙雪山草甸" tvg-name="云南丽江玉龙雪山草甸" tvg-logo="https://live.zbds.top/logo/云南丽江玉龙雪山草甸.png" group-title="直播中国",云南丽江玉龙雪山草甸
+https://gcalic.v.myalicdn.com/gc/hkylxs06_1/index.m3u8
+#EXTINF:-1 tvg-id="乐至综合" tvg-name="乐至综合" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/乐至综合.png" group-title="地方频道",乐至综合
+http://175.155.106.72:89/live1/live1.m3u8
+#EXTINF:-1 tvg-id="BeinSports1" tvg-name="BeinSports1" tvg-logo="https://live.zbds.top/logo/BeinSports1.png" group-title="其他频道",BeinSports1
+https://hse24trend.akamaized.net/hls/live/2006597/hse24trend/playlist.m3u8
+#EXTINF:-1 tvg-id="五彩池" tvg-name="五彩池" tvg-logo="https://live.zbds.top/logo/五彩池.png" group-title="直播中国",五彩池
+https://gcalic.v.myalicdn.com/gc/hlwcc_1/index.m3u8
+#EXTINF:-1 tvg-id="云南大理崇圣寺三塔中景" tvg-name="云南大理崇圣寺三塔中景" tvg-logo="https://live.zbds.top/logo/云南大理崇圣寺三塔中景.png" group-title="直播中国",云南大理崇圣寺三塔中景
+https://gcalic.v.myalicdn.com/gc/dlst03_1/index.m3u8
+#EXTINF:-1 tvg-id="YMG未来" tvg-name="YMG未来" tvg-logo="https://live.zbds.top/logo/YMG未来.png" group-title="地方频道",YMG未来
+http://l.cztvcloud.com/channels/lantian/SXyuhang3/720p.m3u8?
+#EXTINF:-1 tvg-id="上虞综合" tvg-name="上虞综合" tvg-logo="https://live.zbds.top/logo/上虞综合.png" group-title="地方频道",上虞综合
+http://l.cztvcloud.com/channels/lantian/SXzhuji3/720p.m3u8?zzhed?
+#EXTINF:-1 tvg-id="浙江教科影视" tvg-name="浙江教科影视" tvg-logo="https://live.zbds.top/logo/浙江教科影视.png" group-title="电影频道",浙江教科影视
+https://ali-m-l.cztv.com/channels/lantian/channel004/1080p.m3u8
+#EXTINF:-1 tvg-id="江苏南京牛首山" tvg-name="江苏南京牛首山" tvg-logo="https://live.zbds.top/logo/江苏南京牛首山.png" group-title="直播中国",江苏南京牛首山
+https://gcalic.v.myalicdn.com/gc/nss01_1/index.m3u8
+#EXTINF:-1 tvg-id="陈慧娴千千阙歌" tvg-name="陈慧娴千千阙歌" tvg-logo="https://live.zbds.top/logo/陈慧娴千千阙歌.png" group-title="其他频道",陈慧娴千千阙歌
+http://vodcdn.video.taobao.com/oss/ali-video/8f45a35108ebe1b1951d2936007e3cd0/video.m3u8
+#EXTINF:-1 tvg-id="广西桂林漓江景区" tvg-name="广西桂林漓江景区" tvg-logo="https://live.zbds.top/logo/广西桂林漓江景区.png" group-title="直播中国",广西桂林漓江景区
+https://gcalic.v.myalicdn.com/gc/gllj01_1/index.m3u8
+#EXTINF:-1 tvg-id="烟台影视频道" tvg-name="烟台影视频道" tvg-logo="https://live.zbds.top/logo/烟台影视频道.png" group-title="电影频道",烟台影视频道
+http://live.yantaitv.cn/live/e9f1d9045d474c31884d13fa4ffbbd16/a4a9b3704d854756907845107cc56129-1.m3u8
+#EXTINF:-1 tvg-id="湖南张家界天门山西线玻璃栈道" tvg-name="湖南张家界天门山西线玻璃栈道" tvg-logo="https://live.zbds.top/logo/湖南张家界天门山西线玻璃栈道.png" group-title="直播中国",湖南张家界天门山西线玻璃栈道
+https://gcalic.v.myalicdn.com/gc/tms05_1/index.m3u8
+#EXTINF:-1 tvg-id="双流综合" tvg-name="双流综合" tvg-logo="https://live.zbds.top/logo/双流综合.png" group-title="地方频道",双流综合
+http://171.221.250.130:18888/27e684978eb642eeb90ab815f6cc51bf/c41893de5e8645b3b43aef1640859b0d.m3u8?zsicd
+#EXTINF:-1 tvg-id="姚江文化" tvg-name="姚江文化" tvg-logo="https://live.zbds.top/logo/姚江文化.png" group-title="地方频道",姚江文化
+http://l.cztvcloud.com/channels/lantian/SXqingtian1/720p.m3u8?
+#EXTINF:-1 tvg-id="哈利波特凤凰会的密令" tvg-name="哈利波特凤凰会的密令" tvg-logo="https://live.zbds.top/logo/哈利波特凤凰会的密令.png" group-title="电影频道",哈利波特凤凰会的密令
+https://v1.fentvoss.com/sdv1/202308/19/kL6HzXQ7Xi2/video/index.m3u8
+#EXTINF:-1 tvg-id="旅游卫视" tvg-name="旅游卫视" tvg-logo="https://live.zbds.top/logo/旅游卫视.png" group-title="卫视频道",旅游卫视
+http://111.61.236.247:9081/hls/50/index.m3u8
+#EXTINF:-1 tvg-id="CCTV怀旧剧场" tvg-name="CCTV怀旧剧场" tvg-logo="https://live.zbds.top/logo/CCTV怀旧剧场.png" group-title="央视频道",CCTV怀旧剧场
+http://111.61.236.247:9081/hls/67/index.m3u8
+#EXTINF:-1 tvg-id="TVN" tvg-name="TVN" tvg-logo="https://live.zbds.top/logo/TVN.png" group-title="其他频道",TVN
+https://ss5.domint.net:3032/vozz_str/vozzmedia/playlist.m3u8
+#EXTINF:-1 tvg-id="巫启贤只因你伤心" tvg-name="巫启贤只因你伤心" tvg-logo="https://live.zbds.top/logo/巫启贤只因你伤心.png" group-title="其他频道",巫启贤只因你伤心
+http://vodcdn.video.taobao.com/oss/ali-video/c28acbe36530da595b04161855bba004/video.m3u8
+#EXTINF:-1 tvg-id="云南大理崇圣寺三塔远景" tvg-name="云南大理崇圣寺三塔远景" tvg-logo="https://live.zbds.top/logo/云南大理崇圣寺三塔远景.png" group-title="直播中国",云南大理崇圣寺三塔远景
+https://gcalic.v.myalicdn.com/gc/dlst01_1/index.m3u8
+#EXTINF:-1 tvg-id="陈倩倩婴儿" tvg-name="陈倩倩婴儿" tvg-logo="https://live.zbds.top/logo/陈倩倩婴儿.png" group-title="其他频道",陈倩倩婴儿
+http://vodcdn.video.taobao.com/oss/ali-video/4fc8d043456c092c392483bd293d0ee3/video.m3u8
+#EXTINF:-1 tvg-id="狄仁杰之天宫蜃楼" tvg-name="狄仁杰之天宫蜃楼" tvg-logo="https://live.zbds.top/logo/狄仁杰之天宫蜃楼.png" group-title="电影频道",狄仁杰之天宫蜃楼
+https://v9.tlkqc.com/wjv9/202408/06/p7712pXCuV81/video/index.m3u8
+#EXTINF:-1 tvg-id="航拍中国第一季" tvg-name="航拍中国第一季" tvg-logo="https://epg.112114.xyz/logo/航拍中国第一季.png" group-title="纪录频道",航拍中国第一季
+http://hls.cntv.myhwcdn.cn/asp/hls/4000/0303000a/3/default/8edf3fb6a69148ea9a7dc0b5a9d99fdb/4000.m3u8
+#EXTINF:-1 tvg-id="电影熊出没变形记" tvg-name="电影熊出没变形记" tvg-logo="https://live.zbds.top/logo/电影熊出没变形记.png" group-title="电影频道",电影熊出没变形记
+https://newcntv.qcloudcdn.com/asp/hls/1200/0303000a/3/default/1733da751de64e6e910abda889d87a26/1200.m3u8
+#EXTINF:-1 tvg-id="CGTN西语" tvg-name="CGTN西语" tvg-logo="https://live.zbds.top/logo/CGTN西语.png" group-title="央视频道",CGTN西语
+https://0472.org/hls/cgtnx.m3u8
+#EXTINF:-1 tvg-id="CGTN纪录" tvg-name="CGTN纪录" tvg-logo="https://live.zbds.top/logo/CGTN纪录.png" group-title="央视频道",CGTN纪录
+https://0472.org/hls/cgtnd.m3u8
+#EXTINF:-1 tvg-id="TJB" tvg-name="TJB" tvg-logo="https://live.zbds.top/logo/TJB.png" group-title="其他频道",TJB
+http://1.245.74.5:1935/live/tv/.m3u8
+#EXTINF:-1 tvg-id="中华小当家" tvg-name="中华小当家" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/中华小当家.png" group-title="儿童频道",中华小当家
+http://61.221.215.25:8800/hls/40/index.m3u8
+#EXTINF:-1 tvg-id="长城精品" tvg-name="长城精品" tvg-logo="https://live.zbds.top/logo/长城精品.png" group-title="其他频道",长城精品
+http://38.64.72.148:80/hls/modn/list/4008/chunklist0.m3u8
+#EXTINF:-1 tvg-id="上虞文化" tvg-name="上虞文化" tvg-logo="https://live.zbds.top/logo/上虞文化.png" group-title="地方频道",上虞文化
+http://l.cztvcloud.com/channels/lantian/SXshangyu2/720p.m3u8?zzhed?
+#EXTINF:-1 tvg-id="上虞文化影院" tvg-name="上虞文化影院" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/上虞文化影院.png" group-title="地方频道",上虞文化影院
+http://l.cztvcloud.com/channels/lantian/SXshangyu2/720p.m3u8
+#EXTINF:-1 tvg-id="东森亚洲新闻" tvg-name="东森亚洲新闻" tvg-logo="https://live.zbds.top/logo/东森亚洲新闻.png" group-title="其他频道",东森亚洲新闻
+http://38.64.72.148:80/hls/modn/list/2016/chunklist0.m3u8
+#EXTINF:-1 tvg-id="湖南张家界宝峰湖" tvg-name="湖南张家界宝峰湖" tvg-logo="https://live.zbds.top/logo/湖南张家界宝峰湖.png" group-title="直播中国",湖南张家界宝峰湖
+https://gcalic.v.myalicdn.com/gc/zjjbfh_1/index.m3u8
+#EXTINF:-1 tvg-id="3" tvg-name="海峡卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/海峡卫视.png" group-title="卫视频道",海峡卫视
+http://38.64.72.148:80/hls/modn/list/4009/chunklist0.m3u8
+#EXTINF:-1 tvg-id="人生这杯酒你可曾喝醉" tvg-name="人生这杯酒你可曾喝醉" tvg-logo="https://live.zbds.top/logo/人生这杯酒你可曾喝醉.png" group-title="其他频道",人生这杯酒你可曾喝醉
+https://txmov2.a.kwimgs.com/bs3/video-hls/5230931068972633962_hlsb.m3u8
+#EXTINF:-1 tvg-id="鬼舞村诅咒起源" tvg-name="鬼舞村诅咒起源" tvg-logo="https://live.zbds.top/logo/鬼舞村诅咒起源.png" group-title="电影频道",鬼舞村诅咒起源
+https://v12.tlkqc.com/wjv12/202408/04/UJGTrrEASp84/video/index.m3u8
+#EXTINF:-1 tvg-id="草蜢忘情桑巴舞" tvg-name="草蜢忘情桑巴舞" tvg-logo="https://live.zbds.top/logo/草蜢忘情桑巴舞.png" group-title="其他频道",草蜢忘情桑巴舞
+http://vodcdn.video.taobao.com/oss/ali-video/a30020a6cd9ce2a8b387e029f9c5365c/video.m3u8
+#EXTINF:-1 tvg-id="草蜢失恋阵线联盟" tvg-name="草蜢失恋阵线联盟" tvg-logo="https://live.zbds.top/logo/草蜢失恋阵线联盟.png" group-title="其他频道",草蜢失恋阵线联盟
+http://vodcdn.video.taobao.com/oss/ali-video/bbae2fc164d9517913ed5a9117f8455b/video.m3u8
+#EXTINF:-1 tvg-id="铁齿铜牙纪晓岚I第十二集" tvg-name="铁齿铜牙纪晓岚I第十二集" tvg-logo="https://live.zbds.top/logo/铁齿铜牙纪晓岚I第十二集.png" group-title="其他频道",铁齿铜牙纪晓岚I第十二集
+https://txmov2.a.kwimgs.com/bs3/video-hls/5209820410839986526_hlshd15.m3u8
+#EXTINF:-1 tvg-id="山东泰山十八盘" tvg-name="山东泰山十八盘" tvg-logo="https://live.zbds.top/logo/山东泰山十八盘.png" group-title="其他频道",山东泰山十八盘
+https://gcalic.v.myalicdn.com/gc/taishan05_1/index.m3u8?contentid=2820180516001
+#EXTINF:-1 tvg-id="铁齿铜牙纪晓岚I第四集" tvg-name="铁齿铜牙纪晓岚I第四集" tvg-logo="https://live.zbds.top/logo/铁齿铜牙纪晓岚I第四集.png" group-title="其他频道",铁齿铜牙纪晓岚I第四集
+https://txmov2.a.kwimgs.com/bs3/video-hls/5239093806455146697_hlshd15.m3u8
+#EXTINF:-1 tvg-id="上虞3新商都Not247" tvg-name="上虞3新商都Not247" tvg-logo="https://live.zbds.top/logo/上虞3新商都Not247.png" group-title="其他频道",上虞3新商都Not247
+https://l.cztvcloud.com/channels/lantian/SXshangyu3/720p.m3u8
+#EXTINF:-1 tvg-id="XilamTV" tvg-name="XilamTV" tvg-logo="https://live.zbds.top/logo/XilamTV.png" group-title="电影频道",XilamTV
+https://xilam-animation-1-fr.samsung.wurl.tv/playlist.m3u8
+#EXTINF:-1 tvg-id="泰山南天门" tvg-name="泰山南天门" tvg-logo="https://live.zbds.top/logo/泰山南天门.png" group-title="直播中国",泰山南天门
+https://gcalic.v.myalicdn.com/gc/hkts07_1/index.m3u8
+#EXTINF:-1 tvg-id="哈尔滨新闻综合" tvg-name="哈尔滨新闻综合" tvg-logo="https://ghproxy.kilvn.com/https://raw.githubusercontent.com/fanmingming/live/main/tv/哈尔滨新闻综合.png" group-title="地方频道",哈尔滨新闻综合
+http://stream.hrbtv.net/xwzh/sd/live.m3u8
+#EXTINF:-1 tvg-id="东营综合" tvg-name="东营综合" tvg-logo="https://live.zbds.top/logo/东营综合.png" group-title="地方频道",东营综合
+http://stream.hhek.cn/xwzh/sd/live.m3u8?shandd
+#EXTINF:-1 tvg-id="LoveNature" tvg-name="LoveNature" tvg-logo="https://live.zbds.top/logo/LoveNature.png" group-title="其他频道",LoveNature
+https://d18dyiwu97wm6q.cloudfront.net/playlist2160p.m3u8?cc
+#EXTINF:-1 tvg-id="铁齿铜牙纪晓岚I第十五集" tvg-name="铁齿铜牙纪晓岚I第十五集" tvg-logo="https://live.zbds.top/logo/铁齿铜牙纪晓岚I第十五集.png" group-title="其他频道",铁齿铜牙纪晓岚I第十五集
+https://txmov2.a.kwimgs.com/bs3/video-hls/5218827610233741606_hlshd15.m3u8
+#EXTINF:-1 tvg-id="电影爱欲四部曲2" tvg-name="电影爱欲四部曲2" tvg-logo="https://live.zbds.top/logo/电影:爱欲四部曲2.png" group-title="电影频道",电影爱欲四部曲2
+https://ukzy.ukubf8.com/20230629/c70jrwJJ/index.m3u8
+#EXTINF:-1 tvg-id="上虞经济文化Not247" tvg-name="上虞经济文化Not247" tvg-logo="https://live.zbds.top/logo/上虞经济文化Not247.png" group-title="其他频道",上虞经济文化Not247
+https://l.cztvcloud.com/channels/lantian/SXshangyu2/720p.m3u8
+#EXTINF:-1 tvg-id="丽江古城大水车" tvg-name="丽江古城大水车" tvg-logo="https://live.zbds.top/logo/丽江古城大水车.png" group-title="直播中国",丽江古城大水车
+https://gcalic.v.myalicdn.com/gc/ljgcdsc_1/index.m3u8
+#EXTINF:-1 tvg-id="乐山大佛全景" tvg-name="乐山大佛全景" tvg-logo="https://live.zbds.top/logo/乐山大佛全景.png" group-title="直播中国",乐山大佛全景
+https://gcalic.v.myalicdn.com/gc/lsdfgfl_1/index.m3u8
+#EXTINF:-1 tvg-id="铁齿铜牙纪晓岚I第十集" tvg-name="铁齿铜牙纪晓岚I第十集" tvg-logo="https://live.zbds.top/logo/铁齿铜牙纪晓岚I第十集.png" group-title="其他频道",铁齿铜牙纪晓岚I第十集
+https://txmov2.a.kwimgs.com/bs3/video-hls/5256545257134268388_hlshd15.m3u8
+#EXTINF:-1 tvg-id="丽江古城大研花巷观景" tvg-name="丽江古城大研花巷观景" tvg-logo="https://live.zbds.top/logo/丽江古城大研花巷观景.png" group-title="直播中国",丽江古城大研花巷观景
+https://gcalic.v.myalicdn.com/gc/ljgcdyhxgjt_1/index.m3u8
+#EXTINF:-1 tvg-id="CHANNELV" tvg-name="CHANNELV" tvg-logo="https://live.zbds.top/logo/CHANNELV.png" group-title="其他频道",CHANNELV
+https://ramach.ddns.net/live/ramalive/index.m3u8
+#EXTINF:-1 tvg-id="中央电视塔东" tvg-name="中央电视塔东" tvg-logo="https://live.zbds.top/logo/中央电视塔东.png" group-title="直播中国",中央电视塔东
+https://gcalic.v.myalicdn.com/gc/ztd_1/index.m3u8
+#EXTINF:-1 tvg-id="乌镇龙形田" tvg-name="乌镇龙形田" tvg-logo="https://live.zbds.top/logo/乌镇龙形田.png" group-title="直播中国",乌镇龙形田
+https://gcalic.v.myalicdn.com/gc/zjwzlxt_1/index.m3u8
+#EXTINF:-1 tvg-id="恒山悬空寺全景" tvg-name="恒山悬空寺全景" tvg-logo="https://live.zbds.top/logo/恒山悬空寺全景.png" group-title="直播中国",恒山悬空寺全景
+https://gcalic.v.myalicdn.com/gc/hsxksqj_1/index.m3u8
+#EXTINF:-1 tvg-id="四川四姑娘山隆珠措" tvg-name="四川四姑娘山隆珠措" tvg-logo="https://live.zbds.top/logo/四川四姑娘山隆珠措.png" group-title="直播中国",四川四姑娘山隆珠措
+https://gcalic.v.myalicdn.com/gc/sgns02_1/index.m3u8
+#EXTINF:-1 tvg-id="航拍中国第二季" tvg-name="航拍中国第二季" tvg-logo="https://epg.112114.xyz/logo/航拍中国第二季.png" group-title="纪录频道",航拍中国第二季
+http://newcntv.qcloudcdn.com/asp/hls/4000/0303000a/3/default/2bdfdad540b342f592f9817cb7f3b79a/4000.m3u8
+#EXTINF:-1 tvg-id="哈利波特消失的密室" tvg-name="哈利波特消失的密室" tvg-logo="https://live.zbds.top/logo/哈利波特消失的密室.png" group-title="电影频道",哈利波特消失的密室
+https://v1.fentvoss.com/sdv1/202308/19/7pizD2d5YN2/video/index.m3u8
+#EXTINF:-1 tvg-id="NowTV" tvg-name="NowTV" tvg-logo="https://live.zbds.top/logo/NowTV.png" group-title="其他频道",NowTV
+https://dgwfm675921lp.cloudfront.net/playlist.m3u8
+#EXTINF:-1 tvg-id="山东泰山大观峰" tvg-name="山东泰山大观峰" tvg-logo="https://live.zbds.top/logo/山东泰山大观峰.png" group-title="其他频道",山东泰山大观峰
+https://gcalic.v.myalicdn.com/gc/taishan03_1/index.m3u8?contentid=2820180516001
+#EXTINF:-1 tvg-id="四川峨眉山云海日出" tvg-name="四川峨眉山云海日出" tvg-logo="https://live.zbds.top/logo/四川峨眉山云海日出.png" group-title="直播中国",四川峨眉山云海日出
+https://gcalic.v.myalicdn.com/gc/emsarm_1/index.m3u8
+#EXTINF:-1 tvg-id="铁齿铜牙纪晓岚I第四十集" tvg-name="铁齿铜牙纪晓岚I第四十集" tvg-logo="https://live.zbds.top/logo/铁齿铜牙纪晓岚I第四十集.png" group-title="其他频道",铁齿铜牙纪晓岚I第四十集
+https://txmov2.a.kwimgs.com/bs3/video-hls/5257671154675984197_hlshd15.m3u8
+#EXTINF:-1 tvg-id="山东碧霞祠" tvg-name="山东碧霞祠" tvg-logo="https://live.zbds.top/logo/山东碧霞祠.png" group-title="其他频道",山东碧霞祠
+https://gcalic.v.myalicdn.com/gc/hkts03_1/index.m3u8?contentid=2820180516001
+#EXTINF:-1 tvg-id="四川峨眉山普贤菩萨铜像" tvg-name="四川峨眉山普贤菩萨铜像" tvg-logo="https://live.zbds.top/logo/四川峨眉山普贤菩萨铜像.png" group-title="直播中国",四川峨眉山普贤菩萨铜像
+https://gcalic.v.myalicdn.com/gc/emspxps_1/index.m3u8
+#EXTINF:-1 tvg-id="铁齿铜牙纪晓岚I第十九集" tvg-name="铁齿铜牙纪晓岚I第十九集" tvg-logo="https://live.zbds.top/logo/铁齿铜牙纪晓岚I第十九集.png" group-title="其他频道",铁齿铜牙纪晓岚I第十九集
+https://txmov2.a.kwimgs.com/bs3/video-hls/5193494862341579373_hlshd15.m3u8
+#EXTINF:-1 tvg-id="绝地战警生死与共" tvg-name="绝地战警生死与共" tvg-logo="https://live.zbds.top/logo/绝地战警生死与共.png" group-title="电影频道",绝地战警生死与共
+https://v3.tlkqc.com/wjv3/202406/12/gFunRiZvHb75/video/index.m3u8
+#EXTINF:-1 tvg-id="公视戏剧" tvg-name="公视戏剧" tvg-logo="https://live.zbds.top/logo/公视戏剧.png" group-title="戏曲频道",公视戏剧
+http://104.244.79.187:4994/proxy?url=http%3A//104.244.79.187%3A5050/litv/4gtv-4gtv042
+#EXTINF:-1 tvg-id="兰溪新闻综合" tvg-name="兰溪新闻综合" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/兰溪新闻综合.png" group-title="地方频道",兰溪新闻综合
+http://l.cztvcloud.com/channels/lantian/SXlanxi1/720p.m3u8
+#EXTINF:-1 tvg-id="四川峨眉山远眺万佛顶" tvg-name="四川峨眉山远眺万佛顶" tvg-logo="https://live.zbds.top/logo/四川峨眉山远眺万佛顶.png" group-title="直播中国",四川峨眉山远眺万佛顶
+https://gcalic.v.myalicdn.com/gc/emswfs_1/index.m3u8
+#EXTINF:-1 tvg-id="东营公共" tvg-name="东营公共" tvg-logo="https://live.zbds.top/logo/东营公共.png" group-title="其他频道",东营公共
+http://stream.hhek.cn/ggpd/sd/live.m3u8?shandd
+#EXTINF:-1 tvg-id="乌镇西市河" tvg-name="乌镇西市河" tvg-logo="https://live.zbds.top/logo/乌镇西市河.png" group-title="直播中国",乌镇西市河
+https://gcalic.v.myalicdn.com/gc/zjwzbblh_1/index.m3u8
+#EXTINF:-1 tvg-id="浙江影视" tvg-name="浙江影视" tvg-logo="https://live.zbds.top/logo/浙江影视.png" group-title="电影频道",浙江影视
+https://ali-m-l.cztv.com/channels/lantian/channel005/1080p.m3u8?
+#EXTINF:-1 tvg-id="三立戏剧" tvg-name="三立戏剧" tvg-logo="https://live.zbds.top/logo/三立戏剧.png" group-title="戏曲频道",三立戏剧
+http://61.221.215.25:8800/hls/41/index.m3u8
+#EXTINF:-1 tvg-id="丽江古城万古楼遥望玉龙雪山" tvg-name="丽江古城万古楼遥望玉龙雪山" tvg-logo="https://live.zbds.top/logo/丽江古城万古楼遥望玉龙雪山.png" group-title="直播中国",丽江古城万古楼遥望玉龙雪山
+https://gcalic.v.myalicdn.com/gc/ljgcwglytylxs_1/index.m3u8
+#EXTINF:-1 tvg-id="中央电视塔南" tvg-name="中央电视塔南" tvg-logo="https://live.zbds.top/logo/中央电视塔南.png" group-title="直播中国",中央电视塔南
+https://gcalic.v.myalicdn.com/gc/ztn_1/index.m3u8
+#EXTINF:-1 tvg-id="铁齿铜牙纪晓岚I第十七集" tvg-name="铁齿铜牙纪晓岚I第十七集" tvg-logo="https://live.zbds.top/logo/铁齿铜牙纪晓岚I第十七集.png" group-title="其他频道",铁齿铜牙纪晓岚I第十七集
+https://txmov2.a.kwimgs.com/bs3/video-hls/5188146839016561493_hlshd15.m3u8
+#EXTINF:-1 tvg-id="山西悬空寺全景" tvg-name="山西悬空寺全景" tvg-logo="https://live.zbds.top/logo/山西悬空寺全景.png" group-title="其他频道",山西悬空寺全景
+https://gcalic.v.myalicdn.com/gc/hsxksqj_1/index.m3u8?contentid=2820180516001
+#EXTINF:-1 tvg-id="重温经典" tvg-name="重温经典" tvg-logo="https://live.zbds.top/logo/重温经典.png" group-title="电影频道",重温经典
+http://cdn3.132.us.kg/live/cwjd/stream.m3u8
+#EXTINF:-1 tvg-id="延边卫视" tvg-name="延边卫视" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/延边卫视.png" group-title="地方频道",延边卫视
+http://live.ybtvyun.com/video/s10016-7e5f23de35df/index.m3u8
+#EXTINF:-1 tvg-id="电影大卫贝肯倒霉特工熊" tvg-name="电影大卫贝肯倒霉特工熊" tvg-logo="https://live.zbds.top/logo/电影大卫贝肯倒霉特工熊.png" group-title="电影频道",电影大卫贝肯倒霉特工熊
+https://newcntv.qcloudcdn.com/asp/hls/1200/0303000a/3/default/87f87ba569c147e3805f80e4844d2de9/1200.m3u8
+#EXTINF:-1 tvg-id="雨花石云朵" tvg-name="雨花石云朵" tvg-logo="https://live.zbds.top/logo/雨花石云朵.png" group-title="其他频道",雨花石云朵
+http://newcntv.qcloudcdn.com/asp/hls/2000/0303000a/3/default/20a65dbb23e4448cbcb52a756ebdc74d/2000.m3u8
+#EXTINF:-1 tvg-id="乌镇全景" tvg-name="乌镇全景" tvg-logo="https://live.zbds.top/logo/乌镇全景.png" group-title="直播中国",乌镇全景
+https://gcalic.v.myalicdn.com/gc/zjwzblt_1/index.m3u8
+#EXTINF:-1 tvg-id="电影猪猪侠英雄猪少年" tvg-name="电影猪猪侠英雄猪少年" tvg-logo="https://live.zbds.top/logo/电影猪猪侠英雄猪少年.png" group-title="电影频道",电影猪猪侠英雄猪少年
+https://newcntv.qcloudcdn.com/asp/hls/1200/0303000a/3/default/0f03b08bc7b042358144617000fd2931/1200.m3u8
+#EXTINF:-1 tvg-id="乌镇蓝印花布" tvg-name="乌镇蓝印花布" tvg-logo="https://live.zbds.top/logo/乌镇蓝印花布.png" group-title="直播中国",乌镇蓝印花布
+https://gcalic.v.myalicdn.com/gc/zjwzlyhb_1/index.m3u8
+#EXTINF:-1 tvg-id="东营科教" tvg-name="东营科教" tvg-logo="https://live.zbds.top/logo/东营科教.png" group-title="其他频道",东营科教
+http://stream.hhek.cn/dyjy/sd/live.m3u8?shandd
+#EXTINF:-1 tvg-id="韩国EBS少儿频道" tvg-name="韩国EBS少儿频道" tvg-logo="https://live.zbds.top/logo/韩国EBS少儿频道.png" group-title="儿童频道",韩国EBS少儿频道
+http://ebsonairios.ebs.co.kr/ebsutablet500k/tablet500k/playlist.m3u8
+#EXTINF:-1 tvg-id="安徽九华山" tvg-name="安徽九华山" tvg-logo="https://live.zbds.top/logo/安徽九华山.png" group-title="其他频道",安徽九华山
+https://gcalic.v.myalicdn.com/gc/jhs05_1/index.m3u8?contentid=2820180516001
+#EXTINF:-1 tvg-id="辛晓琪俩俩相忘" tvg-name="辛晓琪俩俩相忘" tvg-logo="https://live.zbds.top/logo/辛晓琪俩俩相忘.png" group-title="其他频道",辛晓琪俩俩相忘
+http://vodcdn.video.taobao.com/oss/ali-video/6b406c70e3007a5c66a2085c39b13d80/video.m3u8
+#EXTINF:-1 tvg-id="东森美洲" tvg-name="东森美洲" tvg-logo="https://live.zbds.top/logo/东森美洲.png" group-title="其他频道",东森美洲
+http://38.64.72.148:80/hls/modn/list/2016/chunklist1.m3u8
+#EXTINF:-1 tvg-id="2024年春晚" tvg-name="2024年春晚" tvg-logo="https://gh-proxy.com/raw.githubusercontent.com/suxuang/myIPTV/main/img/春晚.png" group-title="春晚频道",2024年春晚
+https://p2.bdstatic.com/rtmp.liveshow.lss-user.baidubce.com/live/stream_bduid_6488563992_8982723413/merged_1707497046297_88536_25144_41936.m3u8
+#EXTINF:-1 tvg-id="山东泰山玉皇顶" tvg-name="山东泰山玉皇顶" tvg-logo="https://live.zbds.top/logo/山东泰山玉皇顶.png" group-title="其他频道",山东泰山玉皇顶
+https://gcalic.v.myalicdn.com/gc/taishan06_1/index.m3u8?contentid=2820180516001
+#EXTINF:-1 tvg-id="KBSLiveCamDokDo" tvg-name="KBSLiveCamDokDo" tvg-logo="https://live.zbds.top/logo/KBSLiveCamDokDo.png" group-title="其他频道",KBSLiveCamDokDo
+http://kbs-dokdo.gscdn.com/dokdo_300/dokdo_300.stream/playlist.m3u8
+#EXTINF:-1 tvg-id="山东白云亭悬崖" tvg-name="山东白云亭悬崖" tvg-logo="https://live.zbds.top/logo/山东白云亭悬崖.png" group-title="其他频道",山东白云亭悬崖
+https://gcalic.v.myalicdn.com/gc/hkts02_1/index.m3u8?contentid=2820180516001
+#EXTINF:-1 tvg-id="铁齿铜牙纪晓岚I第五集" tvg-name="铁齿铜牙纪晓岚I第五集" tvg-logo="https://live.zbds.top/logo/铁齿铜牙纪晓岚I第五集.png" group-title="其他频道",铁齿铜牙纪晓岚I第五集
+https://txmov2.a.kwimgs.com/bs3/video-hls/5223331208477788648_hlshd15.m3u8
+#EXTINF:-1 tvg-id="铁齿铜牙纪晓岚I第二集" tvg-name="铁齿铜牙纪晓岚I第二集" tvg-logo="https://live.zbds.top/logo/铁齿铜牙纪晓岚I第二集.png" group-title="其他频道",铁齿铜牙纪晓岚I第二集
+https://txmov2.a.kwimgs.com/bs3/video-hls/5201376159691089640_hlshd15.m3u8
+#EXTINF:-1 tvg-id="俄国amedia2" tvg-name="俄国amedia2" tvg-logo="https://live.zbds.top/logo/俄國amedia2.png" group-title="其他频道",俄国amedia2
+http://31.148.48.15/A2/index.m3u8
+#EXTINF:-1 tvg-id="西青新闻综合Not247" tvg-name="西青新闻综合Not247" tvg-logo="https://live.zbds.top/logo/西青新闻综合Not247.png" group-title="其他频道",西青新闻综合Not247
+http://221.238.209.44:81/hls/live1.m3u8
+#EXTINF:-1 tvg-id="铁齿铜牙纪晓岚I第二十四集" tvg-name="铁齿铜牙纪晓岚I第二十四集" tvg-logo="https://live.zbds.top/logo/铁齿铜牙纪晓岚I第二十四集.png" group-title="其他频道",铁齿铜牙纪晓岚I第二十四集
+https://txmov2.a.kwimgs.com/bs3/video-hls/5201094687267977284_hlshd15.m3u8
+#EXTINF:-1 tvg-id="湖南天门山西线玻璃栈道" tvg-name="湖南天门山西线玻璃栈道" tvg-logo="https://live.zbds.top/logo/湖南天门山西线玻璃栈道.png" group-title="其他频道",湖南天门山西线玻璃栈道
+https://gcalic.v.myalicdn.com/gc/tms05_1/index.m3u8?contentid=2820180516001
+#EXTINF:-1 tvg-id="浙江少儿" tvg-name="浙江少儿" tvg-logo="https://live.zbds.top/logo/浙江少儿.png" group-title="儿童频道",浙江少儿
+https://ali-m-l.cztv.com/channels/lantian/channel008/1080p.m3u8
+#EXTINF:-1 tvg-id="嵊州综合Not247" tvg-name="嵊州综合Not247" tvg-logo="https://live.zbds.top/logo/嵊州综合Not247.png" group-title="其他频道",嵊州综合Not247
+https://l.cztvcloud.com/channels/lantian/SXshengzhou1/720p.m3u8
+#EXTINF:-1 tvg-id="新昌休闲影视Not247" tvg-name="新昌休闲影视Not247" tvg-logo="https://live.zbds.top/logo/新昌休闲影视Not247.png" group-title="电影频道",新昌休闲影视Not247
+https://l.cztvcloud.com/channels/lantian/SXxinchang2/720p.m3u8
+#EXTINF:-1 tvg-id="ATVWORLD" tvg-name="ATVWORLD" tvg-logo="https://live.zbds.top/logo/ATVWORLD.png" group-title="其他频道",ATVWORLD
+https://alba-pe-atv-atv.stream.mediatiquestream.com/index.m3u8
+#EXTINF:-1 tvg-id="NeiMonggolTV2MongolianCultureChannel" tvg-name="NeiMonggolTV2MongolianCultureChannel" tvg-logo="https://live.zbds.top/logo/NeiMonggolTV2MongolianCultureChannel.png" group-title="其他频道",NeiMonggolTV2MongolianCultureChannel
+http://1.183.141.194:8001/hls/54/index.m3u8
+#EXTINF:-1 tvg-id="铁齿铜牙纪晓岚I第十一集" tvg-name="铁齿铜牙纪晓岚I第十一集" tvg-logo="https://live.zbds.top/logo/铁齿铜牙纪晓岚I第十一集.png" group-title="其他频道",铁齿铜牙纪晓岚I第十一集
+https://txmov2.a.kwimgs.com/bs3/video-hls/5192931913725958598_hlshd15.m3u8
+#EXTINF:-1 tvg-id="农林卫视" tvg-name="农林卫视" tvg-logo="https://live.zbds.top/logo/农林卫视.png" group-title="卫视频道",农林卫视
+http://120.76.248.139/live/bfgd/4200000122.m3u8
+#EXTINF:-1 tvg-id="电影九龙秘藏" tvg-name="电影九龙秘藏" tvg-logo="https://live.zbds.top/logo/电影九龙秘藏.png" group-title="电影频道",电影九龙秘藏
+https://ukzyvod3.ukubf5.com/20230615/f62WRA4Q/index.m3u8
+#EXTINF:-1 tvg-id="王麟伤不起" tvg-name="王麟伤不起" tvg-logo="https://live.zbds.top/logo/王麟伤不起.png" group-title="其他频道",王麟伤不起
+http://vodcdn.video.taobao.com/oss/ali-video/1e3633ff1c3a525e148968b45c18f780/video.m3u8
+#EXTINF:-1 tvg-id="YanbianTV1" tvg-name="YanbianTV1" tvg-logo="https://live.zbds.top/logo/YanbianTV1.png" group-title="其他频道",YanbianTV1
+https://live.ybtvyun.com/video/s10016-ca5bdbc3f06d/index.m3u8
+#EXTINF:-1 tvg-id="龙华电影" tvg-name="龙华电影" tvg-logo="https://gitee.com/suxuang/TVlogo/raw/main/img/LTV1.png" group-title="电影频道",龙华电影
+http://37.27.111.214:8080/live/19/hls.m3u8
+#EXTINF:-1 tvg-id="TBSSeoul" tvg-name="TBSSeoul" tvg-logo="https://live.zbds.top/logo/TBS Seoul.png" group-title="其他频道",TBSSeoul
+https://cdntv.tbs.seoul.kr/tbs/tbs_tv_web.smil/playlist.m3u8
+#EXTINF:-1 tvg-id="YanbianCineseComprehensiveChannel" tvg-name="YanbianCineseComprehensiveChannel" tvg-logo="https://live.zbds.top/logo/YanbianCineseComprehensiveChannel.png" group-title="其他频道",YanbianCineseComprehensiveChannel
+https://live.ybtvyun.com/video/s10016-6d4fe23a90b3/index.m3u8
+#EXTINF:-1 tvg-id="云南丽江玉龙雪山" tvg-name="云南丽江玉龙雪山" tvg-logo="https://live.zbds.top/logo/云南丽江玉龙雪山.png" group-title="直播中国",云南丽江玉龙雪山
+https://gcalic.v.myalicdn.com/gc/ylxs11_1/index.m3u8
+#EXTINF:-1 tvg-id="王菲执迷不悔" tvg-name="王菲执迷不悔" tvg-logo="https://live.zbds.top/logo/王菲执迷不悔.png" group-title="其他频道",王菲执迷不悔
+http://vodcdn.video.taobao.com/oss/ali-video/15bf7da88b44048edaabe73d6b17c00b/video.m3u8
+#EXTINF:-1 tvg-id="浙江公共Not247" tvg-name="浙江公共Not247" tvg-logo="https://live.zbds.top/logo/浙江公共Not247.png" group-title="其他频道",浙江公共Not247
+https://ct-m-l.cztv.com/channels/lantian/channel007/1080p.m3u8
+#EXTINF:-1 tvg-id="电影大海怪" tvg-name="电影大海怪" tvg-logo="https://live.zbds.top/logo/电影大海怪.png" group-title="电影频道",电影大海怪
+https://ukzyvod3.ukubf5.com/20230416/SMQI1Hjn/index.m3u8
+#EXTINF:-1 tvg-id="云南丽江印象实景" tvg-name="云南丽江印象实景" tvg-logo="https://live.zbds.top/logo/云南丽江印象实景.png" group-title="直播中国",云南丽江印象实景
+https://gcalic.v.myalicdn.com/gc/hkylxs01_1/index.m3u8
+#EXTINF:-1 tvg-id="云南丽江冰川" tvg-name="云南丽江冰川" tvg-logo="https://live.zbds.top/logo/云南丽江冰川.png" group-title="直播中国",云南丽江冰川
+https://gcalic.v.myalicdn.com/gc/hkylxs05_1/index.m3u8
+#EXTINF:-1 tvg-id="JapanimTV" tvg-name="JapanimTV" tvg-logo="https://live.zbds.top/logo/JapanimTV.png" group-title="电影频道",JapanimTV
+https://foxkidstv.be:3369/stream/play.m3u8
+#EXTINF:-1 tvg-id="RuSport" tvg-name="RuSport" tvg-logo="https://live.zbds.top/logo/RuSport.png" group-title="其他频道",RuSport
+https://streaming.astrakhan.ru/astrakhanrusporthd/playlist.m3u8
+#EXTINF:-1 tvg-id="产科医生第十八集" tvg-name="产科医生第十八集" tvg-logo="https://live.zbds.top/logo/产科医生第十八集.png" group-title="其他频道",产科医生第十八集
+https://cdn8.yzzy-tv-cdn.com/20220909/18899_d35ea92a/1000k/hls/index.m3u8
+#EXTINF:-1 tvg-id="济南少儿" tvg-name="济南少儿" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/济南少儿.png" group-title="儿童频道",济南少儿
+http://221.0.78.198:1681/hls/10285/index.m3u8
+#EXTINF:-1 tvg-id="湖南宝峰湖" tvg-name="湖南宝峰湖" tvg-logo="https://live.zbds.top/logo/湖南宝峰湖.png" group-title="其他频道",湖南宝峰湖
+https://gcalic.v.myalicdn.com/gc/zjjbfh_1/index.m3u8?contentid=2820180516001
+#EXTINF:-1 tvg-id="产科医生第四十二集" tvg-name="产科医生第四十二集" tvg-logo="https://live.zbds.top/logo/产科医生 第四十二集.png" group-title="其他频道",产科医生第四十二集
+https://cdn8.yzzy-tv-cdn.com/20220909/18925_8a33d636/1000k/hls/index.m3u8
+#EXTINF:-1 tvg-id="世间的酒你醉了没有" tvg-name="世间的酒你醉了没有" tvg-logo="https://live.zbds.top/logo/世间的酒你醉了没有.png" group-title="其他频道",世间的酒你醉了没有
+https://txmov2.a.kwimgs.com/bs3/video-hls/5245849239862387651_hlsb.m3u8
+#EXTINF:-1 tvg-id="铁齿铜牙纪晓岚I第二十五集" tvg-name="铁齿铜牙纪晓岚I第二十五集" tvg-logo="https://live.zbds.top/logo/铁齿铜牙纪晓岚I第二十五集.png" group-title="其他频道",铁齿铜牙纪晓岚I第二十五集
+https://txmov2.a.kwimgs.com/bs3/video-hls/5234590207910516390_hlshd15.m3u8
+#EXTINF:-1 tvg-id="宿州公共Not247" tvg-name="宿州公共Not247" tvg-logo="https://live.zbds.top/logo/宿州公共_(1080p)_[Not_24/7].png" group-title="其他频道",宿州公共Not247
+http://live.ahsz.tv/video/s10001-ggpd/index.m3u8
+#EXTINF:-1 tvg-id="余杭未来" tvg-name="余杭未来" tvg-logo="https://live.zbds.top/logo/余杭未来.png" group-title="地方频道",余杭未来
+http://l.cztvcloud.com/channels/lantian/SXyuhang3/720p.m3u8
+#EXTINF:-1 tvg-id="安徽影视" tvg-name="安徽影视" tvg-logo="https://gitee.com/suxuang/epglogo/raw/master/anhui/Anhui2.png" group-title="电影频道",安徽影视
+http://112.30.194.221:20080/live/d18ff95cb1fb4bbcb56215e189fc12be/hls.m3u8
+#EXTINF:-1 tvg-id="黄山" tvg-name="黄山" tvg-logo="https://live.zbds.top/logo/黄山.png" group-title="直播中国",黄山
+https://gcalic.v.myalicdn.com/gc/ahhs01_1/index.m3u8
+#EXTINF:-1 tvg-id="萨尔瓦多Canal4" tvg-name="萨尔瓦多Canal4" tvg-logo="https://live.zbds.top/logo/萨尔瓦多Canal4.png" group-title="其他频道",萨尔瓦多Canal4
+http://131.221.41.94/hls/canal2.m3u8
+#EXTINF:-1 tvg-id="黄山卧云峰" tvg-name="黄山卧云峰" tvg-logo="https://live.zbds.top/logo/黄山卧云峰.png" group-title="直播中国",黄山卧云峰
+https://gcalic.v.myalicdn.com/gc/hswlf_1/index.m3u8
+#EXTINF:-1 tvg-id="越喧嚣越寂寞" tvg-name="越喧嚣越寂寞" tvg-logo="https://live.zbds.top/logo/越喧嚣越寂寞.png" group-title="其他频道",越喧嚣越寂寞
+https://txmov2.a.kwimgs.com/bs3/video-hls/5204472422409005341_hlsb.m3u8
+#EXTINF:-1 tvg-id="延边卫视" tvg-name="延边卫视" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/延边卫视.png" group-title="地方频道",延边卫视
+http://live.ybtvyun.com/video/s10016-7e5f23de35df/index.m3u8
+#EXTINF:-1 tvg-id="CGTN俄语" tvg-name="CGTN俄语" tvg-logo="https://live.zbds.top/logo/CGTN俄语.png" group-title="央视频道",CGTN俄语
+https://0472.org/hls/cgtne.m3u8
+#EXTINF:-1 tvg-id="山东南天门" tvg-name="山东南天门" tvg-logo="https://live.zbds.top/logo/山东南天门.png" group-title="其他频道",山东南天门
+https://gcalic.v.myalicdn.com/gc/hkts07_1/index.m3u8?contentid=2820180516001
+#EXTINF:-1 tvg-id="KBSWorld" tvg-name="KBSWorld" tvg-logo="https://live.zbds.top/logo/KBS World.png" group-title="其他频道",KBSWorld
+https://kbsworld-ott.akamaized.net:443/hls/live/2002341/kbsworld/01.m3u8
+#EXTINF:-1 tvg-id="产科医生第十四集" tvg-name="产科医生第十四集" tvg-logo="https://live.zbds.top/logo/产科医生第十四集.png" group-title="其他频道",产科医生第十四集
+https://cdn8.yzzy-tv-cdn.com/20220909/18896_a9797821/1000k/hls/index.m3u8
+#EXTINF:-1 tvg-id="浙江乌镇西市河" tvg-name="浙江乌镇西市河" tvg-logo="https://live.zbds.top/logo/浙江乌镇西市河.png" group-title="其他频道",浙江乌镇西市河
+https://gcalic.v.myalicdn.com/gc/zjwzbblh_1/index.m3u8?contentid=2820180516001
+#EXTINF:-1 tvg-id="广东韶关综合台Not247" tvg-name="广东韶关综合台Not247" tvg-logo="https://live.zbds.top/logo/广东韶关综合台Not247.png" group-title="其他频道",广东韶关综合台Not247
+https://www.sgmsw.cn/videos/tv/201805/1308/SB05RIYZOU8JR418AUQOF62CAJQ08D0E/hls/live.m3u8
+#EXTINF:-1 tvg-id="MBC" tvg-name="MBC" tvg-logo="https://live.zbds.top/logo/MBC.png" group-title="其他频道",MBC
+http://vod.mpmbc.co.kr:1935/live/encoder-tv/playlist.m3u8
+#EXTINF:-1 tvg-id="浙江普陀山" tvg-name="浙江普陀山" tvg-logo="https://live.zbds.top/logo/浙江普陀山.png" group-title="其他频道",浙江普陀山
+https://gcalic.v.myalicdn.com/gc/pts01_1/index.m3u8?contentid=2820180516001
+#EXTINF:-1 tvg-id="罗山电视台Not247" tvg-name="罗山电视台Not247" tvg-logo="https://live.zbds.top/logo/罗山电视台Not247.png" group-title="其他频道",罗山电视台Not247
+http://live.dxhmt.cn:9081/tv/11521-1.m3u8
+#EXTINF:-1 tvg-id="伊拉克AlSharqiya" tvg-name="伊拉克AlSharqiya" tvg-logo="https://live.zbds.top/logo/伊拉克AlSharqiya.png" group-title="其他频道",伊拉克AlSharqiya
+http://ns8.indexforce.com:1935/home/mystream/playlist.m3u8
+#EXTINF:-1 tvg-id="铁齿铜牙纪晓岚I第二十一集" tvg-name="铁齿铜牙纪晓岚I第二十一集" tvg-logo="https://live.zbds.top/logo/铁齿铜牙纪晓岚I第二十一集.png" group-title="其他频道",铁齿铜牙纪晓岚I第二十一集
+https://txmov2.a.kwimgs.com/bs3/video-hls/5204753859831730416_hlshd15.m3u8
+#EXTINF:-1 tvg-id="伤心的酒吧伤心的雨" tvg-name="伤心的酒吧伤心的雨" tvg-logo="https://live.zbds.top/logo/伤心的酒吧伤心的雨.png" group-title="其他频道",伤心的酒吧伤心的雨
+https://txmov2.a.kwimgs.com/bs3/video-hls/5222768292229481631_hlsb.m3u8
+#EXTINF:-1 tvg-id="CGTN纪录" tvg-name="CGTN纪录" tvg-logo="https://live.zbds.top/logo/CGTN纪录.png" group-title="央视频道",CGTN纪录
+https://0472.org/hls/cgtnd.m3u8
+#EXTINF:-1 tvg-id="CHC家庭影院" tvg-name="CHC家庭影院" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/CHC家庭影院.png" group-title="电影频道",CHC家庭影院
+http://110.53.52.63:8888/newlive/live/hls/51/live.m3u8
+#EXTINF:-1 tvg-id="铁齿铜牙纪晓岚I第二十三集" tvg-name="铁齿铜牙纪晓岚I第二十三集" tvg-logo="https://live.zbds.top/logo/铁齿铜牙纪晓岚I第二十三集.png" group-title="其他频道",铁齿铜牙纪晓岚I第二十三集
+https://txmov2.a.kwimgs.com/bs3/video-hls/5192368963062536528_hlshd15.m3u8
+#EXTINF:-1 tvg-id="2013年春晚" tvg-name="2013年春晚" tvg-logo="https://gh-proxy.com/raw.githubusercontent.com/suxuang/myIPTV/main/img/春晚.png" group-title="春晚频道",2013年春晚
+https://txmov2.a.kwimgs.com/bs3/video-hls/5241627109089548390_hlshd15.m3u8
+#EXTINF:-1 tvg-id="2004年春晚" tvg-name="2004年春晚" tvg-logo="https://gh-proxy.com/raw.githubusercontent.com/suxuang/myIPTV/main/img/春晚.png" group-title="春晚频道",2004年春晚
+https://txmov2.a.kwimgs.com/bs3/video-hls/5223894184413450769_hlshd15.m3u8
+#EXTINF:-1 tvg-id="铁齿铜牙纪晓岚I第九集" tvg-name="铁齿铜牙纪晓岚I第九集" tvg-logo="https://live.zbds.top/logo/铁齿铜牙纪晓岚I第九集.png" group-title="其他频道",铁齿铜牙纪晓岚I第九集
+https://txmov2.a.kwimgs.com/bs3/video-hls/5246975105769336824_hlshd15.m3u8
+#EXTINF:-1 tvg-id="万源新闻综合" tvg-name="万源新闻综合" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/万源新闻综合.png" group-title="地方频道",万源新闻综合
+http://live.wanyuannews.com:80/wytv/hd/live.m3u8
+#EXTINF:-1 tvg-id="陈慧娴归来吧" tvg-name="陈慧娴归来吧" tvg-logo="https://live.zbds.top/logo/陈慧娴归来吧.png" group-title="其他频道",陈慧娴归来吧
+http://vodcdn.video.taobao.com/oss/ali-video/c89589fd5809cf6e2f1a4d7a52023733/video.m3u8
+#EXTINF:-1 tvg-id="福建醉美沙滩翡翠湾" tvg-name="福建醉美沙滩翡翠湾" tvg-logo="https://live.zbds.top/logo/福建醉美沙滩翡翠湾.png" group-title="其他频道",福建醉美沙滩翡翠湾
+https://gcalic.v.myalicdn.com/gc/fcw03_1/index.m3u8?contentid=2820180516001
+#EXTINF:-1 tvg-id="福建武夷山玉女峰" tvg-name="福建武夷山玉女峰" tvg-logo="https://live.zbds.top/logo/福建武夷山玉女峰.png" group-title="直播中国",福建武夷山玉女峰
+https://gcalic.v.myalicdn.com/gc/wysynf_1/index.m3u8
+#EXTINF:-1 tvg-id="2021年春晚" tvg-name="2021年春晚" tvg-logo="https://gh-proxy.com/raw.githubusercontent.com/suxuang/myIPTV/main/img/春晚.png" group-title="春晚频道",2021年春晚
+https://txmov2.a.kwimgs.com/bs3/video-hls/5255700831151909807_hlshd15.m3u8
+#EXTINF:-1 tvg-id="2014年春晚" tvg-name="2014年春晚" tvg-logo="https://gh-proxy.com/raw.githubusercontent.com/suxuang/myIPTV/main/img/春晚.png" group-title="春晚频道",2014年春晚
+https://txmov2.a.kwimgs.com/bs3/video-hls/5245286283437869627_hlshd15.m3u8
+#EXTINF:-1 tvg-id="2003年春晚" tvg-name="2003年春晚" tvg-logo="https://gh-proxy.com/raw.githubusercontent.com/suxuang/myIPTV/main/img/春晚.png" group-title="春晚频道",2003年春晚
+https://txmov2.a.kwimgs.com/bs3/video-hls/5232338436280256836_hlshd15.m3u8
+#EXTINF:-1 tvg-id="好你个陈世美" tvg-name="好你个陈世美" tvg-logo="https://live.zbds.top/logo/好你个陈世美.png" group-title="其他频道",好你个陈世美
+https://txmov2.a.kwimgs.com/bs3/video-hls/5228960742650458807_hlsb.m3u8
+#EXTINF:-1 tvg-id="山东泰山主峰" tvg-name="山东泰山主峰" tvg-logo="https://live.zbds.top/logo/山东泰山主峰.png" group-title="其他频道",山东泰山主峰
+https://gcalic.v.myalicdn.com/gc/taishan01_1/index.m3u8?contentid=2820180516001
+#EXTINF:-1 tvg-id="产科医生第十一集" tvg-name="产科医生第十一集" tvg-logo="https://live.zbds.top/logo/产科医生第十一集.png" group-title="其他频道",产科医生第十一集
+https://cdn8.yzzy-tv-cdn.com/20220909/18894_ccd2cc85/1000k/hls/index.m3u8
+#EXTINF:-1 tvg-id="上虞1新闻综合Not247" tvg-name="上虞1新闻综合Not247" tvg-logo="https://live.zbds.top/logo/上虞1新闻综合Not247.png" group-title="其他频道",上虞1新闻综合Not247
+https://l.cztvcloud.com/channels/lantian/SXshangyu1/720p.m3u8
+#EXTINF:-1 tvg-id="WONDER" tvg-name="WONDER" tvg-logo="https://live.zbds.top/logo/WONDER.png" group-title="其他频道",WONDER
+https://wonder-samsung-uk.amagi.tv/playlist.m3u8
+#EXTINF:-1 tvg-id="广东东莞中心广场" tvg-name="广东东莞中心广场" tvg-logo="https://live.zbds.top/logo/广东东莞中心广场.png" group-title="其他频道",广东东莞中心广场
+https://gcalic.v.myalicdn.com/gc/zsslstpt_1/index.m3u8?contentid=2820180516001
+#EXTINF:-1 tvg-id="蒙古EagleNews" tvg-name="蒙古EagleNews" tvg-logo="https://live.zbds.top/logo/蒙古EagleNews.png" group-title="其他频道",蒙古EagleNews
+https://cdn2.skygo.mn/live/disk1/Eagle/HLS-FTA/Eagle.m3u8
+#EXTINF:-1 tvg-id="库尔德斯坦NETTV" tvg-name="库尔德斯坦NETTV" tvg-logo="https://live.zbds.top/logo/庫爾德斯坦NETTV.png" group-title="其他频道",库尔德斯坦NETTV
+https://livefta.malimarcdn.com/ftaedge00/laonet.sdp/chunklist.m3u8
+#EXTINF:-1 tvg-id="铁齿铜牙纪晓岚I第二十二集" tvg-name="铁齿铜牙纪晓岚I第二十二集" tvg-logo="https://live.zbds.top/logo/铁齿铜牙纪晓岚I第二十二集.png" group-title="其他频道",铁齿铜牙纪晓岚I第二十二集
+https://txmov2.a.kwimgs.com/bs3/video-hls/5231212507018901825_hlshd15.m3u8
+#EXTINF:-1 tvg-id="有线财经资讯" tvg-name="有线财经资讯" tvg-logo="https://live.zbds.top/logo/有线财经资讯.png" group-title="其他频道",有线财经资讯
+http://61.10.2.141/live_freedirect/freehd208_h.live/playlist.m3u8
+#EXTINF:-1 tvg-id="蒙古BloomBerg" tvg-name="蒙古BloomBerg" tvg-logo="https://live.zbds.top/logo/蒙古BloomBerg.png" group-title="其他频道",蒙古BloomBerg
+https://bloomberg-bloombergtv-1-gb.samsung.wurl.tv/playlist.m3u8
+#EXTINF:-1 tvg-id="靖天电影" tvg-name="靖天电影" tvg-logo="https://live.zbds.top/logo/靖天电影.png" group-title="电影频道",靖天电影
+http://104.244.79.187:4994/proxy?url=http%3A//104.244.79.187%3A5050/litv/4gtv-4gtv061
+#EXTINF:-1 tvg-id="产科医生第四十一集" tvg-name="产科医生第四十一集" tvg-logo="https://live.zbds.top/logo/产科医生第四十一集.png" group-title="其他频道",产科医生第四十一集
+https://cdn8.yzzy-tv-cdn.com/20220909/18923_d757f02b/1000k/hls/index.m3u8
+#EXTINF:-1 tvg-id="KBC" tvg-name="KBC" tvg-logo="https://live.zbds.top/logo/KBC.png" group-title="其他频道",KBC
+http://119.200.131.11:1935/KBCTV/tv/playlist.m3u8
+#EXTINF:-1 tvg-id="蒙古TV9" tvg-name="蒙古TV9" tvg-logo="https://live.zbds.top/logo/蒙古TV9.png" group-title="其他频道",蒙古TV9
+https://cdn-live.dltv.ac.th/dltv09.m3u8
+#EXTINF:-1 tvg-id="浙江乌镇龙形田" tvg-name="浙江乌镇龙形田" tvg-logo="https://live.zbds.top/logo/浙江乌镇龙形田.png" group-title="其他频道",浙江乌镇龙形田
+https://gcalic.v.myalicdn.com/gc/zjwzlxt_1/index.m3u8?contentid=2820180516001
+#EXTINF:-1 tvg-id="哈利波特火杯的考验" tvg-name="哈利波特火杯的考验" tvg-logo="https://live.zbds.top/logo/哈利波特火杯的考验.png" group-title="电影频道",哈利波特火杯的考验
+https://ikcdn01.ikzybf.com/20221210/qYaADoTA/index.m3u8
+#EXTINF:-1 tvg-id="草蜢半点心" tvg-name="草蜢半点心" tvg-logo="https://live.zbds.top/logo/草蜢半点心.png" group-title="其他频道",草蜢半点心
+http://vodcdn.video.taobao.com/oss/ali-video/68fc953ff930412784dada5eb79d0821/1461058499/video.m3u8.m3u8
+#EXTINF:-1 tvg-id="阿尔及利亚DzairTV" tvg-name="阿尔及利亚DzairTV" tvg-logo="https://live.zbds.top/logo/阿尔及利亚DzairTV.png" group-title="其他频道",阿尔及利亚DzairTV
+https://cdn09jtedge.indihometv.com/joss/134/daaitv/index.m3u8
+#EXTINF:-1 tvg-id="来时人间去时尘" tvg-name="来时人间去时尘" tvg-logo="https://live.zbds.top/logo/来时人间去时尘.png" group-title="其他频道",来时人间去时尘
+https://txmov2.a.kwimgs.com/bs3/video-hls/5241627115538696157_hlsb.m3u8
+#EXTINF:-1 tvg-id="铁齿铜牙纪晓岚I第二十六集" tvg-name="铁齿铜牙纪晓岚I第二十六集" tvg-logo="https://live.zbds.top/logo/铁齿铜牙纪晓岚I第二十六集.png" group-title="其他频道",铁齿铜牙纪晓岚I第二十六集
+https://txmov2.a.kwimgs.com/bs3/video-hls/5201094686875682859_hlshd15.m3u8
+#EXTINF:-1 tvg-id="铁齿铜牙纪晓岚I第三集" tvg-name="铁齿铜牙纪晓岚I第三集" tvg-logo="https://live.zbds.top/logo/铁齿铜牙纪晓岚I第三集.png" group-title="其他频道",铁齿铜牙纪晓岚I第三集
+https://txmov2.a.kwimgs.com/bs3/video-hls/5239375284210688597_hlshd15.m3u8
+#EXTINF:-1 tvg-id="2019年春晚" tvg-name="2019年春晚" tvg-logo="https://gh-proxy.com/raw.githubusercontent.com/suxuang/myIPTV/main/img/春晚.png" group-title="春晚频道",2019年春晚
+https://txmov2.a.kwimgs.com/bs3/video-hls/5239093835831655107_hlshd15.m3u8
+#EXTINF:-1 tvg-id="万州影视文艺频道" tvg-name="万州影视文艺频道" tvg-logo="https://live.zbds.top/logo/万州影视文艺频道.png" group-title="电影频道",万州影视文艺频道
+http://123.146.162.24:8017/d4ceB1a/1000/live.m3u8
+#EXTINF:-1 tvg-id="湖南张家界迷魂台" tvg-name="湖南张家界迷魂台" tvg-logo="https://live.zbds.top/logo/湖南张家界迷魂台.png" group-title="其他频道",湖南张家界迷魂台
+https://gcalic.v.myalicdn.com/gc/zjjmht_1/index.m3u8?contentid=2820180516001
+#EXTINF:-1 tvg-id="俄国RUTV" tvg-name="俄国RUTV" tvg-logo="https://live.zbds.top/logo/俄国RUTV.png" group-title="其他频道",俄国RUTV
+https://reflect-communitytv.cablecast.tv/live-4/live/live.m3u8
+#EXTINF:-1 tvg-id="产科医生第十二集" tvg-name="产科医生第十二集" tvg-logo="https://live.zbds.top/logo/产科医生第十二集.png" group-title="其他频道",产科医生第十二集
+https://cdn8.yzzy-tv-cdn.com/20220909/18895_6deb8fca/1000k/hls/index.m3u8
+#EXTINF:-1 tvg-id="叶倩文潇洒走一回" tvg-name="叶倩文潇洒走一回" tvg-logo="https://live.zbds.top/logo/叶倩文潇洒走一回.png" group-title="其他频道",叶倩文潇洒走一回
+http://vodcdn.video.taobao.com/oss/ali-video/371d75312720e701b5f3988d46cdf4ef/video.m3u8
+#EXTINF:-1 tvg-id="2023年春晚" tvg-name="2023年春晚" tvg-logo="https://gh-proxy.com/raw.githubusercontent.com/suxuang/myIPTV/main/img/春晚.png" group-title="春晚频道",2023年春晚
+https://txmov2.a.kwimgs.com/bs3/video-hls/5251197255879398624_hlshd15.m3u8
+#EXTINF:-1 tvg-id="产科医生第十三集" tvg-name="产科医生第十三集" tvg-logo="https://live.zbds.top/logo/产科医生第十三集.png" group-title="其他频道",产科医生第十三集
+https://cdn8.yzzy-tv-cdn.com/20220909/18897_0229bc93/1000k/hls/index.m3u8
+#EXTINF:-1 tvg-id="音乐之声" tvg-name="音乐之声" tvg-logo="https://raw.githubusercontent.com/fanmingming/live/main/tv/音乐之声.png" group-title="音乐频道",音乐之声
+http://ngcdn003.cnr.cn/live/yyzs/index.m3u8
+#EXTINF:-1 tvg-id="YCTV" tvg-name="YCTV" tvg-logo="https://live.zbds.top/logo/YCTV.png" group-title="其他频道",YCTV
+http://tvpull.dxhmt.cn:9081/tv/11481-1.m3u8
+#EXTINF:-1 tvg-id="铁齿铜牙纪晓岚I第二十八集" tvg-name="铁齿铜牙纪晓岚I第二十八集" tvg-logo="https://live.zbds.top/logo/铁齿铜牙纪晓岚I第二十八集.png" group-title="其他频道",铁齿铜牙纪晓岚I第二十八集
+https://txmov2.a.kwimgs.com/bs3/video-hls/5207287136691571086_hlshd15.m3u8
+#EXTINF:-1 tvg-id="铁齿铜牙纪晓岚I第三十二集" tvg-name="铁齿铜牙纪晓岚I第三十二集" tvg-logo="https://live.zbds.top/logo/铁齿铜牙纪晓岚I第三十二集.png" group-title="其他频道",铁齿铜牙纪晓岚I第三十二集
+https://txmov2.a.kwimgs.com/bs3/video-hls/5226708907786597436_hlshd15.m3u8
+#EXTINF:-1 tvg-id="铁齿铜牙纪晓岚I第三十六集" tvg-name="铁齿铜牙纪晓岚I第三十六集" tvg-logo="https://live.zbds.top/logo/铁齿铜牙纪晓岚I第三十六集.png" group-title="其他频道",铁齿铜牙纪晓岚I第三十六集
+https://txmov2.a.kwimgs.com/bs3/video-hls/5201657637463988722_hlshd15.m3u8
+#EXTINF:-1 tvg-id="蒙古SBN" tvg-name="蒙古SBN" tvg-logo="https://live.zbds.top/logo/蒙古SBN.png" group-title="其他频道",蒙古SBN
+https://cdn2.skygo.mn/live/disk1/SBN/HLS-FTA/SBN.m3u8
+#EXTINF:-1 tvg-id="伊拉克DamaaTV" tvg-name="伊拉克DamaaTV" tvg-logo="https://live.zbds.top/logo/伊拉克DamaaTV.png" group-title="其他频道",伊拉克DamaaTV
+https://cdn09jtedge.indihometv.com/joss/134/daaitv/index.m3u8?c
+#EXTINF:-1 tvg-id="安徽黄山飞来石" tvg-name="安徽黄山飞来石" tvg-logo="https://live.zbds.top/logo/安徽黄山飞来石.png" group-title="其他频道",安徽黄山飞来石
+https://gcalic.v.myalicdn.com/gc/hsptgy_1/index.m3u8?contentid=2820180516001
+#EXTINF:-1 tvg-id="为何要伤我的心httpstxmov2akwimgscombs3videohls5213198114266928813hlsbm3u8" tvg-name="为何要伤我的心httpstxmov2akwimgscombs3videohls5213198114266928813hlsbm3u8" tvg-logo="https://live.zbds.top/logo/为何要伤我的心httpstxmov2akwimgscombs3videohls5213198114266928813hlsbm3u8.png" group-title="其他频道",为何要伤我的心httpstxmov2akwimgscombs3videohls5213198114266928813hlsbm3u8
+https://txmov2.a.kwimgs.com/bs3/video-hls/5194339288984532686_hlsb.m3u8
+#EXTINF:-1 tvg-id="文莱RTBSukmaindera" tvg-name="文莱RTBSukmaindera" tvg-logo="https://live.zbds.top/logo/文萊RTBSukmaindera.png" group-title="其他频道",文莱RTBSukmaindera
+https://d1211whpimeups.cloudfront.net/smil:rtb1/playlist.m3u8
+#EXTINF:-1 tvg-id="1998年春晚" tvg-name="1998年春晚" tvg-logo="https://gh-proxy.com/raw.githubusercontent.com/suxuang/myIPTV/main/img/春晚.png" group-title="春晚频道",1998年春晚
+https://txmov2.a.kwimgs.com/bs3/video-hls/5225864507896315430_hlshd15.m3u8
+#EXTINF:-1 tvg-id="铁齿铜牙纪晓岚I第三十九集" tvg-name="铁齿铜牙纪晓岚I第三十九集" tvg-logo="https://live.zbds.top/logo/铁齿铜牙纪晓岚I第三十九集.png" group-title="其他频道",铁齿铜牙纪晓岚I第三十九集
+https://txmov2.a.kwimgs.com/bs3/video-hls/5224457108637573625_hlshd15.m3u8
+#EXTINF:-1 tvg-id="电影昆塔反转星球" tvg-name="电影昆塔反转星球" tvg-logo="https://live.zbds.top/logo/电影昆塔反转星球.png" group-title="电影频道",电影昆塔反转星球
+https://newcntv.qcloudcdn.com/asp/hls/1200/0303000a/3/default/3ccdecc7d6e341c1920ad4eac5d82f38/1200.m3u8
+#EXTINF:-1 tvg-id="倩女幽魂妖魔道" tvg-name="倩女幽魂妖魔道" tvg-logo="https://gh-proxy.com/raw.githubusercontent.com/suxuang/myIPTV/main/img/电影.png" group-title="电影频道",倩女幽魂妖魔道
+http://jsmov2.a.yximgs.com/bs3/video-hls/5232901391302199073_hlsb.m3u8
+#EXTINF:-1 tvg-id="苏丹S24TV" tvg-name="苏丹S24TV" tvg-logo="https://live.zbds.top/logo/苏丹S24TV.png" group-title="其他频道",苏丹S24TV
+https://turkmedya-live.ercdn.net/tv24/tv24.m3u8
+#EXTINF:-1 tvg-id="黄山始信新道" tvg-name="黄山始信新道" tvg-logo="https://live.zbds.top/logo/黄山始信新道.png" group-title="直播中国",黄山始信新道
+https://gcalic.v.myalicdn.com/gc/hsyg_1/index.m3u8
+#EXTINF:-1 tvg-id="ANTV" tvg-name="ANTV" tvg-logo="https://live.zbds.top/logo/ANTV.png" group-title="其他频道",ANTV
+http://antvlive.ab5c6921.cdnviet.com/antv/chunklist.m3u8?zshijd
