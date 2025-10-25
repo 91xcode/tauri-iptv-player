@@ -216,7 +216,7 @@ function VideoPlayer({ channel }: VideoPlayerProps) {
         autoPlay
         muted
         playsInline
-        style={{ display: error ? "none" : "block", width: "100%", height: "auto" }}
+        style={{ display: error ? "none" : "block" }}
       />
       {loading && !error && (
         <div className="video-error">
