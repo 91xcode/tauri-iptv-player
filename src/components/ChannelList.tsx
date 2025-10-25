@@ -92,10 +92,18 @@ function ChannelList({ channels, selectedChannel, onSelectChannel }: ChannelList
                     selectedChannel?.url === channel.url ? "active" : ""
                   }`}
                   onClick={() => onSelectChannel(channel)}
+                  title={channel.url}
                 >
-                  <div className="channel-icon">📺</div>
+                  <div className="channel-icon">
+                    {channel.url.includes('[') && channel.url.includes(']') ? '🌐' : '📺'}
+                  </div>
                   <div className="channel-info">
-                    <div className="channel-name">{channel.name}</div>
+                    <div className="channel-name">
+                      {channel.name}
+                      {channel.url.includes('[') && channel.url.includes(']') && (
+                        <span style={{ fontSize: '10px', marginLeft: '5px', opacity: 0.6 }}>IPv6</span>
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}

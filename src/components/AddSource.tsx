@@ -16,9 +16,21 @@ function AddSource({ onAdd, onClose }: AddSourceProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("========================================");
+    console.log("🚀 handleSubmit 被调用");
+    console.log("名称:", name);
+    console.log("URL 长度:", url.length);
+    console.log("URL 前缀:", url.substring(0, 50));
+
     if (name.trim() && url.trim()) {
+      console.log("✅ 验证通过，调用 onAdd");
       onAdd(name.trim(), url.trim());
+    } else {
+      console.log("❌ 验证失败");
+      console.log("name.trim():", name.trim());
+      console.log("url.trim():", url.trim());
     }
+    console.log("========================================");
   };
 
   const handleSelectFile = async () => {

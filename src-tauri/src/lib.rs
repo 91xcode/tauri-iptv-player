@@ -2,6 +2,16 @@ use serde::{Deserialize, Serialize};
 use std::sync::Mutex;
 use tauri::State;
 use uuid::Uuid;
+use std::collections::HashMap;
+use std::sync::Arc;
+use axum::{
+    extract::Query,
+    http::{header, StatusCode},
+    response::{IntoResponse, Response},
+    routing::get,
+    Router,
+};
+use tower_http::cors::CorsLayer;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 struct Channel {
@@ -23,6 +33,7 @@ struct Source {
 
 struct AppState {
     sources: Mutex<Vec<Source>>,
+    proxy_mappings: Arc<Mutex<HashMap<String, String>>>,
 }
 
 #[tauri::command]
@@ -109,6 +120,146 @@ fn delete_source(source_id: String, state: State<AppState>) -> Result<(), String
     Ok(())
 }
 
+/// 为 IPv6 URL 创建代理映射
+#[tauri::command]
+fn create_proxy_url(original_url: String, state: State<AppState>) -> Result<String, String> {
+    // 检查是否是 IPv6 URL
+    if !original_url.contains('[') || !original_url.contains(']') {
+        // 不是 IPv6，直接返回原 URL
+        return Ok(original_url);
+    }
+
+    println!("🔄 为 IPv6 URL 创建代理: {}", original_url);
+
+    // 生成代理 ID
+    let proxy_id = Uuid::new_v4().to_string();
+    let proxy_url = format!("tauri://proxy/{}", proxy_id);
+
+    // 存储映射
+    let mut mappings = state.proxy_mappings.lock().unwrap();
+    mappings.insert(proxy_id, original_url.clone());
+
+    println!("✅ 代理 URL: {}", proxy_url);
+    Ok(proxy_url)
+}
+
+/// 通过代理获取流数据
+#[tauri::command]
+async fn proxy_stream(proxy_id: String, state: State<'_, AppState>) -> Result<Vec<u8>, String> {
+    // 获取原始 URL
+    let original_url = {
+        let mappings = state.proxy_mappings.lock().unwrap();
+        mappings.get(&proxy_id).cloned()
+            .ok_or_else(|| "代理 ID 不存在".to_string())?
+    };
+
+    println!("🌐 代理请求: {} -> {}", proxy_id, original_url);
+
+    // 通过 reqwest 获取数据（支持 IPv6）
+    let response = reqwest::get(&original_url)
+        .await
+        .map_err(|e| format!("代理请求失败: {}", e))?;
+
+    let bytes = response
+        .bytes()
+        .await
+        .map_err(|e| format!("读取数据失败: {}", e))?;
+
+    Ok(bytes.to_vec())
+}
+
+/// 简单获取 URL 内容（支持 IPv6）
+#[tauri::command]
+async fn fetch_url_content(url: String) -> Result<String, String> {
+    println!("🌐 获取 URL 内容: {}", url);
+
+    let client = reqwest::Client::builder()
+        .redirect(reqwest::redirect::Policy::limited(10))
+        .build()
+        .map_err(|e| format!("创建客户端失败: {}", e))?;
+
+    let response = client
+        .get(&url)
+        .send()
+        .await
+        .map_err(|e| {
+            println!("❌ 请求失败: {}", e);
+            format!("请求失败: {}", e)
+        })?;
+
+    let content = response
+        .text()
+        .await
+        .map_err(|e| {
+            println!("❌ 读取内容失败: {}", e);
+            format!("读取内容失败: {}", e)
+        })?;
+
+    println!("✅ 成功获取内容，大小: {} 字节", content.len());
+    Ok(content)
+}
+
+/// 获取并处理 IPv6 m3u8 内容，将相对 URL 转换为绝对 URL
+#[tauri::command]
+async fn fetch_and_proxy_m3u8(url: String) -> Result<String, String> {
+    println!("🌐 获取并处理 m3u8: {}", url);
+
+    // 获取原始内容
+    let client = reqwest::Client::builder()
+        .redirect(reqwest::redirect::Policy::limited(10))
+        .build()
+        .map_err(|e| format!("创建客户端失败: {}", e))?;
+
+    let response = client
+        .get(&url)
+        .send()
+        .await
+        .map_err(|e| format!("请求失败: {}", e))?;
+
+    let content = response
+        .text()
+        .await
+        .map_err(|e| format!("读取内容失败: {}", e))?;
+
+    println!("📄 原始 m3u8 大小: {} 字节", content.len());
+
+    // 解析 base URL
+    let base_url = if let Some(pos) = url.rfind('/') {
+        &url[..pos + 1]
+    } else {
+        &url
+    };
+
+    println!("🔗 Base URL: {}", base_url);
+
+    // 处理 m3u8 内容，将相对路径转换为绝对路径
+    let mut processed_lines = Vec::new();
+    for line in content.lines() {
+        let trimmed = line.trim();
+
+        // 如果是注释或空行，直接保留
+        if trimmed.starts_with('#') || trimmed.is_empty() {
+            processed_lines.push(line.to_string());
+        } else {
+            // 这是一个 URL 行
+            let absolute_url = if trimmed.starts_with("http://") || trimmed.starts_with("https://") {
+                // 已经是绝对 URL
+                trimmed.to_string()
+            } else {
+                // 相对 URL，转换为绝对 URL
+                format!("{}{}", base_url, trimmed)
+            };
+            println!("🔄 转换 URL: {} -> {}", trimmed, absolute_url);
+            processed_lines.push(absolute_url);
+        }
+    }
+
+    let processed_content = processed_lines.join("\n");
+    println!("✅ 处理完成，新大小: {} 字节", processed_content.len());
+
+    Ok(processed_content)
+}
+
 async fn fetch_and_parse_m3u(url: &str) -> Result<Vec<Channel>, String> {
     // 下载播放列表
     let response = reqwest::get(url)
@@ -181,9 +332,16 @@ fn parse_m3u_content(content: &str, url: &str) -> Result<Vec<Channel>, String> {
             if i + 1 < lines.len() {
                 let next_line = lines[i + 1].trim();
                 if !next_line.is_empty() && !next_line.starts_with('#') {
+                    let channel_url = next_line.to_string();
+
+                    // 检测并记录 IPv6 URL
+                    if channel_url.contains('[') && channel_url.contains(']') {
+                        println!("🌐 检测到 IPv6 URL: {}", channel_url);
+                    }
+
                     channels.push(Channel {
                         name: if name.is_empty() { "未命名频道".to_string() } else { name },
-                        url: next_line.to_string(),
+                        url: channel_url,
                         logo,
                         group,
                     });
@@ -205,18 +363,156 @@ fn parse_m3u_content(content: &str, url: &str) -> Result<Vec<Channel>, String> {
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
+    // 在后台启动代理服务器
+    tauri::async_runtime::spawn(async {
+        if let Err(e) = start_proxy_server().await {
+            eprintln!("❌ 代理服务器启动失败: {}", e);
+        }
+    });
+
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_fs::init())
+        .register_asynchronous_uri_scheme_protocol("stream", |_app, request, responder| {
+            tauri::async_runtime::spawn(async move {
+                match handle_stream_protocol(&request).await {
+                    Ok(response) => responder.respond(response),
+                    Err(e) => {
+                        eprintln!("Protocol error: {}", e);
+                        let error_response = tauri::http::Response::builder()
+                            .status(500)
+                            .body(format!("Error: {}", e).into_bytes())
+                            .unwrap();
+                        responder.respond(error_response);
+                    }
+                }
+            });
+        })
         .manage(AppState {
             sources: Mutex::new(Vec::new()),
+            proxy_mappings: Arc::new(Mutex::new(HashMap::new())),
         })
         .invoke_handler(tauri::generate_handler![
             get_sources,
             add_source,
-            delete_source
+            delete_source,
+            create_proxy_url,
+            proxy_stream,
+            fetch_url_content,
+            fetch_and_proxy_m3u8
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
+}
+
+// HTTP 代理服务器处理函数
+#[derive(Deserialize)]
+struct ProxyParams {
+    url: String,
+}
+
+async fn proxy_handler(Query(params): Query<ProxyParams>) -> Result<Response, StatusCode> {
+    println!("🌐 代理请求: {}", params.url);
+
+    let client = reqwest::Client::builder()
+        .redirect(reqwest::redirect::Policy::limited(10))
+        .timeout(std::time::Duration::from_secs(30))
+        .build()
+        .map_err(|e| {
+            eprintln!("❌ 创建客户端失败: {}", e);
+            StatusCode::INTERNAL_SERVER_ERROR
+        })?;
+
+    let response = client
+        .get(&params.url)
+        .send()
+        .await
+        .map_err(|e| {
+            eprintln!("❌ 请求失败: {}", e);
+            StatusCode::BAD_GATEWAY
+        })?;
+
+    let content_type = response
+        .headers()
+        .get(header::CONTENT_TYPE)
+        .and_then(|v| v.to_str().ok())
+        .unwrap_or("application/octet-stream")
+        .to_string();
+
+    let bytes = response
+        .bytes()
+        .await
+        .map_err(|e| {
+            eprintln!("❌ 读取数据失败: {}", e);
+            StatusCode::INTERNAL_SERVER_ERROR
+        })?;
+
+    println!("✅ 代理成功: {} 字节, 类型: {}", bytes.len(), content_type);
+
+    Ok((
+        StatusCode::OK,
+        [(header::CONTENT_TYPE, content_type.as_str())],
+        bytes.to_vec(),
+    )
+        .into_response())
+}
+
+// 启动本地代理服务器
+async fn start_proxy_server() -> Result<(), Box<dyn std::error::Error>> {
+    let app = Router::new()
+        .route("/proxy", get(proxy_handler))
+        .layer(CorsLayer::permissive());
+
+    let addr = std::net::SocketAddr::from(([127, 0, 0, 1], 18080));
+    println!("🚀 启动代理服务器: http://{}", addr);
+
+    let listener = tokio::net::TcpListener::bind(addr).await?;
+    axum::serve(listener, app).await?;
+
+    Ok(())
+}
+
+async fn handle_stream_protocol(request: &tauri::http::Request<Vec<u8>>) -> Result<tauri::http::Response<Vec<u8>>, Box<dyn std::error::Error>> {
+    let url_str = request.uri().to_string();
+    println!("🌐 Stream protocol request: {}", url_str);
+
+    // 从 stream://xxx 中提取实际 URL
+    // 格式: stream://encode(actual_url)
+    let actual_url = url_str
+        .strip_prefix("stream://")
+        .ok_or("Invalid stream URL")?;
+
+    // URL decode
+    let decoded_url = urlencoding::decode(actual_url)?;
+
+    println!("📡 Fetching: {}", decoded_url);
+
+    // 使用 reqwest 获取数据（支持 IPv6）
+    let client = reqwest::Client::builder()
+        .redirect(reqwest::redirect::Policy::limited(10))
+        .build()?;
+
+    let response = client
+        .get(decoded_url.as_ref())
+        .send()
+        .await?;
+
+    let content_type = response
+        .headers()
+        .get("content-type")
+        .and_then(|v| v.to_str().ok())
+        .unwrap_or("application/octet-stream")
+        .to_string();
+
+    let bytes = response.bytes().await?;
+
+    println!("✅ Fetched {} bytes, type: {}", bytes.len(), content_type);
+
+    tauri::http::Response::builder()
+        .status(200)
+        .header("Content-Type", content_type)
+        .header("Access-Control-Allow-Origin", "*")
+        .body(bytes.to_vec())
+        .map_err(|e| e.into())
 }
