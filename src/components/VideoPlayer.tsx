@@ -107,14 +107,23 @@ function VideoPlayer({ channel }: VideoPlayerProps) {
             duration: video.duration,
             readyState: video.readyState,
             networkState: video.networkState,
+            muted: video.muted,
           });
 
           setLoading(false);
 
+          // 确保静音以符合浏览器自动播放策略
+          video.muted = true;
+
           video.play().then(() => {
-            console.log("✅ 视频播放成功");
+            console.log("✅ 视频播放成功（静音）");
+            // 播放成功后立即取消静音
+            setTimeout(() => {
+              video.muted = false;
+              console.log("🔊 已取消静音");
+            }, 100);
           }).catch((err) => {
-            console.error("❌ 播放失败:", err);
+            console.error("❌ 自动播放失败:", err);
             console.error("错误详情:", err.name, err.message);
             setError("自动播放失败，请点击播放按钮");
           });
@@ -198,9 +207,18 @@ function VideoPlayer({ channel }: VideoPlayerProps) {
 
   const handleManualPlay = () => {
     if (videoRef.current) {
-      videoRef.current.play().then(() => {
+      const video = videoRef.current;
+      // 先静音播放以符合浏览器策略
+      video.muted = true;
+
+      video.play().then(() => {
         console.log("✅ 手动播放成功");
         setError(null);
+        // 播放成功后立即取消静音
+        setTimeout(() => {
+          video.muted = false;
+          console.log("🔊 已取消静音");
+        }, 100);
       }).catch((err) => {
         console.error("❌ 手动播放失败:", err);
         setError(`播放失败: ${err.message}`);
