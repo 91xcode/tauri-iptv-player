@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Hls from "hls.js";
+// @ts-ignore - 保留用于未来功能
 import { invoke } from "@tauri-apps/api/core";
 import type { Channel } from "../App";
 

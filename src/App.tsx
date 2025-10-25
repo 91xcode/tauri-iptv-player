@@ -33,6 +33,7 @@ function App() {
 
   useEffect(() => {
     loadSources();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loadSources = async () => {
@@ -57,7 +58,7 @@ function App() {
       console.log("=== 开始添加订阅源 ===");
       console.log("名称:", name);
       console.log("URL:", url);
-      console.log("Tauri 环境:", !!window.__TAURI__);
+      console.log("Tauri 环境:", !!(window as any).__TAURI__);
 
       await invoke("add_source", { name, url });
       console.log("✅ 添加成功，开始加载订阅源列表...");

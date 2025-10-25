@@ -11,6 +11,7 @@ function ChannelList({ channels, selectedChannel, onSelectChannel }: ChannelList
   const [searchTerm, setSearchTerm] = useState("");
 
   // 按分组整理频道
+  // @ts-ignore - 保留用于未来功能
   const groupedChannels = useMemo(() => {
     const groups: { [key: string]: Channel[] } = {};
 
