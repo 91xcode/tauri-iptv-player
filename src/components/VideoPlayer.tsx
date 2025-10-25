@@ -5,7 +5,7 @@ import { invoke } from "@tauri-apps/api/core";
 import type { Channel } from "../App";
 
 interface VideoPlayerProps {
-  channel: Channel;
+  channel: Channel | null;
 }
 
 function VideoPlayer({ channel }: VideoPlayerProps) {
@@ -19,7 +19,7 @@ function VideoPlayer({ channel }: VideoPlayerProps) {
   const maxRetries = 3;
 
   useEffect(() => {
-    if (!videoRef.current) return;
+    if (!videoRef.current || !channel) return;
 
     setError(null);
     setLoading(true);
@@ -67,15 +67,18 @@ function VideoPlayer({ channel }: VideoPlayerProps) {
     const loadVideo = async () => {
       let processedUrl = channel.url;
 
-      // ⭐ 完全复制 x-iptv-player 的做法：直接使用代理 URL，不转换成 Blob
-      if (isIpv6 && channel.url.includes(".m3u8")) {
-        console.log("🌐 检测到 IPv6 m3u8，直接通过代理访问");
+      // ⭐ 所有 m3u8 都走代理（修复混合内容问题 + IPv6支持）
+      if (channel.url.includes(".m3u8")) {
+        console.log("🌐 检测到 m3u8，通过代理访问");
 
         // 直接将原始 URL 编码后传给代理服务器
         const encodedUrl = encodeURIComponent(channel.url);
         processedUrl = `http://127.0.0.1:18080/proxy?url=${encodedUrl}`;
 
         console.log("🔄 代理 URL:", processedUrl);
+        if (isIpv6) {
+          console.log("  (IPv6 URL)");
+        }
       }
 
       // 检查是否是 HLS 流
@@ -421,7 +424,7 @@ function VideoPlayer({ channel }: VideoPlayerProps) {
         URL.revokeObjectURL(blobUrlRef.current);
       }
     };
-  }, [channel.url]);
+  }, [channel]);
 
   const handleManualPlay = () => {
     if (videoRef.current) {
@@ -455,7 +458,7 @@ function VideoPlayer({ channel }: VideoPlayerProps) {
         preload="auto"
         style={{ display: error ? "none" : "block" }}
       />
-      {loading && !error && (
+      {loading && !error && channel && (
         <div className="video-error">
           <p>正在加载 {channel.name}...</p>
           {bufferInfo && <p style={{ fontSize: "12px", marginTop: "5px", opacity: 0.8 }}>{bufferInfo}</p>}
@@ -479,7 +482,15 @@ function VideoPlayer({ channel }: VideoPlayerProps) {
           {bufferInfo}
         </div>
       )}
-      {error && (
+      {!channel && (
+        <div className="video-error">
+          <p>请选择一个频道开始播放</p>
+          <p style={{ fontSize: "14px", marginTop: "10px", opacity: 0.7 }}>
+            👈 从左侧选择订阅源和频道
+          </p>
+        </div>
+      )}
+      {error && channel && (
         <div className="video-error">
           <p>{error}</p>
           <p style={{ fontSize: "14px", marginTop: "10px", opacity: 0.7 }}>

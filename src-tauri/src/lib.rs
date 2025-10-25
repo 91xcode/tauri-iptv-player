@@ -187,8 +187,8 @@ async fn add_source(name: String, url: String, state: State<'_, AppState>) -> Re
         // 返回内置的测试频道
         vec![
             Channel {
-                name: "测试视频 1 - Demo".to_string(),
-                url: "https://upyun.luckly-mjw.cn/Assets/media-source/example/media/index.m3u8".to_string(),
+                name: "测试视频 1 - Sintel".to_string(),
+                url: "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8".to_string(),
                 logo: Some("https://picsum.photos/100/100?1".to_string()),
                 group: Some("测试频道".to_string()),
             },
@@ -777,7 +777,7 @@ struct ProxyParams {
 
 #[instrument(skip(params))]
 async fn proxy_handler(Query(params): Query<ProxyParams>) -> Result<Response, StatusCode> {
-    debug!("HTTP 代理请求: {}", params.url);
+    info!("🌐 代理请求: {}", params.url);
 
     // ⭐ 完全复制 x-iptv-player 的请求头策略
     let client = reqwest::Client::builder()
