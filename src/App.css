@@ -360,7 +360,7 @@ body {
 .modal-actions {
   display: flex;
   gap: 12px;
-  justify-content: flex-end;
+  justify-content: center;  /* 居中对齐 */
   margin-top: 24px;
 }
 
