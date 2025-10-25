@@ -847,7 +847,7 @@ async fn proxy_handler(Query(params): Query<ProxyParams>) -> Result<Response, St
                 debug!("Base URL: {}", base_url);
 
                 // 重写每一行
-                let mut ipv6_count = 0;
+                let mut rewrite_count = 0;
                 let processed_lines: Vec<String> = content.lines().map(|line| {
                     let trimmed = line.trim();
 
@@ -865,11 +865,17 @@ async fn proxy_handler(Query(params): Query<ProxyParams>) -> Result<Response, St
                         format!("{}{}", base_url, trimmed)
                     };
 
-                    // ⭐ 关键：如果是 IPv6 URL，通过代理
-                    if absolute_url.contains('[') && absolute_url.contains(']') {
-                        ipv6_count += 1;
+                    // ⭐ 关键：所有 HTTP 和 IPv6 URL 都通过代理
+                    // 原因1: HTTP 在 HTTPS 页面中会被阻止（Mixed Content）
+                    // 原因2: IPv6 URL 浏览器无法直接访问
+                    let needs_proxy = absolute_url.contains('[') && absolute_url.contains(']')  // IPv6
+                        || absolute_url.starts_with("http://");  // HTTP (非 HTTPS)
+
+                    if needs_proxy {
+                        rewrite_count += 1;
                         let encoded = urlencoding::encode(&absolute_url);
                         let proxied = format!("http://127.0.0.1:18080/proxy?url={}", encoded);
+                        debug!("  重写: {} -> {}", absolute_url, proxied);
                         proxied
                     } else {
                         absolute_url
@@ -877,10 +883,10 @@ async fn proxy_handler(Query(params): Query<ProxyParams>) -> Result<Response, St
                 }).collect();
 
                 let processed_content = processed_lines.join("\n");
-                if ipv6_count > 0 {
-                    debug!("m3u8 处理完成，重写了 {} 个 IPv6 URL，新大小: {} 字节", ipv6_count, processed_content.len());
+                if rewrite_count > 0 {
+                    info!("m3u8 URL重写完成：{} 个URL，新大小: {} 字节", rewrite_count, processed_content.len());
                 } else {
-                    debug!("m3u8 处理完成，新大小: {} 字节", processed_content.len());
+                    debug!("m3u8 处理完成，无需重写URL，大小: {} 字节", processed_content.len());
                 }
                 processed_content.into_bytes()
             }
