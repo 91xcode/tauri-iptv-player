@@ -27,6 +27,7 @@ src-tauri/gen
 *.njsproj
 *.sln
 *.sw?
+.deepvcode/
 
 # OS
 .DS_Store
