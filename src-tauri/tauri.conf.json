@@ -22,7 +22,14 @@
       }
     ],
     "security": {
-      "csp": null,
+      "csp": {
+        "default-src": "'self' 'unsafe-inline' 'unsafe-eval' data: blob: http: https:",
+        "connect-src": "'self' http: https: ws: wss:",
+        "media-src": "'self' http: https: data: blob:",
+        "img-src": "'self' http: https: data: blob:",
+        "script-src": "'self' 'unsafe-inline' 'unsafe-eval'",
+        "style-src": "'self' 'unsafe-inline'"
+      },
       "assetProtocol": {
         "enable": true,
         "scope": ["**"]
