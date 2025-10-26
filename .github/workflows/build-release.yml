@@ -47,7 +47,7 @@ jobs:
           done
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: IPTV-Player-${{ matrix.arch }}
           path: src-tauri/target/${{ matrix.target }}/release/bundle/dmg/*.dmg
