@@ -1,19 +1,58 @@
 # IPTV Player
 
-一个基于 Tauri + React 的跨平台 IPTV 播放器，专为稳定播放直播流而优化。
+一个基于 Tauri + React 的**全平台** IPTV 播放器，专为稳定播放直播流而优化。
+
+## 🌍 支持平台
+
+| 平台 | 架构 | 安装包格式 | 状态 |
+|------|------|-----------|------|
+| **macOS** | Apple Silicon (M1/M2/M3) | `.dmg` | ✅ 完全支持 |
+| **macOS** | Intel (x86_64) | `.dmg` | ✅ 完全支持 |
+| **Windows** | x64 | `.msi`, `.exe` | ✅ 完全支持 |
+| **Linux** | x64 | `.deb`, `.AppImage` | ✅ 完全支持 |
 
 ## ✨ 特性
 
 - 📺 支持 M3U/M3U8 播放列表
 - 🎬 支持 HLS 直播流播放（完全兼容 IPv6）
 - 🌐 内置 HTTP 代理服务器（`http://127.0.0.1:18080`）
-- 🔄 智能 URL 重写（自动处理 IPv6 和相对路径）
+- 🔄 智能 URL 重写（自动处理 IPv6、相对路径、混合内容）
 - 📱 现代化的用户界面
 - 🔄 订阅源管理
 - 📋 频道列表展示
-- 🎯 轻量级打包（DMG 仅 3-10MB）
+- 🎯 轻量级打包（3-10MB）
 - ⚡ 高性能、低内存占用
 - 🛡️ 稳定的长时间播放（支持超过 1 小时的连续直播）
+- 🌍 **全平台支持**（macOS, Windows, Linux）
+
+## 📥 下载安装
+
+### 从 GitHub Releases 下载
+
+访问 [Releases 页面](https://github.com/91xcode/tauri-iptv-player/releases) 下载最新版本：
+
+**macOS**:
+- Apple Silicon (M1/M2/M3): `IPTV-Player-v*-macOS-Apple-Silicon.dmg`
+- Intel: `IPTV-Player-v*-macOS-Intel.dmg`
+- 安装: 双击 `.dmg`，拖拽到 Applications
+
+**Windows**:
+- `IPTV-Player-v*-Windows-x64.msi` (推荐)
+- `IPTV-Player-v*-Windows-x64-setup.exe` (NSIS 安装器)
+- 安装: 双击运行安装程序
+
+**Linux**:
+- Debian/Ubuntu: `IPTV-Player-v*-Linux-x64.deb`
+  ```bash
+  sudo dpkg -i IPTV-Player-v*-Linux-x64.deb
+  ```
+- 通用格式: `IPTV-Player-v*-Linux-x64.AppImage`
+  ```bash
+  chmod +x IPTV-Player-v*-Linux-x64.AppImage
+  ./IPTV-Player-v*-Linux-x64.AppImage
+  ```
+
+---
 
 ## 🚀 快速开始
 
