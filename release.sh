@@ -235,27 +235,15 @@ if [[ "$REPUBLISH_MODE" != true && "$CURRENT_VERSION" != "$NEW_VERSION" ]]; then
     echo -e "${YELLOW}📝 更新版本号...${NC}"
 
     # 更新 package.json
-    if [[ "$OS_TYPE" == Darwin* ]]; then
-        sed -i '' "s/\"version\": \"${CURRENT_VERSION}\"/\"version\": \"${NEW_VERSION}\"/" package.json
-    else
-        sed -i "s/\"version\": \"${CURRENT_VERSION}\"/\"version\": \"${NEW_VERSION}\"/" package.json
-    fi
+    perl -i -pe "s/\"version\": \"${CURRENT_VERSION}\"/\"version\": \"${NEW_VERSION}\"/" package.json
     echo -e "  ${GREEN}✓${NC} package.json"
 
     # 更新 src-tauri/Cargo.toml
-    if [[ "$OS_TYPE" == Darwin* ]]; then
-        sed -i '' "s/version = \"${CURRENT_VERSION}\"/version = \"${NEW_VERSION}\"/" src-tauri/Cargo.toml
-    else
-        sed -i "s/version = \"${CURRENT_VERSION}\"/version = \"${NEW_VERSION}\"/" src-tauri/Cargo.toml
-    fi
+    perl -i -pe "s/version = \"${CURRENT_VERSION}\"/version = \"${NEW_VERSION}\"/" src-tauri/Cargo.toml
     echo -e "  ${GREEN}✓${NC} src-tauri/Cargo.toml"
 
     # 更新 src-tauri/tauri.conf.json
-    if [[ "$OS_TYPE" == Darwin* ]]; then
-        sed -i '' "s/\"version\": \"${CURRENT_VERSION}\"/\"version\": \"${NEW_VERSION}\"/" src-tauri/tauri.conf.json
-    else
-        sed -i "s/\"version\": \"${CURRENT_VERSION}\"/\"version\": \"${NEW_VERSION}\"/" src-tauri/tauri.conf.json
-    fi
+    perl -i -pe "s/\"version\": \"${CURRENT_VERSION}\"/\"version\": \"${NEW_VERSION}\"/" src-tauri/tauri.conf.json
     echo -e "  ${GREEN}✓${NC} src-tauri/tauri.conf.json"
 
     echo -e "${GREEN}✅ 版本号更新完成${NC}"
