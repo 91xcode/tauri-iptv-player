@@ -35,6 +35,7 @@
 - Apple Silicon (M1/M2/M3): `IPTV-Player-v*-macOS-Apple-Silicon.dmg`
 - Intel: `IPTV-Player-v*-macOS-Intel.dmg`
 - 安装: 双击 `.dmg`，拖拽到 Applications
+- ⚠️ **重要**: 首次打开请查看 [macOS 安装说明](INSTALL_MACOS.md)（解决"应用已损坏"问题）
 
 **Windows**:
 - `IPTV-Player-v*-Windows-x64.msi` (推荐)
