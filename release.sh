@@ -1,6 +1,20 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -e  # 遇到错误立即退出
+
+# 检测操作系统
+OS_TYPE="$(uname -s)"
+case "$OS_TYPE" in
+    Darwin*)
+        SED_INPLACE="sed -i ''"
+        ;;
+    Linux*)
+        SED_INPLACE="sed -i"
+        ;;
+    *)
+        SED_INPLACE="sed -i"
+        ;;
+esac
 
 # 颜色定义
 RED='\033[0;31m'
@@ -218,15 +232,27 @@ if [[ "$REPUBLISH_MODE" != true && "$CURRENT_VERSION" != "$NEW_VERSION" ]]; then
     echo -e "${YELLOW}📝 更新版本号...${NC}"
 
     # 更新 package.json
-    sed -i '' "s/\"version\": \"${CURRENT_VERSION}\"/\"version\": \"${NEW_VERSION}\"/" package.json
+    if [[ "$OS_TYPE" == "Darwin"* ]]; then
+        sed -i '' "s/\"version\": \"${CURRENT_VERSION}\"/\"version\": \"${NEW_VERSION}\"/" package.json
+    else
+        sed -i "s/\"version\": \"${CURRENT_VERSION}\"/\"version\": \"${NEW_VERSION}\"/" package.json
+    fi
     echo -e "  ${GREEN}✓${NC} package.json"
 
     # 更新 src-tauri/Cargo.toml
-    sed -i '' "s/version = \"${CURRENT_VERSION}\"/version = \"${NEW_VERSION}\"/" src-tauri/Cargo.toml
+    if [[ "$OS_TYPE" == "Darwin"* ]]; then
+        sed -i '' "s/version = \"${CURRENT_VERSION}\"/version = \"${NEW_VERSION}\"/" src-tauri/Cargo.toml
+    else
+        sed -i "s/version = \"${CURRENT_VERSION}\"/version = \"${NEW_VERSION}\"/" src-tauri/Cargo.toml
+    fi
     echo -e "  ${GREEN}✓${NC} src-tauri/Cargo.toml"
 
     # 更新 src-tauri/tauri.conf.json
-    sed -i '' "s/\"version\": \"${CURRENT_VERSION}\"/\"version\": \"${NEW_VERSION}\"/" src-tauri/tauri.conf.json
+    if [[ "$OS_TYPE" == "Darwin"* ]]; then
+        sed -i '' "s/\"version\": \"${CURRENT_VERSION}\"/\"version\": \"${NEW_VERSION}\"/" src-tauri/tauri.conf.json
+    else
+        sed -i "s/\"version\": \"${CURRENT_VERSION}\"/\"version\": \"${NEW_VERSION}\"/" src-tauri/tauri.conf.json
+    fi
     echo -e "  ${GREEN}✓${NC} src-tauri/tauri.conf.json"
 
     echo -e "${GREEN}✅ 版本号更新完成${NC}"
